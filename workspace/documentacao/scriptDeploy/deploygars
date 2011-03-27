@@ -1,0 +1,98 @@
+#! /bin/sh
+set -e
+#export GLOBUS_LOCATION=/usr/local/globus-4.0.5
+#export JAVA_HOME=/usr/local/j2sdk1.4.2_01
+#export ANT_HOME=/usr/local/apache-ant-1.7.0
+#export GLOBUS_OPTIONS="-Xms256M -Xmx512M"
+
+#. $GLOBUS_LOCATION/etc/globus-user-env.sh
+
+
+#cd $GLOBUS_LOCATION
+
+case "$1" in
+    11)
+        $GLOBUS_LOCATION/sbin/globus-stop-container-detached
+	globus-undeploy-gar org_cube_service 
+        ;;
+    12)
+    	globus-deploy-gar org_cube_service.gar
+       	$GLOBUS_LOCATION/sbin/globus-start-container-detached -nosec -p 8443
+        ;;
+    13)
+    	globus-undeploy-gar org_cube_service
+    	;;
+    14)
+    	globus-deploy-gar org_cube_service.gar
+	;;
+    
+
+    21)
+        $GLOBUS_LOCATION/sbin/globus-stop-container-detached
+	globus-undeploy-gar org_drs_service 
+        ;;
+    22)
+    	globus-deploy-gar org_drs_service.gar
+       	$GLOBUS_LOCATION/sbin/globus-start-container-detached -nosec -p 8443
+        ;;
+    23)
+    	globus-undeploy-gar org_drs_service
+    	;;
+    24)
+    	globus-deploy-gar org_drs_service.gar
+	;;
+    
+
+    31)
+        $GLOBUS_LOCATION/sbin/globus-stop-container-detached
+	globus-undeploy-gar org_cubeindex_service
+        ;;
+    32)
+    	globus-deploy-gar org_cubeindex_service.gar
+       	$GLOBUS_LOCATION/sbin/globus-start-container-detached -nosec -p 8443
+        ;;
+    33)
+    	globus-undeploy-gar org_cubeindex_service
+    	;;
+    34)
+    	globus-deploy-gar org_cubeindex_service.gar
+	;;
+
+    41)
+	$GLOBUS_LOCATION/sbin/globus-stop-container-detached
+    	globus-undeploy-gar org_globus_examples_services_core_factory
+	;;
+    42)
+    	globus-deploy-gar org_globus_examples_services_core_factory.gar
+	$GLOBUS_LOCATION/sbin/globus-start-container-detached -nosec -p 8443
+	;;
+    43)
+    	globus-undeploy-gar org_globus_examples_services_core_factory
+	;;
+    44)
+    	globus-deploy-gar org_globus_examples_services_core_factory.gar
+	;;
+	
+    51)
+    	$GLOBUS_LOCATION/sbin/globus-stop-container-detached
+	;;
+    52)
+    	$GLOBUS_LOCATION/sbin/globus-start-container-detached -nosec -p 8443 -debug
+	;;
+    53)
+    	cat $GLOBUS_LOCATION/var/container.log
+	;;
+    54)
+    	tail -f -n 50 $GLOBUS_LOCATION/var/container.log
+	;;
+    55)
+    	./deploygars 51
+	./deploygars 52
+	;;
+    *)
+        echo "Usage: globus {1|2|3|4|5}" >&2
+        # exit 1
+       ;;
+esac
+#exit 0
+

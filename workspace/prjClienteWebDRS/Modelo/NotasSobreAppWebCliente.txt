@@ -1,0 +1,19 @@
+Houve dificuldade de configurar o CLASSPATH para o projeto 'prjClienteWebDRS'. Embora
+encontrado um meio de fazer as classes dos serviços serem localizadas corretamente, e
+inclusive as bibliotacas do globus, ao configurar um servidor tomcat interno e fazer
+o deploy da aplicação esta não funcionava. O Eclipse não compartilhava como o tomcat 
+o mesmo CLASSPATH e nem fazia algum tipo de ligação. As classes e bibliotecas eram 
+simplesmente "perdidas". A solução encontrada foi colocar as bibliotecas do globus e
+Stubs dos Serviços relacionados ao DRS na pasta lib do Tomcat. Ao fazer isso a aplicação
+pode ser inicializada a partir do servidor tomcat vinculado ao Eclipse. Isso implica
+em que mudanças feitas no wsdl e, em conseqüencias nos stubes, dos serviços sejam
+replicadas para o lib do tomcat ($CATALINA_HOME/lib/).
+
+Últimas Melhorias:
+
+14-05-09 (Kim)
+
+Na página gerada por /pg/options.jsp os dados das opções escolhidas pelos usuários eram 
+passados para /pg/enviarOpcoes.jsp através de uma manipulação da URL que acabava sendo
+similar à do metodo GET do HTTP. Isso foi descontinuado e os dados enviados ao servidor
+são passados no corpo e não na URL, como estabelecido no método POST do HTTP.

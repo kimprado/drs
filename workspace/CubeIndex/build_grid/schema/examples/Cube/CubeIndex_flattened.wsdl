@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CubeIndexService" targetNamespace="http://www.globus.org/namespaces/examples/core/Cube" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsrpw="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" xmlns:wsdlpp="http://www.globus.org/namespaces/2004/10/WSDLPreprocessor" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsrp="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd">
+  <import namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" location="../../wsrf/properties/WS-ResourceProperties.wsdl"/>
+  <types>
+    <xsd:schema targetNamespace="http://www.globus.org/namespaces/examples/core/Cube" xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://schemas.xmlsoap.org/ws/2004/03/addressing" schemaLocation="../../ws/addressing/WS-Addressing.xsd"/>
+
+
+
+	<!-- Requests and responses -->
+
+	<xsd:element name="getCubeList">
+		<xsd:complexType/>
+	</xsd:element>
+
+	<xsd:element name="cubeEntry">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="entry" type="xsd:int"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="uri" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="index" type="xsd:int"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="time" type="xsd:dateTime"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cubeListResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:cubeEntry"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="getCubeEntry" type="xsd:int"/>
+
+	<xsd:element name="cubeEntryResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:cubeEntry"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="addCubeEntry" ref="tns:cubeEntry"/>
+	
+	<!-- 
+	<xsd:element name="addCubeEntry">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeEntry" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	 -->
+	
+	<xsd:element name="addResponse" type="xsd:int"/>
+
+
+	<xsd:element name="removeEntry" type="xsd:int"/>
+
+	<xsd:element name="removeEntryResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="refreshCube" type="xsd:int"/>
+
+	<xsd:element name="refreshCubeResponse" type="xsd:boolean"/>
+
+	<!-- Resource properties -->
+
+	<xsd:element name="cubeURI" type="xsd:string"/>
+
+	<xsd:element name="CubeIndexResourceProperties">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:cubeURI"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+  </types>
+  <message name="AddCubeEntryInputMessage">
+    <part name="parameters" element="tns:addCubeEntry"/>
+  </message>
+  <message name="RefreshCubeOutputMessage">
+    <part name="parameters" element="tns:refreshCubeResponse"/>
+  </message>
+  <message name="RefreshCubeInputMessage">
+    <part name="parameters" element="tns:refreshCube"/>
+  </message>
+  <message name="CubeEntryOutputMessage">
+    <part name="parameters" element="tns:cubeEntryResponse"/>
+  </message>
+  <message name="GetCubeListInputMessage">
+    <part name="parameters" element="tns:getCubeList"/>
+  </message>
+  <message name="RemoveEntryOutputMessage">
+    <part name="parameters" element="tns:removeEntryResponse"/>
+  </message>
+  <message name="CubeListOutputMessage">
+    <part name="parameters" element="tns:cubeListResponse"/>
+  </message>
+  <message name="RemoveEntryInputMessage">
+    <part name="parameters" element="tns:removeEntry"/>
+  </message>
+  <message name="GetCubeEntryInputMessage">
+    <part name="parameters" element="tns:getCubeEntry"/>
+  </message>
+  <message name="AddOutputMessage">
+    <part name="parameters" element="tns:addResponse"/>
+  </message>
+  <portType name="CubeIndexPortType" wsrp:ResourceProperties="tns:CubeIndexResourceProperties">
+    <operation name="getCubeList">
+      <input message="tns:GetCubeListInputMessage"/>
+      <output message="tns:CubeListOutputMessage"/>
+    </operation>
+    <operation name="getCubeEntry">
+      <input message="tns:GetCubeEntryInputMessage"/>
+      <output message="tns:CubeEntryOutputMessage"/>
+    </operation>
+    <operation name="addCubeEntry">
+      <input message="tns:AddCubeEntryInputMessage"/>
+      <output message="tns:AddOutputMessage"/>
+    </operation>
+    <operation name="removeEntry">
+      <input message="tns:RemoveEntryInputMessage"/>
+      <output message="tns:RemoveEntryOutputMessage"/>
+    </operation>
+    <operation name="refreshCube">
+      <input message="tns:RefreshCubeInputMessage"/>
+      <output message="tns:RefreshCubeOutputMessage"/>
+    </operation>
+    <operation name="SetResourceProperties">
+      <input name="SetResourcePropertiesRequest" message="wsrpw:SetResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/SetResourceProperties"/>
+      <output name="SetResourcePropertiesResponse" message="wsrpw:SetResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/SetResourcePropertiesResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="InvalidSetResourcePropertiesRequestContentFault" message="wsrpw:InvalidSetResourcePropertiesRequestContentFault"/>
+      <fault name="SetResourcePropertyRequestFailedFault" message="wsrpw:SetResourcePropertyRequestFailedFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+      <fault name="UnableToModifyResourcePropertyFault" message="wsrpw:UnableToModifyResourcePropertyFault"/>
+    </operation>
+    <operation name="QueryResourceProperties">
+      <input name="QueryResourcePropertiesRequest" message="wsrpw:QueryResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/QueryResourceProperties"/>
+      <output name="QueryResourcePropertiesResponse" message="wsrpw:QueryResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/QueryResourcePropertiesResponse"/>
+      <fault name="UnknownQueryExpressionDialectFault" message="wsrpw:UnknownQueryExpressionDialectFault"/>
+      <fault name="QueryEvaluationErrorFault" message="wsrpw:QueryEvaluationErrorFault"/>
+      <fault name="InvalidQueryExpressionFault" message="wsrpw:InvalidQueryExpressionFault"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+    <operation name="GetResourceProperty">
+      <input name="GetResourcePropertyRequest" message="wsrpw:GetResourcePropertyRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetResourceProperty"/>
+      <output name="GetResourcePropertyResponse" message="wsrpw:GetResourcePropertyResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetResourcePropertyResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+    <operation name="GetMultipleResourceProperties">
+      <input name="GetMultipleResourcePropertiesRequest" message="wsrpw:GetMultipleResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourceProperties"/>
+      <output name="GetMultipleResourcePropertiesResponse" message="wsrpw:GetMultipleResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourcePropertiesResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+  </portType>
+</definitions>

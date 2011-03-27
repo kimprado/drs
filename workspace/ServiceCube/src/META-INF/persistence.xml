@@ -1,0 +1,56 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="cubeservice">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>org.cube.service.impl.modelo.Atributo</class>
+		<class>org.cube.service.impl.modelo.ChaveEstrangeira</class>
+		<class>org.cube.service.impl.modelo.ChavePrimaria</class>
+		<class>org.cube.service.impl.modelo.Cubo</class>
+		<class>org.cube.service.impl.modelo.Dimensao</class>
+		<class>org.cube.service.impl.modelo.Fato</class>
+		<class>org.cube.service.impl.modelo.Ligacao</class>
+		<class>org.cube.service.impl.modelo.Tabela</class>
+		
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cubeservice"/>
+			<property name="javax.persistence.jdbc.user" value="globus"/>
+			<property name="javax.persistence.jdbc.password" value="globus"/>
+
+			<!-- 
+			
+			<property name="hibernate.search.default.directory_provider"
+				value="org.hibernate.search.store.FSDirectoryProvider"/>
+			<property name="hibernate.search.default.indexBase"
+				value="C:\Documents and Settings\Caelum1060804\Desktop\caelum1060804\workspace\projeto-fj25-web\WebContent\WEB-INF\lucene\indexes"/>
+			<property name="hibernate.search.analyzer"
+				value="org.apache.lucene.analysis.br.BrazilianAnalyzer"/> -->
+			
+			<property name="hibernate.cache.use_second_level_cahe" value="true"/>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
+			
+			<property name="hibernate.generate_statistics" value="true"/>
+			
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			<property name="hibernate.c3p0.max_size" value="20"/>
+			<property name="hibernate.c3p0.timeout" value="180"/>
+			<property name="hibernate.c3p0.idle_test_period" value="100"/> <!--	-->
+			 
+		</properties>
+	</persistence-unit>
+
+</persistence>

@@ -1,0 +1,60 @@
+#! /bin/sh
+set -e
+#export GLOBUS_LOCATION=/usr/local/globus-4.0.5
+#export JAVA_HOME=/usr/local/j2sdk1.4.2_01
+#export ANT_HOME=/usr/local/apache-ant-1.7.0
+#export GLOBUS_OPTIONS="-Xms256M -Xmx512M"
+
+#. $GLOBUS_LOCATION/etc/globus-user-env.sh
+
+
+#cd $GLOBUS_LOCATION
+
+case "$1" in
+    1)
+    	./globus-build-service.sh -d org/cube/service/ -s schema/examples/Cube/Cube.wsdl
+    	./addResourcesToGAR.sh
+    	mv d_org_cube_service_added.gar org_cube_service.gar
+    	cp org_cube_service.gar /dados/
+    	echo "Copied org_cube_service.gar to /dados/" >&2
+        ;;
+    2)
+    	echo "Compiling..."
+        javac -classpath ./build/stubs/classes/:$CLASSPATH org/cube/client/Client.java
+	echo "Compiled" >&2
+        ;;
+    3)
+    	echo "Executing..."
+    	java -classpath ./build/stubs/classes/:$CLASSPATH org.cube.client.Client http://eingrid002.unigranrio.br:8443/wsrf/services/cube/Cube
+    	;;
+    4)
+    	echo "Compiling..."
+        javac -classpath ./build/stubs/classes/:$CLASSPATH org/cube/client/Client.java
+	echo "Executing..."
+    	java -classpath ./build/stubs/classes/:$CLASSPATH org.cube.client.Client http://eingrid002.unigranrio.br:8443/wsrf/services/cube/Cube
+    	;;
+    toweb)
+    		#Projeto Antigo Dentro do Workspace
+    	#cp -r build/stubs/classes/org/ ../../WebAppCube/cube/web/WEB-INF/classes/
+    	#echo "Copied ./build/stubs/classes/ to WebAppCube/.../classes" >&2
+    		
+		#Projeto Atual Dentro do Workspace
+	#cp -r build/stubs/classes/org/ ../../prjClienteWebDRS/build/stubs/
+        #echo "Copied ./build/stubs/classes/ to prjClienteWebDRS/build/stubs"
+	
+		#Diretamente dentro da Lib Pública do TomCat. Devido a Dificuldade de Configuração Do CLASSPATH do Eclipse GanyMede
+	cp build/lib/org_cube_service_stubs.jar $CATALINA_HOME/lib
+        echo "cp build/lib/stubsCube.jar to 'CATALINA_HOME'/lib"
+
+	;;
+    todrs)
+    	cp -r build/stubs/classes/org/globus/cube/ ../../DRS/src/build/stubs/classes/org/globus/
+    	echo "Copied ./build/stubs/.../examples/ to DRS/.../classes" >&2
+    	;;
+    *)
+        echo "Usage: s {1|2|3|4}" >&2
+        # exit 1
+       ;;
+esac
+#exit 0
+

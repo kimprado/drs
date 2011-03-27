@@ -1,0 +1,50 @@
+#! /bin/sh
+set -e
+#export GLOBUS_LOCATION=/usr/local/globus-4.0.5
+#export JAVA_HOME=/usr/local/j2sdk1.4.2_01
+#export ANT_HOME=/usr/local/apache-ant-1.7.0
+#export GLOBUS_OPTIONS="-Xms256M -Xmx512M"
+
+#. $GLOBUS_LOCATION/etc/globus-user-env.sh
+
+
+#cd $GLOBUS_LOCATION
+
+case "$1" in
+    1)
+    	./globus-build-service.sh -d org/cubeindex/service/ -s schema/examples/Cube/CubeIndex.wsdl
+	cp org_cubeindex_service.gar /dados/
+	echo "cp org_cubeindex_service.gar to /dados/"
+	#cp -r build/stubs/classes/org ../../ServiceCube/src/build/stubs/classes/
+	#echo "cp -r 'stubs/' to SetrviceCube/stubs'" >&2
+        ;;
+    2)
+    	echo "Compiling..."
+        javac -classpath ./build/stubs/classes/:$CLASSPATH org/cubeindex/client/ClientIndex.java
+	echo "Compiled" >&2
+        ;;
+    3)
+    	echo "Executing..."
+    	java -classpath ./build/stubs/classes/:$CLASSPATH org.cubeindex.client.ClientIndex http://eingrid001.unigranrio.br:8443/wsrf/services/cubeIndex
+    	;;
+    4)
+    	echo "Compiling..."
+        javac -classpath ./build/stubs/classes/:$CLASSPATH org/cubeindex/client/ClientIndex.java
+	echo "Executing..."
+	java -classpath ./build/stubs/classes/:$CLASSPATH org.cubeindex.client.ClientIndex http://eingrid002.unigranrio.br:8443/wsrf/services/cubeIndex
+    	;;
+    5)
+    	cp -r -f build/stubs/classes/* ../../ServiceCube/src/build/stubs/classes/
+	echo "cp -r -f 'stubs/' to ServiceCube/stubs'" >&2
+	;;
+    toweb)
+    	cp build/lib/org_cubeindex_service_stubs.jar $CATALINA_HOME/lib
+	echo "cp build/lib/stubsIndex.jar to 'CATALINA_HOME'/lib"
+	;;
+    *)
+        echo "Usage: s {1|2|3|4}" >&2
+        # exit 1
+       ;;
+esac
+#exit 0
+

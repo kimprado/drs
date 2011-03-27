@@ -1,0 +1,8 @@
+first,org/globus/examples/services/core/first,schema/examples/MathService_instance/Math.wsdl
+singleton,org/globus/examples/services/core/singleton,schema/examples/MathService_instance/Math.wsdl
+factory,org/globus/examples/services/core/factory,schema/examples/MathService_instance/Math.wsdl,schema/examples/FactoryService/Factory.wsdl
+rp,org/globus/examples/services/core/rp,schema/examples/MathService_instance_rp/Math.wsdl
+rl,org/globus/examples/services/core/rl,schema/examples/MathService_instance_rl/Math.wsdl,schema/examples/FactoryService/Factory.wsdl
+notifications,org/globus/examples/services/core/notifications,schema/examples/MathService_instance_notif/Math.wsdl
+
+sec_first,org/globus/examples/services/security/first,schema/examples/MathService_instance_4op/Math.wsdl

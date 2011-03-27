@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DRSService"
+    targetNamespace="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsrp="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd"
+    xmlns:wsrpw="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    xmlns:wsdlpp="http://www.globus.org/namespaces/2004/10/WSDLPreprocessor"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<wsdl:import
+    namespace=
+    "http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    location="../../wsrf/properties/WS-ResourceProperties.wsdl" />
+
+<types>
+<xsd:schema targetNamespace="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- Requests and responses -->
+
+	<xsd:element name="addCampo">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:atributo" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="opcoes">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="logico" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="comparacao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="valor" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="agSel">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="agregacao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="agHav">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="logico" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="agregacao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="comparacao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="valor" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="atributo">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="consulta" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cubeEntry" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cubo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cuboNome" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="tabela" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="tabelaNome" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="campo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="campoNome" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="agrupar" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="mostrar" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="mostrarPosicao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ordenar" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ordenarPosicao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ordenarDirecao" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="tns:opcoes"  minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="tns:agSel"  minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="tns:agHav"  minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="idObjeto" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="addcampoResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="consultaDescricao">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="cubeEntry" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="consulta" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cubo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="tabela" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="criarConsulta">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:consultaDescricao" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="criarResponse" type="xsd:int"/>
+
+
+	<xsd:element name="verificarConsulta">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:consultaDescricao" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="verificarResponse" type="xsd:int"/>
+
+
+	<xsd:element name="getSQL" type="xsd:int"/>
+	<xsd:element name="getSQLResponse" type="xsd:string"/>
+
+
+	<xsd:element name="removeCampo">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:atributo" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="removecampoResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="getCampo">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:atributo" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="getCampoResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:atributo" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="getResumo">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="consulta" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cubo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="tabela" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="resumoResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="resumoAtributos" ref="tns:atributo" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="resumoOrdemAtributos" ref="tns:atributo" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="resumoOrdemDados" ref="tns:atributo" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	
+	<xsd:element name="salvarOrdemCampos">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="ordemAtributos" ref="tns:atributo" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="salvarOrdemCamposResponse" type="xsd:boolean"/>
+	
+	
+	<xsd:element name="salvarOrdemDados">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="ordemDados" ref="tns:atributo" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="salvarOrdemDadosResponse" type="xsd:boolean"/>
+	
+	<!-- Resource properties -->
+
+	<xsd:element name="cubeURI" type="xsd:string"/>
+
+	<xsd:element name="DRSResourceProperties">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeURI" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+</types>
+
+
+<message name="AddCampoInputMessage">
+	<part name="parameters" element="tns:addCampo"/>
+</message>
+<message name="AddCampoOutputMessage">
+	<part name="parameters" element="tns:addcampoResponse"/>
+</message>
+
+<message name="CriarConsultaInputMessage">
+	<part name="parameters" element="tns:criarConsulta"/>
+</message>
+<message name="CriarOutputMessage">
+	<part name="parameters" element="tns:criarResponse"/>
+</message>
+
+<message name="VerificarConsultaInputMessage">
+	<part name="parameters" element="tns:verificarConsulta"/>
+</message>
+<message name="VerificarOutputMessage">
+	<part name="parameters" element="tns:verificarResponse"/>
+</message>
+
+<message name="GetSQLInputMessage">
+	<part name="parameters" element="tns:getSQL"/>
+</message>
+<message name="GetSQLOutputMessage">
+	<part name="parameters" element="tns:getSQLResponse"/>
+</message>
+
+<message name="RemoveCampoInputMessage">
+	<part name="parameters" element="tns:removeCampo"/>
+</message>
+<message name="RemoveCampoOutputMessage">
+	<part name="parameters" element="tns:removecampoResponse"/>
+</message>
+
+<message name="GetCampoInputMessage">
+	<part name="parameters" element="tns:getCampo"/>
+</message>
+<message name="GetCampoOutputMessage">
+	<part name="parameters" element="tns:getCampoResponse"/>
+</message>
+
+<message name="GetResumoInputMessage">
+	<part name="parameters" element="tns:getResumo"/>
+</message>
+<message name="ResumoOutputMessage">
+	<part name="parameters" element="tns:resumoResponse"/>
+</message>
+
+<message name="SalvarOrdemCamposInputMessage">
+	<part name="parameters" element="tns:salvarOrdemCampos"/>
+</message>
+<message name="SalvarOrdemCamposOutputMessage">
+	<part name="parameters" element="tns:salvarOrdemCamposResponse"/>
+</message>
+
+<message name="SalvarOrdemDadosInputMessage">
+	<part name="parameters" element="tns:salvarOrdemDados"/>
+</message>
+<message name="SalvarOrdemDadosOutputMessage">
+	<part name="parameters" element="tns:salvarOrdemDadosResponse"/>
+</message>
+
+<portType name="DRSPortType"
+    wsdlpp:extends="wsrpw:GetResourceProperty
+                    wsrpw:GetMultipleResourceProperties
+                    wsrpw:SetResourceProperties
+                    wsrpw:QueryResourceProperties"
+    wsrp:ResourceProperties="tns:DRSResourceProperties">
+
+
+	<operation name="addCampo">
+		<input message="tns:AddCampoInputMessage"/>
+		<output message="tns:AddCampoOutputMessage"/>
+	</operation>
+
+	<operation name="criarConsulta">
+		<input message="tns:CriarConsultaInputMessage"/>
+		<output message="tns:CriarOutputMessage"/>
+	</operation>
+
+	<operation name="verificarConsulta">
+		<input message="tns:VerificarConsultaInputMessage"/>
+		<output message="tns:VerificarOutputMessage"/>
+	</operation>
+
+	<operation name="getSQL">
+		<input message="tns:GetSQLInputMessage"/>
+		<output message="tns:GetSQLOutputMessage"/>
+	</operation>
+
+	<operation name="removeCampo">
+		<input message="tns:RemoveCampoInputMessage"/>
+		<output message="tns:RemoveCampoOutputMessage"/>
+	</operation>
+
+	<operation name="getCampo">
+		<input message="tns:GetCampoInputMessage"/>
+		<output message="tns:GetCampoOutputMessage"/>
+	</operation>
+
+	<operation name="getResumo">
+		<input message="tns:GetResumoInputMessage"/>
+		<output message="tns:ResumoOutputMessage"/>
+	</operation>
+	
+	<operation name="salvarOrdemCampos">
+		<input message="tns:SalvarOrdemCamposInputMessage"/>
+		<output message="tns:SalvarOrdemCamposOutputMessage"/>
+	</operation>
+	
+	<operation name="salvarOrdemDados">
+		<input message="tns:SalvarOrdemDadosInputMessage"/>
+		<output message="tns:SalvarOrdemDadosOutputMessage"/>
+	</operation>
+
+</portType>
+
+</definitions>

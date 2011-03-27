@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CubeService" targetNamespace="http://www.globus.org/namespaces/examples/core/Cube/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:binding="http://www.globus.org/namespaces/examples/core/Cube/bindings" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://www.globus.org/namespaces/examples/core/Cube/bindings" location="Cube_bindings.wsdl"/>
+  <wsdl:service name="CubeService">
+    <wsdl:port name="CubePortTypePort" binding="binding:CubePortTypeSOAPBinding">
+      <soap:address location="http://localhost:8080/wsrf/services/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

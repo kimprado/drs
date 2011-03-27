@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CubeService" targetNamespace="http://www.globus.org/namespaces/examples/core/Cube" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsrpw="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" xmlns:wsdlpp="http://www.globus.org/namespaces/2004/10/WSDLPreprocessor" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsrp="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd">
+  <import namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" location="../../wsrf/properties/WS-ResourceProperties.wsdl"/>
+  <types>
+    <xsd:schema targetNamespace="http://www.globus.org/namespaces/examples/core/Cube" xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://schemas.xmlsoap.org/ws/2004/03/addressing" schemaLocation="../../ws/addressing/WS-Addressing.xsd"/>
+
+
+
+	<!-- Requests and responses -->
+
+	<xsd:element name="getCubeColl">
+		<xsd:complexType/>
+	</xsd:element>
+
+	<xsd:element name="cubeCollResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="cubeName" type="xsd:string"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="cubeIndex" type="xsd:string"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="cubeServer" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="printCube" type="xsd:int"/>
+	<xsd:element name="printCubeResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="cube" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="executeQuery">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="selectCube" type="xsd:int"/>
+			<xsd:element name="sql" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="columnResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="column" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="ColumnName" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="executeQueryResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:columnResponse"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="resultColumnName" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="getCubeMetaData" type="xsd:int"/>
+
+	<xsd:element name="fieldMetaData">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:int"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="type" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="size" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="decimal" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="primaryKey" type="xsd:boolean"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="foreignKey" type="xsd:boolean"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="dimensaoMetaData">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:int"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:fieldMetaData"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:ligacaoMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ligacaoMetaData">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="estrangeiro" ref="tns:fieldMetaData"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="primario" ref="tns:fieldMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="fatoMetaData">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:fieldMetaData"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" ref="tns:dimensaoMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cubeMetadataResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:fatoMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="addCube">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="uri" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="user" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="password" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="millisecond" type="xsd:long"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="fato" type="xsd:string"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="addCubeResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="removeCube" type="xsd:int"/>
+
+	<xsd:element name="removeCubeResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="success" type="xsd:boolean"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="setChavePrimaria">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="cube" type="xsd:int"/>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:fatoMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="setChaveResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="setLigacao">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="cube" type="xsd:int"/>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:fatoMetaData"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="setLigacaoResponse" type="xsd:boolean"/>
+
+	<!-- Resource properties -->
+
+	<xsd:element name="Cube" type="xsd:string"/>
+
+	<xsd:element name="CubeResourceProperties">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="tns:Cube"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+  </types>
+  <message name="SetLigacaoInputMessage">
+    <part name="parameters" element="tns:setLigacao"/>
+  </message>
+  <message name="AddCubeInputMessage">
+    <part name="parameters" element="tns:addCube"/>
+  </message>
+  <message name="GetCubeMetadataInputMessage">
+    <part name="parameters" element="tns:getCubeMetaData"/>
+  </message>
+  <message name="AddCubeOutputMessage">
+    <part name="parameters" element="tns:addCubeResponse"/>
+  </message>
+  <message name="SetLigacaoOutputMessage">
+    <part name="parameters" element="tns:setLigacaoResponse"/>
+  </message>
+  <message name="SetChaveOutputMessage">
+    <part name="parameters" element="tns:setChaveResponse"/>
+  </message>
+  <message name="CubeMetadataOutputMessage">
+    <part name="parameters" element="tns:cubeMetadataResponse"/>
+  </message>
+  <message name="PrintCubeInputMessage">
+    <part name="parameters" element="tns:printCube"/>
+  </message>
+  <message name="ExecuteQueryInputMessage">
+    <part name="parameters" element="tns:executeQuery"/>
+  </message>
+  <message name="PrintCubeOutputMessage">
+    <part name="parameters" element="tns:printCubeResponse"/>
+  </message>
+  <message name="RemoveCubeInputMessage">
+    <part name="parameters" element="tns:removeCube"/>
+  </message>
+  <message name="CubeCollOutputMessage">
+    <part name="parameters" element="tns:cubeCollResponse"/>
+  </message>
+  <message name="ExecuteQueryOutputMessage">
+    <part name="parameters" element="tns:executeQueryResponse"/>
+  </message>
+  <message name="RemoveCubeOutputMessage">
+    <part name="parameters" element="tns:removeCubeResponse"/>
+  </message>
+  <message name="GetCubeCollInputMessage">
+    <part name="parameters" element="tns:getCubeColl"/>
+  </message>
+  <message name="SetChavePrimariaInputMessage">
+    <part name="parameters" element="tns:setChavePrimaria"/>
+  </message>
+  <portType name="CubePortType" wsrp:ResourceProperties="tns:CubeResourceProperties">
+    <operation name="getCubeColl">
+      <input message="tns:GetCubeCollInputMessage"/>
+      <output message="tns:CubeCollOutputMessage"/>
+    </operation>
+    <operation name="printCube">
+      <input message="tns:PrintCubeInputMessage"/>
+      <output message="tns:PrintCubeOutputMessage"/>
+    </operation>
+    <operation name="executeQuery">
+      <input message="tns:ExecuteQueryInputMessage"/>
+      <output message="tns:ExecuteQueryOutputMessage"/>
+    </operation>
+    <operation name="getCubeMetaData">
+      <input message="tns:GetCubeMetadataInputMessage"/>
+      <output message="tns:CubeMetadataOutputMessage"/>
+    </operation>
+    <operation name="addCube">
+      <input message="tns:AddCubeInputMessage"/>
+      <output message="tns:AddCubeOutputMessage"/>
+    </operation>
+    <operation name="removeCube">
+      <input message="tns:RemoveCubeInputMessage"/>
+      <output message="tns:RemoveCubeOutputMessage"/>
+    </operation>
+    <operation name="setChavePrimaria">
+      <input message="tns:SetChavePrimariaInputMessage"/>
+      <output message="tns:SetChaveOutputMessage"/>
+    </operation>
+    <operation name="setLigacao">
+      <input message="tns:SetLigacaoInputMessage"/>
+      <output message="tns:SetLigacaoOutputMessage"/>
+    </operation>
+    <operation name="SetResourceProperties">
+      <input name="SetResourcePropertiesRequest" message="wsrpw:SetResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/SetResourceProperties"/>
+      <output name="SetResourcePropertiesResponse" message="wsrpw:SetResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/SetResourcePropertiesResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="InvalidSetResourcePropertiesRequestContentFault" message="wsrpw:InvalidSetResourcePropertiesRequestContentFault"/>
+      <fault name="SetResourcePropertyRequestFailedFault" message="wsrpw:SetResourcePropertyRequestFailedFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+      <fault name="UnableToModifyResourcePropertyFault" message="wsrpw:UnableToModifyResourcePropertyFault"/>
+    </operation>
+    <operation name="QueryResourceProperties">
+      <input name="QueryResourcePropertiesRequest" message="wsrpw:QueryResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/QueryResourceProperties"/>
+      <output name="QueryResourcePropertiesResponse" message="wsrpw:QueryResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/QueryResourcePropertiesResponse"/>
+      <fault name="UnknownQueryExpressionDialectFault" message="wsrpw:UnknownQueryExpressionDialectFault"/>
+      <fault name="QueryEvaluationErrorFault" message="wsrpw:QueryEvaluationErrorFault"/>
+      <fault name="InvalidQueryExpressionFault" message="wsrpw:InvalidQueryExpressionFault"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+    <operation name="GetResourceProperty">
+      <input name="GetResourcePropertyRequest" message="wsrpw:GetResourcePropertyRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetResourceProperty"/>
+      <output name="GetResourcePropertyResponse" message="wsrpw:GetResourcePropertyResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetResourcePropertyResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+    <operation name="GetMultipleResourceProperties">
+      <input name="GetMultipleResourcePropertiesRequest" message="wsrpw:GetMultipleResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourceProperties"/>
+      <output name="GetMultipleResourcePropertiesResponse" message="wsrpw:GetMultipleResourcePropertiesResponse" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourcePropertiesResponse"/>
+      <fault name="InvalidResourcePropertyQNameFault" message="wsrpw:InvalidResourcePropertyQNameFault"/>
+      <fault name="ResourceUnknownFault" message="wsrpw:ResourceUnknownFault"/>
+    </operation>
+  </portType>
+</definitions>

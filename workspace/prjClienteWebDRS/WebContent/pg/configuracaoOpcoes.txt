@@ -1,0 +1,5 @@
+a = (SELECT) Inglobar todas as medidas em um "( )" precedido por operadores relacionais - and, or, not - ou não
+
+b = (SELECT) Inglobar uma qantidade específica medidas em um "( )" precedido por operadores relacionais - and, or, not - ou não
+
+c =

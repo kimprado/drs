@@ -1,0 +1,3 @@
+http\://www.globus.org/namespaces/examples/core/Cube=org.globus.drs.stubs.Cube
+http\://www.globus.org/namespaces/examples/core/Cube/bindings=org.globus.drs.stubs.Cube.bindings
+http\://www.globus.org/namespaces/examples/core/Cube/service=org.globus.drs.stubs.Cube.service

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CubeIndexService"
+    targetNamespace="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsrp="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd"
+    xmlns:wsrpw="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    xmlns:wsdlpp="http://www.globus.org/namespaces/2004/10/WSDLPreprocessor"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<wsdl:import
+    namespace=
+    "http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    location="../../wsrf/properties/WS-ResourceProperties.wsdl" />
+
+<types>
+<xsd:schema targetNamespace="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:tns="http://www.globus.org/namespaces/examples/core/Cube"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- Requests and responses -->
+
+	<xsd:element name="getCubeList">
+		<xsd:complexType/>
+	</xsd:element>
+
+	<xsd:element name="cubeEntry">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="entry" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="index" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="time" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cubeListResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeEntry" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="getCubeEntry" type="xsd:int"/>
+
+	<xsd:element name="cubeEntryResponse">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeEntry" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+	<xsd:element name="addCubeEntry" ref="tns:cubeEntry"/>
+	
+	<!-- 
+	<xsd:element name="addCubeEntry">
+		<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeEntry" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	 -->
+	
+	<xsd:element name="addResponse" type="xsd:int"/>
+
+
+	<xsd:element name="removeEntry" type="xsd:int"/>
+
+	<xsd:element name="removeEntryResponse" type="xsd:boolean"/>
+
+
+	<xsd:element name="refreshCube" type="xsd:int"/>
+
+	<xsd:element name="refreshCubeResponse" type="xsd:boolean"/>
+
+	<!-- Resource properties -->
+
+	<xsd:element name="cubeURI" type="xsd:string"/>
+
+	<xsd:element name="CubeIndexResourceProperties">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="tns:cubeURI" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+</types>
+
+
+<message name="GetCubeListInputMessage">
+	<part name="parameters" element="tns:getCubeList"/>
+</message>
+<message name="CubeListOutputMessage">
+	<part name="parameters" element="tns:cubeListResponse"/>
+</message>
+
+<message name="GetCubeEntryInputMessage">
+	<part name="parameters" element="tns:getCubeEntry"/>
+</message>
+<message name="CubeEntryOutputMessage">
+	<part name="parameters" element="tns:cubeEntryResponse"/>
+</message>
+
+<message name="AddCubeEntryInputMessage">
+	<part name="parameters" element="tns:addCubeEntry"/>
+</message>
+<message name="AddOutputMessage">
+	<part name="parameters" element="tns:addResponse"/>
+</message>
+
+<message name="RemoveEntryInputMessage">
+	<part name="parameters" element="tns:removeEntry"/>
+</message>
+<message name="RemoveEntryOutputMessage">
+	<part name="parameters" element="tns:removeEntryResponse"/>
+</message>
+
+<message name="RefreshCubeInputMessage">
+	<part name="parameters" element="tns:refreshCube"/>
+</message>
+<message name="RefreshCubeOutputMessage">
+	<part name="parameters" element="tns:refreshCubeResponse"/>
+</message>
+
+
+<portType name="CubeIndexPortType"
+    wsdlpp:extends="wsrpw:GetResourceProperty
+                    wsrpw:GetMultipleResourceProperties
+                    wsrpw:SetResourceProperties
+                    wsrpw:QueryResourceProperties"
+    wsrp:ResourceProperties="tns:CubeIndexResourceProperties">
+
+
+	<operation name="getCubeList">
+		<input message="tns:GetCubeListInputMessage"/>
+		<output message="tns:CubeListOutputMessage"/>
+	</operation>
+
+	<operation name="getCubeEntry">
+		<input message="tns:GetCubeEntryInputMessage"/>
+		<output message="tns:CubeEntryOutputMessage"/>
+	</operation>
+
+	<operation name="addCubeEntry">
+		<input message="tns:AddCubeEntryInputMessage"/>
+		<output message="tns:AddOutputMessage"/>
+	</operation>
+
+	<operation name="removeEntry">
+		<input message="tns:RemoveEntryInputMessage"/>
+		<output message="tns:RemoveEntryOutputMessage"/>
+	</operation>
+
+	<operation name="refreshCube">
+		<input message="tns:RefreshCubeInputMessage"/>
+		<output message="tns:RefreshCubeOutputMessage"/>
+	</operation>
+
+</portType>
+
+</definitions>

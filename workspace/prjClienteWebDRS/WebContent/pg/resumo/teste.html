@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="drag_drop.js"></script>
+
+<link rel="stylesheet" type="text/css" href="drag_drop.css">
+
+<style type="text/css"></style>
+
+
+
+<script type="text/javascript">
+
+
+var elementoContainer = null; 
+
+function getListaObjetosDrag(){
+	var lista = new Object();
+
+	var itensDrag = 0;
+	for(var i=0; i<elementoContainer.childNodes.length; i++){
+
+		if(elementoContainer.childNodes[i].nodeName=='#text') continue;
+
+		lista[itensDrag] = elementoContainer.childNodes[i];
+		itensDrag++;
+		lista.size = itensDrag;
+	}
+	return lista;
+}
+
+function getObjetoEnviadoParaOrdenacao(obj){
+	for(var i=0; i<obj.childNodes.length; i++){
+		
+		if(obj.childNodes[i].nodeName=='INPUT'){
+			return obj.childNodes[i];
+		}
+	}
+	return null;
+}
+
+function atualizarOrdemObjetosDrag(){
+	var lista = getListaObjetosDrag();
+	var itensDrag = 1;
+	for(var i=0; i<lista.size ;i++){
+		objetoEnviado = getObjetoEnviadoParaOrdenacao(lista[i]);
+		if(objetoEnviado != null){
+			objetoEnviado.value = itensDrag;
+			itensDrag++;
+			alert(objetoEnviado + ' ' + objetoEnviado.value);
+		}
+	}
+}
+
+window.onload = function(){
+	// Create our helper object that will show the item while dragging
+	dragHelper = document.createElement('DIV');
+	dragHelper.style.cssText = 'position:absolute;display:none;';
+
+	CreateDragContainer(
+		document.getElementById('DragContainer1')//,
+		//document.getElementById('DragContainer2'),
+		//document.getElementById('DragContainer3')
+	);
+
+	elementoContainer = document.getElementById('DragContainer1');
+	
+	document.body.appendChild(dragHelper);
+	
+}
+
+
+</script>
+
+</head>
+<body>
+	
+	
+	<div class="DragContainer" id="DragContainer1">
+		
+		<div class="DragBox" id="Item1" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #1
+			<input type="hidden" name="745294" id="745294" value="5"/>
+		</div>
+		
+		<div class="DragBox" id="Item2" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #2
+			<input type="hidden" name="455" id="455" value="5"/>
+		</div>
+		
+		<div class="DragBox" id="Item3" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #3
+			<input type="hidden" name="745294" id="745294" value="5"/>
+		</div>
+		
+		<div class="DragBox" id="Item4" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #4
+			<input type="hidden" name="67" id="67" value="5"/>
+		</div>
+		
+		<div class="DragBox" id="Item5" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #5
+			<input type="hidden" name="3323" id="3323" value="5"/>
+		</div>
+		
+		<div class="DragBox" id="Item6" overClass="OverDragBox" dragClass="DragDragBox">
+			Item #6
+			<input type="hidden" name="4567" id="3323" value="5"/>
+		</div>
+	
+	</div>
+	
+	<div class="DragContainer" id="DragContainer2"></div>
+	
+	<div class="DragContainer" id="DragContainer3"></div>
+
+	<br>
+	<input type="button" onclick="atualizarOrdemObjetosDrag()" value="atualizar">
+
+</body>
+</html>

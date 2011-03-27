@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>prjClienteWebDRS</display-name>
+  <welcome-file-list>
+    <welcome-file>Controlador</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>Controlador</display-name>
+    <servlet-name>Controlador</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.Controlador</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Controlador</servlet-name>
+    <url-pattern>/Controlador</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>SalvarOrdem</display-name>
+    <servlet-name>SalvarOrdem</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.SalvarOrdem</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SalvarOrdem</servlet-name>
+    <url-pattern>/SalvarOrdem</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>SalvarOrdemAtributo</display-name>
+    <servlet-name>SalvarOrdemAtributo</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.SalvarOrdemAtributo</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SalvarOrdemAtributo</servlet-name>
+    <url-pattern>/pg/SalvarOrdemAtributo</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>SalvarOrdenacaoDados</display-name>
+    <servlet-name>SalvarOrdenacaoDados</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.SalvarOrdenacaoDados</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SalvarOrdenacaoDados</servlet-name>
+    <url-pattern>/pg/SalvarOrdenacaoDados</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>0</session-timeout>
+  </session-config>
+  
+  <servlet>
+    <description></description>
+    <display-name>ResultadoXML</display-name>
+    <servlet-name>ResultadoXML</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.ResultadoXML</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ResultadoXML</servlet-name>
+    <url-pattern>/ResultadoXML</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Faces Servlet</servlet-name>
+  	<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>Faces Servlet</servlet-name>  
+  	<url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
