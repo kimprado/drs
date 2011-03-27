@@ -12,7 +12,6 @@ public class DAO<T> {
 	public DAO(EntityManager em, Class<T> classe) {
 		this.em = em;
 		this.classe = classe;
-
 	}
 	
 	public void adiciona(T t) {
@@ -28,7 +27,7 @@ public class DAO<T> {
 	}
 	
 	public List<T> lista(){
-		return this.em.createQuery("from "+classe.getName()).getResultList();
+		return this.em.createQuery("from " + classe.getName()).getResultList();
 	}
 	
 	public void altera(T t) {

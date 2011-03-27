@@ -23,6 +23,7 @@ public class ChavePrimaria {
 	@OneToOne
 	private Tabela tabela;
 	
+	//@Transient
 	int idAtributo;
 	
 	@OneToMany(mappedBy="chavePrimaria", fetch=FetchType.LAZY)
@@ -30,8 +31,6 @@ public class ChavePrimaria {
 	private List<Atributo> atributos = new LinkedList<Atributo>();
 	
 	public ChavePrimaria(){
-		//atributos = new HashMap<Integer, Atributo>();
-		//idAtributo = 0;
 	}
 	
 	public void setId(Integer id) {
@@ -56,19 +55,6 @@ public class ChavePrimaria {
 		getAtributos().add(atributo);
 	}
 	
-	/*public Atributo[] getAtributos(){
-		Atributo[] atributos = new Atributo[a_chaveP.size()];
-		int count = 0;
-		for (int i=1; i < idAtributo + 1; i++){
-			if (a_chaveP.containsKey(new Integer(i))){
-				atributos[count] = a_chaveP.get(new Integer(i));
-				count++;
-			}
-		}
-		
-		return atributos;
-	}*/
-
 	public void setTabela(Tabela tabela) {
 		this.tabela = tabela;
 	}
@@ -86,13 +72,11 @@ public class ChavePrimaria {
 	}
 
 	public String imprimir(PrintStream p, String print){
-		
 		print += getNome() + "\n\t";
 		
 		for (Atributo atributo : getAtributos()) {
 			print += "" + atributo.getName() + "; ";
 		}
-		
 		
 		return print;
 	}

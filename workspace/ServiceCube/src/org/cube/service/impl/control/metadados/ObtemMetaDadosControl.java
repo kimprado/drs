@@ -25,7 +25,6 @@ public class ObtemMetaDadosControl {
 	 */
 	
 	public Fato obterFatoMetaData(Connection conn, String catalogo) throws SQLException{
-		
 		DatabaseMetaData dbmd = conn.getMetaData();
 		
 		String nomeTabelaFato = detectaFatoPelasForengnKeys(dbmd, catalogo);
@@ -37,7 +36,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public String detectaFatoPelasForengnKeys(DatabaseMetaData dbmd, String catalago) throws SQLException{
-		
 		String nomeTabelaFato = null;
 		ResultSet rsTabela = dbmd.getTables(catalago, null, null, Tables.TABLETYPE);
 		
@@ -99,7 +97,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public Ligacao criaLigacao(Tabela table1, Tabela table2, ForeignKeys foreignKey) throws SQLException{
-		
 		Atributo atributo1 = null;
 		Atributo atributo2 = null;
 		
@@ -133,7 +130,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public ChaveEstrangeira criaChaveEstrangeiraParaFato(Fato fato, Dimensao dimensao, ForeignKeys foreignKey) throws SQLException{
-		
 		ChaveEstrangeira chaveEstrangeira =  new ChaveEstrangeira(fato, dimensao);
 		Ligacao ligacao = criaLigacao(fato, dimensao, foreignKey);
 		if ( ligacao != null){
@@ -159,7 +155,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public void criaLigacoesDeChavesEstrangeirasParaFato( Fato fato, DatabaseMetaData dbmd ) throws SQLException {
-		
 		ResultSet rsForeignKey = dbmd.getImportedKeys(null, null, fato.getNome());
 			
 		while (rsForeignKey.next()){
@@ -170,7 +165,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public void adicionaAtributoNaChavePrimaria(Tabela tabela, PrimaryKeys primaryKey) throws SQLException{
-		
 		String atributoChavePrimaria = primaryKey.getrsPrimaryKeyMetaData(PrimaryKeys.COLUMN_NAME);
 		
 		Atributo atributo = tabela.getAtributo(atributoChavePrimaria);
@@ -194,7 +188,6 @@ public class ObtemMetaDadosControl {
 	}
 	
 	public void criaChavePrimariaParaFato( Fato fato, DatabaseMetaData dbmd  ) throws SQLException{
-		
 		criaChavePrimariaParaTabela(fato, dbmd);
 		
 		for (ChaveEstrangeira chaveEstrangeira : fato.getChaveEstrangeira()) {

@@ -24,12 +24,10 @@ public class Atributo {
 	private String tamanho;
 	private String decimal;
 	
-	@OneToOne
-	//@Transient
+	@OneToOne(fetch=FetchType.LAZY)
 	private Ligacao ligacao;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	//@Transient
 	private ChavePrimaria chavePrimaria; 
 	
 	public Atributo(){

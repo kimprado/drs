@@ -13,11 +13,9 @@ public class CubeServiceDAO {
 		
 		try {
 			
-			
 			// Create endpoint reference to service
 			EndpointReferenceType endpoint = new EndpointReferenceType();
 			endpoint.setAddress(new Address(WebServiceDAO.getServiceURI(WebServiceDAO.CUBESERVICEURI)));
-			
 			
 			// Get PortType
 			CubePortType cube = locator.getCubePortTypePort(endpoint);

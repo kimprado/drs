@@ -35,7 +35,7 @@
 			<property name="hibernate.search.default.indexBase"
 				value="C:\Documents and Settings\Caelum1060804\Desktop\caelum1060804\workspace\projeto-fj25-web\WebContent\WEB-INF\lucene\indexes"/>
 			<property name="hibernate.search.analyzer"
-				value="org.apache.lucene.analysis.br.BrazilianAnalyzer"/> -->
+				value="org.apache.lucene.analysis.br.BrazilianAnalyzer"/> 
 			
 			<property name="hibernate.cache.use_second_level_cahe" value="true"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
@@ -48,7 +48,7 @@
 			<property name="hibernate.c3p0.min_size" value="5"/>
 			<property name="hibernate.c3p0.max_size" value="20"/>
 			<property name="hibernate.c3p0.timeout" value="180"/>
-			<property name="hibernate.c3p0.idle_test_period" value="100"/> <!--	-->
+			<property name="hibernate.c3p0.idle_test_period" value="100"/> -->
 			 
 		</properties>
 	</persistence-unit>

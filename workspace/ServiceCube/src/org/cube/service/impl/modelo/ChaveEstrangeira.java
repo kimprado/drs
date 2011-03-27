@@ -23,9 +23,6 @@ public class ChaveEstrangeira {
 	@ManyToOne
 	private Fato fato;
 	
-	/*@Transient
-	int idLigacao;*/
-	
 	@OneToMany(mappedBy="chaveEstrangeira")
 	private List<Ligacao> ligacoes = new LinkedList<Ligacao>();
 	
@@ -33,8 +30,6 @@ public class ChaveEstrangeira {
 	private Dimensao dimensao;
 	
 	public ChaveEstrangeira(Dimensao dimensao){
-		//idLigacao = 0;
-		//setLigacoes(new HashMap<Integer, Ligacao>());
 		this.dimensao = dimensao;
 		dimensao.setChaveEstrangeira(this);
 	}
@@ -72,12 +67,10 @@ public class ChaveEstrangeira {
 		Ligacao ligacao = new Ligacao(estrangeiro, primario);
 		estrangeiro.setLigacao(ligacao);
 		primario.setLigacao(ligacao);
-		//idLigacao++;
 		this.getLigacoes().add(ligacao);
 	}
 	
 	public void addLigacao(Ligacao ligacao){
-		//idLigacao++;
 		this.getLigacoes().add(ligacao);
 	}
 	
@@ -94,13 +87,11 @@ public class ChaveEstrangeira {
 	}
 	
 	public String imprimir(PrintStream p, String print){
-		
 		print = getNome() + "";
 		
 		for (Ligacao ligacao : getLigacoes()) {
 			print += "\n\t" + ligacao.imprimir(p, print);
 		}
-		 
 		
 		return print;
 	}

@@ -17,7 +17,6 @@ import javax.persistence.Transient;
 public class Fato extends Tabela {
 	
 	@OneToMany(mappedBy="fato")
-	//@Transient
 	private List<ChaveEstrangeira> chaveEstrangeira = new LinkedList<ChaveEstrangeira>();
 	@Transient
 	private int idCount = 0; // registra os IDs das dimensões alocadas para o fato

@@ -40,6 +40,25 @@ public class GerenciaMetaDadosTest {
 		
 	}
 	
+	public String getServiceURI(String procurar){
+		try{
+		FileReader reader = new FileReader(System.getenv("CUBO_CONF"));
+		BufferedReader leitor = new BufferedReader(reader,1*1024*1024);
+		String linha = null;
+		while( leitor.ready()  ) {
+			linha = leitor.readLine();
+			if (linha.toCharArray().length > 0){
+				if(procurar.equalsIgnoreCase( String.copyValueOf(linha.toCharArray(),0,procurar.length()))){
+					return String.copyValueOf(linha.toCharArray(),procurar.length()+1,linha.length() - procurar.length()-1) ;
+				}
+			}
+		}
+		leitor.close();
+		reader.close();
+		}catch (Exception e){ e.printStackTrace();}
+		return null;
+	}
+	
 	@Test
 	public void imprimeMetaDadosDeEsquema() throws SQLException{
 		this.configuraAtributos();
@@ -59,66 +78,13 @@ public class GerenciaMetaDadosTest {
 	}
 	
 	@Test
-	public void carregaMetaDadosDeCuboDinamicamente() throws SQLException{
+	public Cubo carregaMetaDadosDeCuboDinamicamente() throws SQLException{
 		Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
 				"kim", "org.postgresql.Driver", new Long(30000).longValue());
 		
 		CubeServiceControl.setCubeMetaData(cube);
 		System.out.println("Cubo Criado dinamicamente:\n" + cube.imprimir(System.out));
 		
-	}
-	
-	@Test
-	public void persisteCuboComCriacao() throws Exception{
-		
-		EntityManager em = AbreConexao.abreConexao();
-		
-		
-		Cubo cube = new Cubo("Vendas_v_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
-				"kim", "org.postgresql.Driver", new Long(30000).longValue());
-		
-		new PersistirCubo(em, new PersistirCriar() ,cube);
-		
-		//CubeServiceControl.setCubeMetaData(cube);
-		//System.out.println("Cubo persistido:\n" + cube.imprimir(System.out));
-		System.out.println("Cubo persistido:\n" + cube.getNome());
-		
-		FechaConexao.fechaConexao(em);
-		
-	}
-	
-	@Test
-	public void persisteCuboComAlteracao() throws Exception{
-		
-		EntityManager em = AbreConexao.abreConexao();
-		Cubo cube = new Cubo("Vendas_vii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
-				"kim", "org.postgresql.Driver", new Long(30000).longValue());
-		
-		new PersistirCubo(em, new PersistirAlterar() ,cube);
-		
-		System.out.println("Cubo persistido:\n" + cube.getNome());
-		
-		FechaConexao.fechaConexao(em);
-		
-	}
-	
-	
-	public String getServiceURI(String procurar){
-		try{
-		FileReader reader = new FileReader(System.getenv("CUBO_CONF"));
-		BufferedReader leitor = new BufferedReader(reader,1*1024*1024);
-		String linha = null;
-		while( leitor.ready()  ) {
-			linha = leitor.readLine();
-			if (linha.toCharArray().length > 0){
-				if(procurar.equalsIgnoreCase( String.copyValueOf(linha.toCharArray(),0,procurar.length()))){
-					return String.copyValueOf(linha.toCharArray(),procurar.length()+1,linha.length() - procurar.length()-1) ;
-				}
-			}
-		}
-		leitor.close();
-		reader.close();
-		}catch (Exception e){ e.printStackTrace();}
-		return null;
+		return cube;
 	}
 }

@@ -2,15 +2,17 @@ package org.cube.service.impl.teste.modelo;
 
 import javax.persistence.EntityManager;
 
+import org.cube.service.impl.control.PersistirCriar;
+import org.cube.service.impl.control.PersistirCubo;
 import org.cube.service.impl.dao.DAO;
+import org.cube.service.impl.dao.PersisteCuboServiceDAO;
 import org.cube.service.impl.infra.AbreConexao;
 import org.cube.service.impl.infra.FechaConexao;
 import org.cube.service.impl.modelo.Atributo;
 import org.cube.service.impl.modelo.Cubo;
 import org.cube.service.impl.modelo.Fato;
+import org.cube.service.impl.teste.control.GerenciaMetaDadosTest;
 import org.junit.Test;
-
-
 
 public class PopulaBancoTest {
 	
@@ -162,6 +164,22 @@ public class PopulaBancoTest {
 		
 		//Mesmo sem dao.altera() o hibernate faz o updade automático.
 		FechaConexao.fechaConexao(em);
+	}
+	
+	
+	@Test
+	public void carregaMetaDadosEPersisteCubo() throws Exception{
+		EntityManager em = AbreConexao.abreConexao();
+		
+		Cubo cubo = new GerenciaMetaDadosTest().carregaMetaDadosDeCuboDinamicamente();
+		
+		PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
+		persisteCuboServiceDAO.persisteCubo(cubo);
+		
+		System.out.println("Cubo auto detectado e persistido:\n" + cubo.getNome());
+		
+		FechaConexao.fechaConexao(em);
+		
 	}
 	
 }
