@@ -1,0 +1,3 @@
+DRS - Data Report Service
+
+Aplicação OLAP habilitada para operar em grades computacionais. Implementada de forma modular como Web Services SOAP(WSRF). Permite geração dinâmica de consultas(ad-hoc) a banco de dados dimensionais. Possui um cliente com Interface Web que acessa os serviços.
