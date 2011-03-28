@@ -3,6 +3,7 @@ package org.cube.service.impl.modelo;
 import java.io.PrintStream;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,13 +17,13 @@ public class Ligacao {
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private ChaveEstrangeira chaveEstrangeira;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Atributo atributoFato;// Atributo no fato. O comum é que o fato tenha uma chave composta por chaves estrangeiras referenciadas a dimensões.
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Atributo atributoDimensao;// Atributo na Dimensão. O comum é que a dimensão tenha sua chave primária referencia por uma chave estrangeira localizada na tabela de fatos.
 	
 	public Ligacao(){

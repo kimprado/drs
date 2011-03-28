@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -23,10 +24,10 @@ public class ChaveEstrangeira {
 	@ManyToOne
 	private Fato fato;
 	
-	@OneToMany(mappedBy="chaveEstrangeira")
+	@OneToMany(mappedBy="chaveEstrangeira", fetch=FetchType.LAZY)
 	private List<Ligacao> ligacoes = new LinkedList<Ligacao>();
 	
-	@OneToOne
+	@OneToOne(mappedBy="chaveEstrangeira", fetch=FetchType.LAZY)
 	private Dimensao dimensao;
 	
 	public ChaveEstrangeira(Dimensao dimensao){

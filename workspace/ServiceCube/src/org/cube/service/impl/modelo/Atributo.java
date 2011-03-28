@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Atributo {
@@ -24,7 +25,8 @@ public class Atributo {
 	private String tamanho;
 	private String decimal;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	//@OneToOne(fetch=FetchType.LAZY)
+	@Transient
 	private Ligacao ligacao;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -34,6 +36,7 @@ public class Atributo {
 		
 	}
 	
+	@Deprecated
 	public Atributo(String nome, String tipo, String tamanho, String decimal){
 		this.nome = nome;
 		this.tipo = tipo;

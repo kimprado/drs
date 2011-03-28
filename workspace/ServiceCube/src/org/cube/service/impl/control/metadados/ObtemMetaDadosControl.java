@@ -119,12 +119,12 @@ public class ObtemMetaDadosControl {
 			ligacao = new Ligacao(atributo2, atributo1);
 		}
 		
-		try {
+		/*try {
 			atributo1.setLigacao(ligacao);
 			atributo2.setLigacao(ligacao);
 		} catch (NullPointerException e) {
 			
-		}
+		}*/
 		
 		return ligacao;
 	}

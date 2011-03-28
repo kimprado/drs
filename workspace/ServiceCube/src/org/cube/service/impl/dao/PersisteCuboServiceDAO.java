@@ -26,11 +26,12 @@ public class PersisteCuboServiceDAO {
 		Fato fato = cubo.getFato();
 		//fato.setChaveEstrangeira(null);
 		persiste(fato);
+		persiste(fato.getChavePrimaria());
 		
 		for (ChaveEstrangeira chaveEstrangeira : fato.getChaveEstrangeira()) {
 			persiste(chaveEstrangeira);
 			
-			for (Ligacao ligacao : chaveEstrangeira.getLigacoes()) {
+			/*for (Ligacao ligacao : chaveEstrangeira.getLigacoes()) {
 				persiste(ligacao);
 				persiste(ligacao.getAtributoDimensao());
 				persiste(ligacao.getAtributoFato());
@@ -41,15 +42,14 @@ public class PersisteCuboServiceDAO {
 			
 			for (Atributo atributo : dimensao.getAtributos()) {
 				persiste(atributo);
-			}
+			}*/
 		}
 		
-		for (Atributo atributo : fato.getAtributos()) {
+		for (Atributo atributo : fato.getChavePrimaria().getAtributos()) {
 			persiste(atributo);
 		}
 		
-		persiste(fato.getChavePrimaria());
-		for (Atributo atributo : fato.getChavePrimaria().getAtributos()) {
+		for (Atributo atributo : fato.getAtributos()) {
 			persiste(atributo);
 		}
 	}

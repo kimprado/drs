@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 //@DiscriminatorValue("1")
 public class Fato extends Tabela {
 	
-	@OneToMany(mappedBy="fato")
+	@OneToMany(mappedBy="fato", fetch=FetchType.LAZY)
 	private List<ChaveEstrangeira> chaveEstrangeira = new LinkedList<ChaveEstrangeira>();
 	@Transient
 	private int idCount = 0; // registra os IDs das dimensões alocadas para o fato

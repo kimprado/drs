@@ -32,7 +32,8 @@ import org.globus.index.stubs.Cube.CubeIndexPortType;
 import org.globus.index.stubs.Cube.service.CubeIndexServiceAddressingLocator;
 
 public class CubeServiceControl {
-
+	
+	@Deprecated
 	public static int setCubeCollectionMetaData(
 			HashMap<Integer, Cubo> a_cubeColl, String serviceIndexURI,
 			String serviceCubeURI, String bancoMetadadosDriver,

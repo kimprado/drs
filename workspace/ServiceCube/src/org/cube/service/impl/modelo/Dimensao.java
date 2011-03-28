@@ -10,7 +10,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class Dimensao extends Tabela {
 	
-	@OneToOne(mappedBy="dimensao", fetch=FetchType.LAZY)
+	//@OneToOne(mappedBy="dimensao", fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	private ChaveEstrangeira chaveEstrangeira;
 	
 	public Dimensao(String nome){
