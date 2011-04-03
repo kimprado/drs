@@ -20,10 +20,14 @@ function enviarOpcoes()
 	//ResultadoConsulta.jsp
 	
 	var pg =  '<%= "resultado/escolherTipoResultado.jsp?cube="+request.getParameter( "cube" )+"" %>'; // página a tratar o envio dos dados;
-	if (windowResultado != null && windowResultado.document != null ){
-		windowResultado.location=pg;
-	}
-	else{
+	try{
+		if (windowResultado != null && windowResultado.document != null ){
+			windowResultado.location=pg;
+		}
+		else{
+			windowResultado = window.open(pg,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=820, height=500");
+		}
+	} catch (e) {
 		windowResultado = window.open(pg,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=820, height=500");
 	}
 
