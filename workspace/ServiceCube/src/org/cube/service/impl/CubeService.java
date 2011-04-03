@@ -138,7 +138,15 @@ public class CubeService implements Resource, ResourceProperties{
 	}
 	
 	public CubeMetadataResponse getCubeMetaData(int index){
-		return CubeServiceControl.getCubeMetadata(getCube(index));
+		CubeMetadataResponse cubeMetadataResponse = null;
+		try {
+			EntityManager em = AbreConexao.abreConexao();
+			cubeMetadataResponse = CubeServiceControl.getCubeMetadata(em.merge(getCube(index)));
+			FechaConexao.fechaConexao(em);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cubeMetadataResponse;
 	}
 	
 	public boolean addCube(AddCube addcube){
@@ -262,7 +270,6 @@ public class CubeService implements Resource, ResourceProperties{
 			cubo = em.merge(getCubos().get(new Integer( i )));
 			FechaConexao.fechaConexao(em);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return cubo;

@@ -32,6 +32,10 @@ public class ChaveEstrangeira {
 	@OneToOne
 	private Dimensao dimensao;
 	
+	public ChaveEstrangeira(){
+		
+	}
+	
 	public ChaveEstrangeira(Dimensao dimensao){
 		this.dimensao = dimensao;
 		dimensao.setChaveEstrangeira(this);

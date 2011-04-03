@@ -34,6 +34,7 @@ public class ChavePrimaria {
 	private List<Atributo> atributos = new LinkedList<Atributo>();
 	
 	public ChavePrimaria(){
+		
 	}
 	
 	public void setId(Integer id) {
