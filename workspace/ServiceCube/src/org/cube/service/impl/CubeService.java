@@ -256,7 +256,16 @@ public class CubeService implements Resource, ResourceProperties{
 	}
 	
 	private Cubo getCube(int i) {
-		return getCubos().get(new Integer( i ));
+		EntityManager em = AbreConexao.abreConexao();
+		Cubo cubo = null;
+		try {
+			cubo = em.merge(getCubos().get(new Integer( i )));
+			FechaConexao.fechaConexao(em);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cubo;
 	}
 	
 	private void configurarCubos() throws Exception {
