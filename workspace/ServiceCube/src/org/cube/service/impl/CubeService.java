@@ -130,9 +130,9 @@ public class CubeService implements Resource, ResourceProperties{
 		this.cube = cube;
 	}
 
-	public Cubo getCube(int index){
+	/*public Cubo getCube(int index){
 		return a_cubeColl.get(new Integer( index ));
-	}
+	}*/
 	
 	public void setIdCount(int idCount){
 		this.idCount = idCount;
@@ -142,10 +142,6 @@ public class CubeService implements Resource, ResourceProperties{
 	/* Remotely-accessible operations */
 		
 	public CubeCollResponse getCubeColl(GetCubeColl cubeColl) throws RemoteException {
-		
-		//idCount = Controller.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
-		
-		
 		if ( a_cubeColl.size() >= (1) ){
 			String[] cubeName = new String[a_cubeColl.size()];
 			String[] cubeIndex = new String[a_cubeColl.size()];
@@ -156,15 +152,19 @@ public class CubeService implements Resource, ResourceProperties{
 			for (int i=1; i < idCount + 1; i++){
 			
 				if (a_cubeColl.containsKey(new Integer(i))){
-					cubeName[entry] = (a_cubeColl.get(new Integer( i ))).getNome();
+					cubeName[entry] = (getCube(i)).getNome();
 					cubeIndex[entry] = Integer.toString(i);
-					cubeServer[entry] = (a_cubeColl.get(new Integer( i ))).getServer();
+					cubeServer[entry] = (getCube(i)).getServer();
 					entry++;
 				}
 			}
 			return new CubeCollResponse(cubeIndex, cubeName, cubeServer);
 		}
 		return new CubeCollResponse(null,null,null);
+	}
+
+	private Cubo getCube(int i) {
+		return a_cubeColl.get(new Integer( i ));
 	}
 	
 	
@@ -173,26 +173,26 @@ public class CubeService implements Resource, ResourceProperties{
 		if (index==(-1)){
 			String print = "\nTodos os Cubos:";
 			for(int i = 0; i < a_cubeColl.size(); i++){
-				print = print + ("\n"+(a_cubeColl.get(new Integer( i ))).imprimir(System.out)+"\n");
+				print = print + ("\n"+(getCube(i)).imprimir(System.out)+"\n");
 			}
 			return new PrintCubeResponse(print);
 		}
 		else
-		return new PrintCubeResponse((a_cubeColl.get(new Integer( index ))).imprimir(System.out));//(fato.Getnome());
+		return new PrintCubeResponse((getCube(index)).imprimir(System.out));//(fato.Getnome());
 	}
 	
 	
 	
 	public ExecuteQueryResponse executeQuery(ExecuteQuery exq){
 
-		return CubeServiceControl.executeQuery((a_cubeColl.get(new Integer( exq.getSelectCube() ))).getConnection(), exq.getSql());
+		return CubeServiceControl.executeQuery((getCube(new Integer( exq.getSelectCube() ))).getConnection(), exq.getSql());
 
 	}
 	
 	
 	public CubeMetadataResponse getCubeMetaData(int index){
 		//System.out.println("\n\nRecuperar metadata do cubo: "+index);
-		return CubeServiceControl.getCubeMetadata(a_cubeColl.get(new Integer( index )));
+		return CubeServiceControl.getCubeMetadata(getCube(index));
 	}
 	
 	public boolean addCube(AddCube addcube){
@@ -238,7 +238,7 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	//NÃO É MAIS USADO
 	public boolean setChavePrimaria(SetChavePrimaria setchavePrimaria){
-		Fato fato = a_cubeColl.get(new Integer(setchavePrimaria.getCube())).getFato();
+		Fato fato = getCube(new Integer(setchavePrimaria.getCube())).getFato();
 		FatoMetaData ftMD = setchavePrimaria.getFatoMetaData();
 		ChavePrimaria chaveFato = new ChavePrimaria();
 		for(int i=0; i < ftMD.getFieldMetaData().length; i++){
@@ -262,7 +262,7 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	//NÃO É MAIS USADO
 	public boolean setLigacao(SetLigacao setLigacao){
-		Fato fato = a_cubeColl.get(new Integer(setLigacao.getCube())).getFato();
+		Fato fato = getCube(new Integer(setLigacao.getCube())).getFato();
 		FatoMetaData ftMD = setLigacao.getFatoMetaData();
 		
 		System.out.println("\nDimensões: "+ftMD.getDimensaoMetaData().length);
