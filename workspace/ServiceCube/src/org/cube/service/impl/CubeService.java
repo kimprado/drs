@@ -40,10 +40,8 @@ import org.globus.wsrf.impl.ReflectionResourceProperty;
 import org.globus.wsrf.impl.SimpleResourcePropertySet;
 
 public class CubeService implements Resource, ResourceProperties{
-
 	
-
-	private HashMap< Integer, Cubo>  a_cubeColl = new HashMap< Integer, Cubo>();
+	private HashMap< Integer, Cubo>  cubos = new HashMap< Integer, Cubo>();
 	private int idCount;
 	private String serviceIndexURI;
 	private String serviceCubeURI;
@@ -56,20 +54,8 @@ public class CubeService implements Resource, ResourceProperties{
 	/* Resource properties */
 	private String cube;
 	
-	
 	/* Constructor. Initializes RPs */
 	public CubeService() throws RemoteException {
-		
-		/*try {
-			System.out.println("Acessar o entity Manager JPA \n\nThe sky is the limit\n\n");
-			System.out.println("O bagulho ta doIdu.");
-			//buscaAtributoTest();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}*/
-		
-		System.out.println("Obtendo metadados diretamente do banco via JPA");
-		
 		serviceIndexURI = getServiceURI("cubeindexservice"); //cubeIndex
 		System.out.println("\n\nIndex: "+getServiceURI("cubeindexservice"));
 		serviceCubeURI = getServiceURI("cubeservice");
@@ -81,45 +67,24 @@ public class CubeService implements Resource, ResourceProperties{
 		
 		/* Create RP set */
 		this.propSet = new SimpleResourcePropertySet(CubeQNames.RESOURCE_PROPERTIES);
-
-
+		
 		/* Initialize the RP's */
 		try {
-			
 			ResourceProperty cubeRP = new ReflectionResourceProperty(
 					CubeQNames.RP_Cube, "Cube", this);
 			this.propSet.add(cubeRP);
-			
-			//idCount = CubeServiceControl.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
-			
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 		
-		configurarCubos();
-	}
-
-	private void configurarCubos() {
+		//Obter Cubos
 		try {
-			EntityManager em = AbreConexao.abreConexao();
-		
-			DAO<Cubo> cuboDAO = new DAO<Cubo>(em, Cubo.class);
-			List<Cubo> lista = cuboDAO.lista();
-			for (Cubo cubo : lista) {
-				idCount++;
-				a_cubeColl.put(Integer.valueOf(idCount), cubo);
-				
-				cubo.setURIService(serviceCubeURI);
-				cubo.setTimer(serviceIndexURI, cubo.getRefresh(), idCount);
-			}
-			
-			FechaConexao.fechaConexao(em);
-			System.out.println("Cubos Recuperados corretamente via JPA");
+			configurarCubos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/* Get/Setters for the RPs */
 	
 	public String getCube() {
@@ -129,29 +94,20 @@ public class CubeService implements Resource, ResourceProperties{
 	public void setCube(String cube) {
 		this.cube = cube;
 	}
-
-	/*public Cubo getCube(int index){
-		return a_cubeColl.get(new Integer( index ));
-	}*/
-	
-	public void setIdCount(int idCount){
-		this.idCount = idCount;
-	}
-	
 	
 	/* Remotely-accessible operations */
 		
 	public CubeCollResponse getCubeColl(GetCubeColl cubeColl) throws RemoteException {
-		if ( a_cubeColl.size() >= (1) ){
-			String[] cubeName = new String[a_cubeColl.size()];
-			String[] cubeIndex = new String[a_cubeColl.size()];
-			String[] cubeServer = new String[a_cubeColl.size()];
+		if ( getCubos().size() >= (1) ){
+			String[] cubeName = new String[getCubos().size()];
+			String[] cubeIndex = new String[getCubos().size()];
+			String[] cubeServer = new String[getCubos().size()];
 		
 			int entry = 0;
 		
 			for (int i=1; i < idCount + 1; i++){
 			
-				if (a_cubeColl.containsKey(new Integer(i))){
+				if (getCubos().containsKey(new Integer(i))){
 					cubeName[entry] = (getCube(i)).getNome();
 					cubeIndex[entry] = Integer.toString(i);
 					cubeServer[entry] = (getCube(i)).getServer();
@@ -162,17 +118,11 @@ public class CubeService implements Resource, ResourceProperties{
 		}
 		return new CubeCollResponse(null,null,null);
 	}
-
-	private Cubo getCube(int i) {
-		return a_cubeColl.get(new Integer( i ));
-	}
-	
-	
 	
 	public PrintCubeResponse printCube(int index) throws RemoteException {
 		if (index==(-1)){
 			String print = "\nTodos os Cubos:";
-			for(int i = 0; i < a_cubeColl.size(); i++){
+			for(int i = 0; i < getCubos().size(); i++){
 				print = print + ("\n"+(getCube(i)).imprimir(System.out)+"\n");
 			}
 			return new PrintCubeResponse(print);
@@ -181,24 +131,20 @@ public class CubeService implements Resource, ResourceProperties{
 		return new PrintCubeResponse((getCube(index)).imprimir(System.out));//(fato.Getnome());
 	}
 	
-	
-	
 	public ExecuteQueryResponse executeQuery(ExecuteQuery exq){
 
 		return CubeServiceControl.executeQuery((getCube(new Integer( exq.getSelectCube() ))).getConnection(), exq.getSql());
 
 	}
 	
-	
 	public CubeMetadataResponse getCubeMetaData(int index){
-		//System.out.println("\n\nRecuperar metadata do cubo: "+index);
 		return CubeServiceControl.getCubeMetadata(getCube(index));
 	}
 	
 	public boolean addCube(AddCube addcube){
 		Cubo cb = new Cubo();
 		cb.setConnection(addcube.getUri(), addcube.getUser(), addcube.getPassword());
-		//CubeServiceControl.setCubeMetaDataDesativado(cb, addcube.getFato());
+		
 		try {
 			CubeServiceControl.setCubeMetaData(cb);
 		} catch (SQLException e) {
@@ -208,14 +154,9 @@ public class CubeService implements Resource, ResourceProperties{
 		
 		//idCount+=10;
 		idCount++;
-		a_cubeColl.put(new Integer(idCount), cb);
+		getCubos().put(new Integer(idCount), cb);
 		
 		cb.setURIService(serviceCubeURI); //CubeService
-		
-		//if (Controller.registerCubeIndexService(serviceIndexURI, a_cubeColl.get(new Integer(idCount)),idCount)){
-		//	System.out.println("O novo cubo foi cadastrado e \n registrado no Index Cube");
-		//}
-		
 		
 		cb.setTimer(serviceIndexURI, addcube.getMillisecond(), idCount);
 		
@@ -224,19 +165,16 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	
 	public RemoveCubeResponse removeCube(int cube){
-		
-		if (a_cubeColl.containsKey(new Integer(cube))){	
-			Cubo cb = a_cubeColl.remove(new Integer(cube));
+		if (getCubos().containsKey(new Integer(cube))){	
+			Cubo cb = getCubos().remove(new Integer(cube));
 			CubeServiceControl.removeCubeIndexService(cb,getServiceURI(serviceIndexURI) );
 			return new RemoveCubeResponse(cb.getNome(),true);
-		}
-		
-		else {
+		} else {
 			return new RemoveCubeResponse(null,false);
 		}
 	}
 	
-	//NÃO É MAIS USADO
+	@Deprecated
 	public boolean setChavePrimaria(SetChavePrimaria setchavePrimaria){
 		Fato fato = getCube(new Integer(setchavePrimaria.getCube())).getFato();
 		FatoMetaData ftMD = setchavePrimaria.getFatoMetaData();
@@ -260,7 +198,7 @@ public class CubeService implements Resource, ResourceProperties{
 		return true;
 	}
 	
-	//NÃO É MAIS USADO
+	@Deprecated
 	public boolean setLigacao(SetLigacao setLigacao){
 		Fato fato = getCube(new Integer(setLigacao.getCube())).getFato();
 		FatoMetaData ftMD = setLigacao.getFatoMetaData();
@@ -284,8 +222,6 @@ public class CubeService implements Resource, ResourceProperties{
 		
 		return true;
 	}
-	
-	
 	
 	/* Required by interface ResourceProperties */
 	public ResourcePropertySet getResourcePropertySet() {
@@ -311,17 +247,31 @@ public class CubeService implements Resource, ResourceProperties{
 		return null;
 	}
 	
-	public void buscaAtributoTest() throws Exception {
-		EntityManager abreConexao = AbreConexao.abreConexao();
-		DAO<Atributo> dao = new DAO<Atributo>(abreConexao, Atributo.class);
-		
-		Atributo atributo = dao.busca(56);
-		
-		System.out.println("atributo localizado: " + atributo.getId() + " " + atributo.getName() + " " + atributo.getDecimal() + " " + atributo.getTamanho() + " " +  atributo.getTipo());
-		
-		FechaConexao.fechaConexao(abreConexao);
+	public void setCubos(HashMap< Integer, Cubo> cubos) {
+		this.cubos = cubos;
+	}
+
+	public HashMap< Integer, Cubo> getCubos() {
+		return cubos;
 	}
 	
+	private Cubo getCube(int i) {
+		return getCubos().get(new Integer( i ));
+	}
 	
+	private void configurarCubos() throws Exception {
+		EntityManager em = AbreConexao.abreConexao();
 	
+		DAO<Cubo> cuboDAO = new DAO<Cubo>(em, Cubo.class);
+		List<Cubo> lista = cuboDAO.lista();
+		for (Cubo cubo : lista) {
+			idCount++;
+			getCubos().put(Integer.valueOf(idCount), cubo);
+			
+			cubo.setURIService(serviceCubeURI);
+			cubo.setTimer(serviceIndexURI, cubo.getRefresh(), idCount);
+		}
+		
+		FechaConexao.fechaConexao(em);
+	}
 }
