@@ -29,17 +29,17 @@
 			<property name="javax.persistence.jdbc.password" value="globus"/>
 
 			<!-- 
-			
 			<property name="hibernate.search.default.directory_provider"
 				value="org.hibernate.search.store.FSDirectoryProvider"/>
 			<property name="hibernate.search.default.indexBase"
 				value="C:\Documents and Settings\Caelum1060804\Desktop\caelum1060804\workspace\projeto-fj25-web\WebContent\WEB-INF\lucene\indexes"/>
 			<property name="hibernate.search.analyzer"
-				value="org.apache.lucene.analysis.br.BrazilianAnalyzer"/> 
+				value="org.apache.lucene.analysis.br.BrazilianAnalyzer"/> - ->
 			
 			<property name="hibernate.cache.use_second_level_cahe" value="true"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
 			
+			<!- - 
 			<property name="hibernate.generate_statistics" value="true"/>
 			
 			<property name="hibernate.connection.provider_class"

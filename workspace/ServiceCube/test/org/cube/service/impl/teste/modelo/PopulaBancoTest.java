@@ -43,9 +43,20 @@ public class PopulaBancoTest {
 		
 		cubo = dao.busca(1);
 		
-		System.out.println("cubo localizado: " + cubo.getId() + " " + cubo.getNome() + " " + cubo.getServer() );
+		//System.out.println("cubo localizado: " + cubo.getId() + " " + cubo.getNome() + " " + cubo.getServer() );
+		System.out.println(cubo.getNome() + " - " + cubo.getFato().getNome());
 		
 		FechaConexao.fechaConexao(abreConexao);
+		
+	}
+	
+	@Test
+	public void buscaCubosTest() throws Exception {
+		//Com cache de segundo nível estas três chamadas vão precisar de apenas um consulta ao banco, 
+		//	mesmo com o fechameto dos EntityManager(em) 
+		buscaCuboTest();
+		buscaCuboTest();
+		buscaCuboTest();
 		
 	}
 

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 public class ChaveEstrangeira {
@@ -23,13 +27,13 @@ public class ChaveEstrangeira {
 	
 	private String nome = "";
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Fato fato;
 	
-	@OneToMany(mappedBy="chaveEstrangeira")
+	@OneToMany(mappedBy="chaveEstrangeira", fetch=FetchType.LAZY)
 	private List<Ligacao> ligacoes = new LinkedList<Ligacao>();
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Dimensao dimensao;
 	
 	public ChaveEstrangeira(){

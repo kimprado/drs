@@ -146,6 +146,7 @@ public class ObtemMetaDadosControl {
 			if ( dimensao.getNome().equals(foreignKey.getForeignKeyMetaDataString(ForeignKeys.PKTABLE_NAME)) ){
 				Ligacao ligacao = criaLigacao(fato, dimensao, foreignKey);
 				if ( ligacao != null){
+					ligacao.setChaveEstrangeira(chaveEstrangeira);
 					chaveEstrangeira.addLigacao(ligacao);
 					chaveEstrangeira.setNome(foreignKey.getForeignKeyMetaDataString(ForeignKeys.FK_NAME));
 				}

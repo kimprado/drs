@@ -15,8 +15,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.cube.service.impl.control.tarefas.TaskRefresh;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
+//@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Cubo {
 	
 	@Id
@@ -29,23 +32,23 @@ public class Cubo {
 	private String a_nome;
 	private String a_server;
 	
-	@OneToOne(mappedBy="cubo", fetch=FetchType.LAZY)
-	private Fato a_fato;
+	@OneToOne(fetch=FetchType.LAZY)
+	//@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	private Fato fato;
 	
 	private String a_driver;
 	private String conn_url;
 	private String conn_user;
 	private String conn_password;
+
+	private long refresh; // Tempo de vida no serviço de índice
 	
 	@Transient
 	private int keyCubeIndex = -1; // key recebida ao se cadastrar no CubeIndex 
 	
 	@Transient
 	private Timer a_timer;
-	//@Transient
-	private long refresh;
 	
-
 	public Cubo(){
 			
 	}
@@ -57,15 +60,12 @@ public class Cubo {
 	public Cubo(String nome,String server,Fato fato,String url,String user,String password, String driver, long refresh){
 		a_nome = nome;
 		a_server = server;
-		a_fato = fato;
+		this.fato = fato;
 		conn_url = url;
 		conn_user = user;
 		conn_password = password;
-		setDriver(driver);
+		a_driver = driver;
 		this.refresh = refresh;
-		
-		System.out.println("\n" + nome +" "+ server +" "+ fato +" "+ url +" "+ user +" "+ password +" "+ driver +" "+ refresh);
-		
 	}
 	
 	public void setId(Integer id) {
@@ -78,9 +78,6 @@ public class Cubo {
 	
 	public void setDriver(String driver){
 		a_driver = driver;
-		try {
-			//Class.forName(a_driver);   // Inicialização do driver jdbc
-		}catch (Exception e){ e.printStackTrace();}
 	}
 	
 	public String getDriver(){
@@ -119,10 +116,10 @@ public class Cubo {
 	
 	
 	public void setFato(Fato fato){
-		a_fato = fato;
+		this.fato = fato;
 	}
 	public Fato getFato(){
-		return a_fato;
+		return fato;
 	}
 	
 	public void setTimer(String serviceURI, long millisecond, int idcube){
@@ -168,7 +165,7 @@ public class Cubo {
 		//p.println("Cubo: "+this.getNome().toUpperCase());
 		print = ("Cubo: "+this.getNome().toUpperCase())+"\n\n";
 		//p.println();
-		print = a_fato.imprimir(p,print);
+		print = fato.imprimir(p,print);
 		return print;
 		
 	}

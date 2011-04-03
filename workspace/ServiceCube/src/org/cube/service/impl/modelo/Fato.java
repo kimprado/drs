@@ -8,18 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-//@Table(name="Fato")
-//@PrimaryKeyJoinColumn(name="id")
-//@DiscriminatorValue("1")
 public class Fato extends Tabela {
 	
-	@OneToMany(mappedBy="fato")
+	@OneToMany(mappedBy="fato", fetch=FetchType.LAZY)
 	private List<ChaveEstrangeira> chaveEstrangeira = new LinkedList<ChaveEstrangeira>();
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="fato", fetch=FetchType.LAZY)
 	private Cubo cubo;
 	
 	public Fato(){

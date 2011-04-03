@@ -16,10 +16,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
-//@Table(name="Tabela")
 @Inheritance(strategy=InheritanceType.JOINED)
-//@DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.INTEGER)
 public class Tabela {
 
 	@Id
@@ -35,7 +36,7 @@ public class Tabela {
 	@Transient
 	private int idCount;
 	
-	@OneToOne(mappedBy="tabela", fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	private ChavePrimaria chavePrimaria;
 	
 	public Tabela(){

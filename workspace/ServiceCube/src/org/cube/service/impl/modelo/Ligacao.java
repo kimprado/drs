@@ -3,6 +3,7 @@ package org.cube.service.impl.modelo;
 import java.io.PrintStream;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 public class Ligacao {
@@ -19,13 +22,13 @@ public class Ligacao {
 	@SequenceGenerator(allocationSize=1, initialValue=1, name="ligacao_sequence", sequenceName="ligacao_sequence")
 	private Integer id;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private ChaveEstrangeira chaveEstrangeira;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Atributo atributoFato;// Atributo no fato. O comum é que o fato tenha uma chave composta por chaves estrangeiras referenciadas a dimensões.
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Atributo atributoDimensao;// Atributo na Dimensão. O comum é que a dimensão tenha sua chave primária referencia por uma chave estrangeira localizada na tabela de fatos.
 	
 	public Ligacao(){
@@ -64,7 +67,6 @@ public class Ligacao {
 	}
 	
 	public String imprimir(PrintStream p, String print){
-		
 		String printObjetoLocal = "";
 		
 		try{
@@ -79,8 +81,6 @@ public class Ligacao {
 			e.printStackTrace();
 		}
 		
-		//print += printObjetoLocal;
-		
-		return printObjetoLocal ;//+ printObjetoLocal;
+		return printObjetoLocal ;
 	}
 }

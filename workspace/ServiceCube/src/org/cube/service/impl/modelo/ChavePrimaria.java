@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 public class ChavePrimaria {
 	
@@ -23,14 +26,10 @@ public class ChavePrimaria {
 	
 	private String nome = "";
 	
-	@OneToOne
+	@OneToOne(mappedBy="chavePrimaria", fetch=FetchType.LAZY)
 	private Tabela tabela;
 	
-	//@Transient
-	//int idAtributo;
-	
 	@OneToMany(mappedBy="chavePrimaria", fetch=FetchType.LAZY)
-	//@Transient
 	private List<Atributo> atributos = new LinkedList<Atributo>();
 	
 	public ChavePrimaria(){

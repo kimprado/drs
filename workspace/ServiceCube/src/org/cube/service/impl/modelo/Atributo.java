@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 public class Atributo {
 	
@@ -74,6 +77,7 @@ public class Atributo {
 	public String getName(){
 		return this.nome;
 	}
+	
 	public void setNome(String nome){
 		this.nome = nome;
 	}
@@ -82,6 +86,7 @@ public class Atributo {
 	public String getTipo(){
 		return this.tipo;
 	}
+	
 	public void setTipo(String tipo){
 		this.tipo = tipo;
 	}
@@ -90,6 +95,7 @@ public class Atributo {
 	public String getTamanho(){
 		return this.tamanho;
 	}
+	
 	public void setTamanho(String tamanho){
 		this.tamanho = tamanho;
 	}
@@ -98,6 +104,7 @@ public class Atributo {
 	public String getDecimal(){
 		return this.decimal;
 	}
+	
 	public void setDecimal(String decimal){
 		this.decimal = decimal;
 	}
@@ -105,6 +112,7 @@ public class Atributo {
 	public Ligacao getLigacao(){
 		return this.ligacao;
 	}
+	
 	public void setLigacao(Ligacao ligado){
 		this.ligacao = ligado;
 	}
@@ -119,13 +127,12 @@ public class Atributo {
 	public ChavePrimaria getChavePrimaria(){
 		return this.chavePrimaria;
 	}
+	
 	public void setChavePrimaria(ChavePrimaria chavePrimaria){
 		this.chavePrimaria = chavePrimaria;
 	}
 	
-	
 	public String imprimir(PrintStream p, String print){
-		//p.println(this.Getnome()+" ("+this.Gettipo()+")");
 		print = print+(getName() + " (" + getTipo() + " - " + getTamanho() + ")\n");
 		return print;
 	}
@@ -137,12 +144,4 @@ public class Atributo {
 	public Tabela getTabela() {
 		return tabela;
 	}
-
-	/*public void setTabela(Tabela tabela) {
-		this.tabela = tabela;
-	}
-
-	public Tabela getTabela() {
-		return tabela;
-	}*/
 }

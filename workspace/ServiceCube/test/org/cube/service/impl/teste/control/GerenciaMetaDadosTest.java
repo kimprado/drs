@@ -5,15 +5,7 @@ import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import javax.persistence.EntityManager;
-
 import org.cube.service.impl.control.CubeServiceControl;
-import org.cube.service.impl.control.PersistirAlterar;
-import org.cube.service.impl.control.PersistirCriar;
-import org.cube.service.impl.control.PersistirCubo;
-import org.cube.service.impl.dao.DAO;
-import org.cube.service.impl.infra.AbreConexao;
-import org.cube.service.impl.infra.FechaConexao;
 import org.cube.service.impl.modelo.Cubo;
 import org.junit.Test;
 

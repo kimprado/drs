@@ -9,17 +9,12 @@ import org.junit.Test;
 public class InterfaceServicoTest {
 
 	@Test
-	public void imprimeMetaDadosCubo(){
+	public void imprimeMetaDadosCubo() throws RemoteException{
 		
 		String metadadosSolicitados = null;
-		try {
-			metadadosSolicitados = new CubeServiceDAO().getPotType().printCube(6).getCube();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			new Exception();
-		}
-		System.out.println(metadadosSolicitados);
 		
+		metadadosSolicitados = new CubeServiceDAO().getPotType().printCube(6).getCube();
+		
+		System.out.println(metadadosSolicitados);
 	}
 }
