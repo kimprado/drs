@@ -2,14 +2,13 @@ package org.cube.service.impl.teste.modelo;
 
 import javax.persistence.EntityManager;
 
-import org.cube.service.impl.control.PersistirCriar;
-import org.cube.service.impl.control.PersistirCubo;
 import org.cube.service.impl.dao.DAO;
 import org.cube.service.impl.dao.PersisteCuboServiceDAO;
 import org.cube.service.impl.infra.AbreConexao;
 import org.cube.service.impl.infra.FechaConexao;
 import org.cube.service.impl.modelo.Atributo;
 import org.cube.service.impl.modelo.Cubo;
+import org.cube.service.impl.modelo.Dimensao;
 import org.cube.service.impl.modelo.Fato;
 import org.cube.service.impl.teste.control.GerenciaMetaDadosTest;
 import org.junit.Test;
@@ -72,11 +71,40 @@ public class PopulaBancoTest {
 		EntityManager abreConexao = AbreConexao.abreConexao();
 		DAO<Fato> dao = new DAO<Fato>(abreConexao, Fato.class);
 		
-		Fato fato = dao.busca(2);
+		Fato fato = dao.busca(1);
 		
 		System.out.println("fato localizado: " + fato.getId() + " " + fato.getNome());
 		
 		System.out.println("cubo do fato: " + fato.getCubo());
+		
+		FechaConexao.fechaConexao(abreConexao);
+	}
+	
+	@Test
+	public void criaNovaDimensaoTest() throws Exception {
+		EntityManager em = AbreConexao.abreConexao();
+		//DAO<Fato> dao = new DAO<Fato>(em, Fato.class);
+		
+		Dimensao dimensao = new Dimensao("tempo");
+		//fato.setId(18);
+		//fato.setTesteNofato("teste do nome do fato no fato");
+		//fato.setTesteNatabela("teste do nome da tabela no fato");
+		//dao.adiciona(fato);
+		
+		em.persist(dimensao);
+		
+		FechaConexao.fechaConexao(em);
+		
+	}
+	
+	@Test
+	public void buscaDimensaoTest() throws Exception {
+		EntityManager abreConexao = AbreConexao.abreConexao();
+		DAO<Dimensao> dao = new DAO<Dimensao>(abreConexao, Dimensao.class);
+		
+		Dimensao dimensao = dao.busca(1);
+		
+		System.out.println("dimensao localizada: " + dimensao.getId() + " " + dimensao.getNome());
 		
 		FechaConexao.fechaConexao(abreConexao);
 	}
@@ -170,7 +198,7 @@ public class PopulaBancoTest {
 	@Test
 	public void carregaMetaDadosEPersisteCubo() throws Exception{
 		EntityManager em = AbreConexao.abreConexao();
-		
+
 		Cubo cubo = new GerenciaMetaDadosTest().carregaMetaDadosDeCuboDinamicamente();
 		
 		PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
@@ -179,7 +207,6 @@ public class PopulaBancoTest {
 		System.out.println("Cubo auto detectado e persistido:\n" + cubo.getNome());
 		
 		FechaConexao.fechaConexao(em);
-		
 	}
 	
 }

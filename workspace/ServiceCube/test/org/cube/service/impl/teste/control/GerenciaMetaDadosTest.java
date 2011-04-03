@@ -82,7 +82,10 @@ public class GerenciaMetaDadosTest {
 		Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
 				"kim", "org.postgresql.Driver", new Long(30000).longValue());
 		
+		cube.setURIService("http://localhost:8443/wsrf/services/cube/Cube");
+		
 		CubeServiceControl.setCubeMetaData(cube);
+		
 		System.out.println("Cubo Criado dinamicamente:\n" + cube.imprimir(System.out));
 		
 		return cube;

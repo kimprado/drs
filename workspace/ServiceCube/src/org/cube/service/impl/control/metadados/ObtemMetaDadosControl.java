@@ -28,7 +28,7 @@ public class ObtemMetaDadosControl {
 		DatabaseMetaData dbmd = conn.getMetaData();
 		
 		String nomeTabelaFato = detectaFatoPelasForengnKeys(dbmd, catalogo);
-		Fato fato = criaTabelaFato(dbmd, catalogo, nomeTabelaFato) ;
+		Fato fato = criaTabelaFato(dbmd, catalogo, nomeTabelaFato);
 		criaTabelasDimensao(dbmd, catalogo, fato);
 		criaLigacoesDeChavesEstrangeirasParaFato(fato, dbmd);
 		criaChavePrimariaParaFato(fato, dbmd);

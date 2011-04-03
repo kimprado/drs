@@ -147,7 +147,7 @@ public class CubeServiceControl {
 
 				}
 
-				cube.setUri_service(serviceCubeURI); // CubeService
+				cube.setURIService(serviceCubeURI); // CubeService
 				a_cubeColl.put(new Integer(cuboAtual), cube);
 				cube.setTimer(serviceIndexURI, cube.getRefresh(), cuboAtual);  //TAREFA
 
@@ -179,7 +179,7 @@ public class CubeServiceControl {
 					.getCubeIndexPortTypePort(endpoint);
 
 			CubeEntry entry = new CubeEntry(0, index, cb.getNome(), null, cb
-					.getUri_service());
+					.getURIService());
 
 			int keyIndex = cubeIndex.addCubeEntry(entry);
 
@@ -553,14 +553,16 @@ public class CubeServiceControl {
 
 	}
 	
-	public static void setCubeMetaData(Cubo cube) {
+	public static void setCubeMetaData(Cubo cube) throws SQLException {
 		Connection conn = cube.getConnection();
 		try {
 			String catalogo = conn.getCatalog();
 			cube.setFato( new ObtemMetaDadosControl().obterFatoMetaData(conn, catalogo));
-			conn.close();
+			cube.getFato().setCubo(cube);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
 
 	}

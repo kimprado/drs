@@ -3,7 +3,9 @@ package org.cube.service.impl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -42,7 +44,7 @@ public class CubeService implements Resource, ResourceProperties{
 	
 
 	private HashMap< Integer, Cubo>  a_cubeColl = new HashMap< Integer, Cubo>();
-	private int idCount = 0;
+	private int idCount;
 	private String serviceIndexURI;
 	private String serviceCubeURI;
 	private String bancoMetadadosDriver;
@@ -66,6 +68,8 @@ public class CubeService implements Resource, ResourceProperties{
 			e1.printStackTrace();
 		}*/
 		
+		System.out.println("Obtendo metadados diretamente do banco via JPA");
+		
 		serviceIndexURI = getServiceURI("cubeindexservice"); //cubeIndex
 		System.out.println("\n\nIndex: "+getServiceURI("cubeindexservice"));
 		serviceCubeURI = getServiceURI("cubeservice");
@@ -80,36 +84,39 @@ public class CubeService implements Resource, ResourceProperties{
 
 
 		/* Initialize the RP's */
-		
 		try {
 			
 			ResourceProperty cubeRP = new ReflectionResourceProperty(
 					CubeQNames.RP_Cube, "Cube", this);
 			this.propSet.add(cubeRP);
 			
-			idCount = CubeServiceControl.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
+			//idCount = CubeServiceControl.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 		
-		// Inicialização manual de cubo.
+		configurarCubos();
+	}
+
+	private void configurarCubos() {
 		try {
-			Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
-					"kim", "org.postgresql.Driver", new Long(30000).longValue());
+			EntityManager em = AbreConexao.abreConexao();
+		
+			DAO<Cubo> cuboDAO = new DAO<Cubo>(em, Cubo.class);
+			List<Cubo> lista = cuboDAO.lista();
+			for (Cubo cubo : lista) {
+				idCount++;
+				a_cubeColl.put(Integer.valueOf(idCount), cubo);
+				
+				cubo.setURIService(serviceCubeURI);
+				cubo.setTimer(serviceIndexURI, cubo.getRefresh(), idCount);
+			}
 			
-			CubeServiceControl.setCubeMetaData(cube);
-			System.out.println("Cubo Criado dinamicamente:\n" + cube.imprimir(System.out));
-			
-			idCount++;
-			a_cubeColl.put(Integer.valueOf(idCount), cube);
-			
-			cube.setUri_service(serviceCubeURI); // CubeService
-			/*a_cubeColl.put(new Integer(cuboAtual), cube);*/
-			cube.setTimer(serviceIndexURI, cube.getRefresh(), idCount);
-			
+			FechaConexao.fechaConexao(em);
+			System.out.println("Cubos Recuperados corretamente via JPA");
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 
@@ -192,14 +199,18 @@ public class CubeService implements Resource, ResourceProperties{
 		Cubo cb = new Cubo();
 		cb.setConnection(addcube.getUri(), addcube.getUser(), addcube.getPassword());
 		//CubeServiceControl.setCubeMetaDataDesativado(cb, addcube.getFato());
-		CubeServiceControl.setCubeMetaData(cb);
+		try {
+			CubeServiceControl.setCubeMetaData(cb);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		cb.setNome(addcube.getName());
 		
 		//idCount+=10;
 		idCount++;
 		a_cubeColl.put(new Integer(idCount), cb);
 		
-		cb.setUri_service(serviceCubeURI); //CubeService
+		cb.setURIService(serviceCubeURI); //CubeService
 		
 		//if (Controller.registerCubeIndexService(serviceIndexURI, a_cubeColl.get(new Integer(idCount)),idCount)){
 		//	System.out.println("O novo cubo foi cadastrado e \n registrado no Index Cube");
@@ -310,5 +321,7 @@ public class CubeService implements Resource, ResourceProperties{
 		
 		FechaConexao.fechaConexao(abreConexao);
 	}
+	
+	
 	
 }

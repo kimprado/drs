@@ -7,15 +7,18 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class ChavePrimaria {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "chavePrimaria_sequence")
+	@SequenceGenerator(allocationSize=1, initialValue=1, name="chavePrimaria_sequence", sequenceName="chavePrimaria_sequence")
 	private Integer id;
 	
 	private String nome = "";
@@ -24,7 +27,7 @@ public class ChavePrimaria {
 	private Tabela tabela;
 	
 	//@Transient
-	int idAtributo;
+	//int idAtributo;
 	
 	@OneToMany(mappedBy="chavePrimaria", fetch=FetchType.LAZY)
 	//@Transient
@@ -50,7 +53,7 @@ public class ChavePrimaria {
 	}
 	
 	public void addAtributo(Atributo atributo){
-		idAtributo++;
+		//idAtributo++;
 		atributo.setChavePrimaria(this);
 		getAtributos().add(atributo);
 	}

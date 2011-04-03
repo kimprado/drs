@@ -1,4 +1,5 @@
 *~
+*.gar
 bin
 build
 build_grid

@@ -8,8 +8,10 @@ import java.util.Timer;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.cube.service.impl.control.tarefas.TaskRefresh;
@@ -18,7 +20,8 @@ import org.cube.service.impl.control.tarefas.TaskRefresh;
 public class Cubo {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "cubo_sequence")
+	@SequenceGenerator(allocationSize=1, initialValue=1, name="cubo_sequence", sequenceName="cubo_sequence")
 	private Integer id;
 	
 	private String a_UriService; // uri do serviço Cube
@@ -39,8 +42,8 @@ public class Cubo {
 	
 	@Transient
 	private Timer a_timer;
-	@Transient
-	private long a_refresh;
+	//@Transient
+	private long refresh;
 	
 
 	public Cubo(){
@@ -59,7 +62,7 @@ public class Cubo {
 		conn_user = user;
 		conn_password = password;
 		setDriver(driver);
-		a_refresh = refresh;
+		this.refresh = refresh;
 		
 		System.out.println("\n" + nome +" "+ server +" "+ fato +" "+ url +" "+ user +" "+ password +" "+ driver +" "+ refresh);
 		
@@ -84,10 +87,10 @@ public class Cubo {
 		return a_driver;
 	}
 	
-	public void setUri_service(String uri){
+	public void setURIService(String uri){
 		a_UriService = uri;	
 	}
-	public String getUri_service(){
+	public String getURIService(){
 		return a_UriService;		
 	}	
 	
@@ -125,7 +128,6 @@ public class Cubo {
 	public void setTimer(String serviceURI, long millisecond, int idcube){
 		a_timer = new Timer();
 		a_timer.schedule(new TaskRefresh(serviceURI, idcube, this), 0, millisecond);
-		
 	}
 	
 	public void cancelTimer(){
@@ -133,11 +135,11 @@ public class Cubo {
 	}
 	
 	public void setRefresh(long refresh){
-		a_refresh = refresh;
+		this.refresh = refresh;
 	}
 	
 	public long getRefresh(){
-		return a_refresh;
+		return this.refresh;
 	}
 	
 	public void setConnection(String url, String user, String password){

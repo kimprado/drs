@@ -7,11 +7,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 @Entity
@@ -21,24 +23,19 @@ import javax.persistence.Transient;
 public class Tabela {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "tabela_sequence")
+	@SequenceGenerator(allocationSize=1, initialValue=1, name="tabela_sequence", sequenceName="tabela_sequence")
 	private Integer id;
 	
 	private String nome;
 	
-	//@OneToMany(mappedBy="tabela", fetch=FetchType.LAZY)
-	//@Transient
-	//private List<Atributo> atributosLista;
-	
 	@OneToMany(mappedBy="tabela", fetch=FetchType.LAZY)
-	//@Transient
 	private List<Atributo> atributos = new LinkedList<Atributo>();
 	
 	@Transient
-	private int idCount;// = 0;
+	private int idCount;
 	
 	@OneToOne(mappedBy="tabela", fetch=FetchType.LAZY)
-	//@Transient
 	private ChavePrimaria chavePrimaria;
 	
 	public Tabela(){
@@ -46,7 +43,6 @@ public class Tabela {
 	}
 	
 	public Tabela(String nome){
-		//chavePrimaria = new ChavePrimaria();
 		this.nome = nome;
 	}
 
@@ -60,30 +56,9 @@ public class Tabela {
 	}
 	
 	public void addAtributo(Atributo atributo){
-		try{
-			int i = atributo.getId() + 1;
-		} catch (NullPointerException e){
-			atributo.setId(idCount + 1);
-		}
-		
-		if (atributo.getId() > idCount){
-			idCount = atributo.getId();
-		}
-		else{
-			idCount+=1;
-		}
-		
-		getAtributos().add(/*new Integer( idCount),*/ atributo);
-		//System.out.println("Adicionei atributo "+idCount+" na tabela "+  this.nome);
+		idCount++;
+		getAtributos().add(atributo);
 	}
-	
-	/*public void Addatributo(Atributo atributo, int idAtributo){
-		if(idAtributo > idCount){
-			idCount = idAtributo;
-		}
-		atributos.add(new Integer( idAtributo), atributo);
-		//System.out.println("Adicionei atributo "+idAtributo+" na tabela "+  this.nome);
-	}*/
 	
 	public Atributo getAtributo(int i){
 		for (Atributo atributo : getAtributos()) {
@@ -92,7 +67,7 @@ public class Tabela {
 			}
 		}
 		
-		return null;//getAtributos().get( new Integer(i) );
+		return null;
 	}
 	
 	public Atributo getAtributo(String name){
@@ -102,7 +77,7 @@ public class Tabela {
 			}
 		}
 		
-		return null;//getAtributos().get( new Integer(i) );
+		return null;
 	}
 	
 	public int GetQuantidadeAtributo(){
@@ -110,7 +85,8 @@ public class Tabela {
 	}
 	
 	public int getIdMaxAtributo(){
-		return idCount;
+		//TODO Esse método deve deixar de ser usado
+		return 5000;//idCount;
 	}
 	
 	public boolean contemAtributo(int idAtributo){
@@ -143,15 +119,12 @@ public class Tabela {
 	}
 
 	public String imprimir(PrintStream p, String print){
-		//p.println(this.Getnome());
 		print = print+this.getNome()+"\n";
-		//p.println("  Atributos:");
 		print = print+"  Atributos:\n";
-		//for (int i=0;i < this.GetQuantidadeAtributo();i++){
-		for (int i=0;i < 5000;i++){
-			Atributo at = this.getAtributo(i);
+		
+		for (Atributo atributo : getAtributos()) {
 			try{
-				print = at.imprimir(p,print);
+				print = atributo.imprimir(p,print);
 			} catch (NullPointerException e){
 				
 			}
@@ -171,12 +144,4 @@ public class Tabela {
 	public List<Atributo> getAtributos() {
 		return atributos;
 	}
-
-	/*public void setAtributosLista(List<Atributo> atributosLista) {
-		this.atributosLista = atributosLista;
-	}
-
-	public List<Atributo> getAtributosLista() {
-		return atributosLista;
-	}*/
 }

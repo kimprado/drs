@@ -24,17 +24,19 @@ public class PersisteCuboServiceDAO {
 		persiste(cubo);
 		
 		Fato fato = cubo.getFato();
-		//fato.setChaveEstrangeira(null);
 		persiste(fato);
+		
+		for (Atributo atributo : fato.getAtributos()) {
+			persiste(atributo);
+		}
+		
+		persiste(fato.getChavePrimaria());
+		/*for (Atributo atributo : fato.getChavePrimaria().getAtributos()) {
+			persiste(atributo);
+		}*/
 		
 		for (ChaveEstrangeira chaveEstrangeira : fato.getChaveEstrangeira()) {
 			persiste(chaveEstrangeira);
-			
-			for (Ligacao ligacao : chaveEstrangeira.getLigacoes()) {
-				persiste(ligacao);
-				persiste(ligacao.getAtributoDimensao());
-				persiste(ligacao.getAtributoFato());
-			}
 			
 			Dimensao dimensao = chaveEstrangeira.getDimensao();
 			persiste(dimensao);
@@ -42,16 +44,22 @@ public class PersisteCuboServiceDAO {
 			for (Atributo atributo : dimensao.getAtributos()) {
 				persiste(atributo);
 			}
+			
+			persiste(dimensao.getChavePrimaria());
+			/*for (Atributo atributo : dimensao.getChavePrimaria().getAtributos()) {
+				persiste(atributo);
+			}*/
+			
+			
+			for (Ligacao ligacao : chaveEstrangeira.getLigacoes()) {
+				persiste(ligacao);
+				//persiste(ligacao.getAtributoDimensao());
+				//persiste(ligacao.getAtributoFato());
+			}
 		}
 		
-		for (Atributo atributo : fato.getAtributos()) {
-			persiste(atributo);
-		}
 		
-		persiste(fato.getChavePrimaria());
-		for (Atributo atributo : fato.getChavePrimaria().getAtributos()) {
-			persiste(atributo);
-		}
+		
 	}
 	
 	private void persiste(Object entity) {

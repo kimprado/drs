@@ -4,16 +4,19 @@ import java.io.PrintStream;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 
 @Entity
 public class Ligacao {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "ligacao_sequence")
+	@SequenceGenerator(allocationSize=1, initialValue=1, name="ligacao_sequence", sequenceName="ligacao_sequence")
 	private Integer id;
 	
 	@ManyToOne

@@ -13,6 +13,9 @@ public class Dimensao extends Tabela {
 	@OneToOne(mappedBy="dimensao", fetch=FetchType.LAZY)
 	private ChaveEstrangeira chaveEstrangeira;
 	
+	public Dimensao(){
+		super();
+	}
 	public Dimensao(String nome){
 		
 		super(nome);	

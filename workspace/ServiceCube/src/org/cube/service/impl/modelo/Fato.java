@@ -18,8 +18,6 @@ public class Fato extends Tabela {
 	
 	@OneToMany(mappedBy="fato")
 	private List<ChaveEstrangeira> chaveEstrangeira = new LinkedList<ChaveEstrangeira>();
-	@Transient
-	private int idCount = 0; // registra os IDs das dimensões alocadas para o fato
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	private Cubo cubo;
@@ -29,10 +27,7 @@ public class Fato extends Tabela {
 	}
 	
 	public Fato(String nome){
-		
 		super(nome);
-		
-		//setChaveEstrangeira(new HashMap< Integer, ChaveEstrangeira>());
 	}
 	
 	public void setCubo(Cubo cubo) {
@@ -45,30 +40,10 @@ public class Fato extends Tabela {
 	}
 
 	public void addDimensao(Dimensao dimensao){
-		
-		try{
-			int i = dimensao.getId() + 1;
-		} catch (NullPointerException e){
-			dimensao.setId(idCount + 1);
-		}
-		
-		if (dimensao.getId() > idCount){
-			idCount = dimensao.getId();
-		}
-		else{
-			idCount+=1;
-		}
-		
-		getChaveEstrangeira().add(new ChaveEstrangeira(dimensao));
+		ChaveEstrangeira chaveEstrangeira = new ChaveEstrangeira(dimensao);
+		chaveEstrangeira.setFato(this);
+		getChaveEstrangeira().add(chaveEstrangeira);
 	}
-	
-	/*public void addDimensao(Dimensao dimensao, int iddimensao){
-		if (iddimensao > idCount){
-			idCount = iddimensao;
-		}
-		
-		//getChaveEstrangeira().put(new Integer(iddimensao), new ChaveEstrangeira(dimensao));
-	}*/
 	
 	public Dimensao getdimensao(int idDimensao){
 		for (ChaveEstrangeira chaveEstrangeira : getChaveEstrangeira()) {
@@ -77,8 +52,7 @@ public class Fato extends Tabela {
 				return dimensao;
 			}
 		}
-		//Dimensao dimensao = getChaveEstrangeira().get( new Integer(i) ).getDimensao();
-		return null;//dimensao;
+		return null;
 	}
 	
 	
@@ -87,7 +61,8 @@ public class Fato extends Tabela {
 	}
 	
 	public int getIdMaxDimensao(){
-		return idCount;
+		//TODO Esse método deve deixar de ser usado
+		return 5000;//idCount;
 	}
 	
 	public boolean contemDimensao(int idDimensao){
@@ -121,8 +96,6 @@ public class Fato extends Tabela {
 	}
 	
 	public String imprimir(PrintStream p, String print){
-		
-
 		print = print + "\n" + "FATO: "; 
 		
 		print = super.imprimir(p,print);
@@ -132,17 +105,14 @@ public class Fato extends Tabela {
 			print += chaveEstrangeira.imprimir(p, print) + "\n";
 		}
 		
-		
 		print = print+"\n\n"+"  DIMENSAO:"+"\n\n";
-		//for (int i=0;i < this.getQuantidadeDimensao();i++){
-		for (int i=0;i < 5000;i++){
-			Dimensao dm = this.getdimensao(i);
+		for (ChaveEstrangeira chaveEstrangeira : getChaveEstrangeira()) {
 			try{
-				print = (dm.imprimir(p,print)+"\n");
+				Dimensao dimensao = chaveEstrangeira.getDimensao();
+				print = dimensao.imprimir(p,print) + "\n";
 			} catch (NullPointerException e){
 				
 			}
-			//p.println();
 		}
 		return print;
 	}
