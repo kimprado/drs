@@ -16,6 +16,7 @@ public class Dimensao extends Tabela {
 	public Dimensao(){
 		super();
 	}
+	
 	public Dimensao(String nome){
 		
 		super(nome);	
