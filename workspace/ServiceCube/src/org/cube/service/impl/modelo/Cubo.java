@@ -15,8 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.cube.service.impl.control.tarefas.TaskRefresh;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 //@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -33,7 +31,6 @@ public class Cubo {
 	private String a_server;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	//@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Fato fato;
 	
 	private String a_driver;
