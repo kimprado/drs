@@ -27,13 +27,14 @@ function resultado(){
 }
 
 function configurarTipoResultado(){
-	//var form = document.getElementById('form');
-
 	if(escolha != null){
 		if (escolha == 'natela'){
 			return "resultadoTela.jsp"; //aponta para jsp
 		}
-		else if (escolha == 'resultadoxml'){
+		else if (escolha == 'xml'){
+			return "../../ResultadoXML"; //aponta para Servlet
+		}
+		else if (escolha == 'excel'){
 			return "../../ResultadoXML"; //aponta para Servlet
 		}
 			
@@ -51,14 +52,17 @@ function configurarTipoResultado(){
 
 <form id="form" name="form" action="" method="post">
 	<input type="hidden" value="<%= request.getParameter( "cube" ) %>" name="cube" />
-</form>
 
-<form action="">
-	<input type="radio" name="resultado" id="natela" onclick="escolher('natela');" value="" />Exibir na tela
+
+	<input type="radio" name="tipoResultado" id="" onclick="escolher('natela');" value="natela" />Exibir na tela
 	<br>
-	<input type="radio" name="resultado" id="resultadoxml" onclick="escolher('resultadoxml');" value="" />Salvar em XML
+	<input type="radio" name="tipoResultado" id="" onclick="escolher('xml');" value="xml" />Salvar em XML
+	<br>
+	<input type="radio" name="tipoResultado" id="" onclick="escolher('excel');" value="excel" />Salvar em Microsoft Excel
 </form>
+<!-- </form>
 
+<form action=""> -->
 <br /><br />
 <br /><br />
 <input type="button" onclick="resultado()" value="OK">

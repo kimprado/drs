@@ -87,13 +87,17 @@ public class Condicao {
 	}
 	
 	private String toStrValor(String tipo){
-		if (tipo.toUpperCase().contains( new String("VARCHAR").subSequence(0, 6) ) == true ){
+		if (tipo.toUpperCase().contains( "VARCHAR".subSequence(0, 6) ) == true ){
 			return "'"+a_valor+"'";
 		}else
-			if (tipo.toUpperCase().contains( new String("INT").subSequence(0, 2) ) == true ){ 
+			if (tipo.toUpperCase().contains( "INT".subSequence(0, 2) ) == true ){ 
 				return a_valor;
 		}else
-			if (tipo.toUpperCase().contains( new String("DATE").subSequence(0, 3) ) == true ){
+			if (tipo.toUpperCase().contains( "DATE".subSequence(0, 3) ) == true ){
+				return "'"+a_valor+"'";
+			
+		}else
+			if ( tipo.toUpperCase().equals("TIMESTAMP") ){
 				return "'"+a_valor+"'";
 			
 		}else{

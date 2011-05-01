@@ -114,7 +114,7 @@ function enviarOpcoes()
 						out.println( "fato.add(dimensao);" ); // adiciona o objeto dimensao ao fato
 						for(int a=0; a < dimMD.getFieldMetaData().length; a++){
 							FieldMetaData fdmd = dimMD.getFieldMetaData(a);
-							if ( !(fdmd.isPrimaryKey()) & !(fdmd.isForeignKey()) ){ //Se Não Fizer parte da Chave
+							if ( !(fdmd.isPrimaryKey()) & !(fdmd.isForeignKey()) & !fdmd.getName().toUpperCase().matches("ID_.*") ){ //Se Não Fizer parte da Chave
 								out.println( "dimensao.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table="+ dimMD.getKey() +"&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','options'));" ); // adiciona o objeto fild(campos) ao fato
 							}
 						} // for atributo das dimensoes
@@ -122,9 +122,9 @@ function enviarOpcoes()
 					}
 
 					for(int j=0; j <cubeMD.getFatoMetaData().getFieldMetaData().length; j++){
-						//if (fatoMD.getFieldMetaData(j).isForeignKey() != true){ //Se Não Fizer parte da Chave Estrangeira
-						if (!fatoMD.getFieldMetaData(j).isForeignKey() & !fatoMD.getFieldMetaData(j).isPrimaryKey() ){ //Se Não Fizer parte da Chave Estrangeira
-							out.println( "fato.add(new WebFXTreeItem('"+ fatoMD.getFieldMetaData(j).getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table=-1&field="+ fatoMD.getFieldMetaData(j).getKey() +"&fieldName="+ fatoMD.getFieldMetaData(j).getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','options'));" ); // adiciona o objeto fild(campos) ao fato
+						FieldMetaData fdmd = fatoMD.getFieldMetaData(j);
+						if (!fdmd.isForeignKey() & !fdmd.isPrimaryKey() && !fdmd.getName().toUpperCase().matches("ID_.*") ){ //Se Não Fizer parte da Chave Estrangeira
+							out.println( "fato.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table=-1&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','options'));" ); // adiciona o objeto fild(campos) ao fato
 						}
 					}
 

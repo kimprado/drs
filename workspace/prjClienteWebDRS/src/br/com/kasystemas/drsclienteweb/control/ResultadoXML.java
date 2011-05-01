@@ -18,6 +18,8 @@ import org.globus.cube.stubs.Cube.service.CubeServiceAddressingLocator;
 import org.globus.drs.stubs.Cube.DRSPortType;
 import org.globus.drs.stubs.Cube.service.DRSServiceAddressingLocator;
 
+import br.com.kasystemas.drsclienteweb.model.exportarResultado.ResultadoParaExcel;
+
 /**
  * Servlet implementation class ResultadoXML
  */
@@ -37,6 +39,7 @@ public class ResultadoXML extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//System.out.println("oi get");
+		this.exec(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,15 +95,22 @@ public class ResultadoXML extends HttpServlet {
 
 			String sql = drs.getSQL(a_mysession.intValue()); //passa o valor correspondente da consulta da sessão
 			
-			//System.out.println("\nConsulta Submetida:\n"+sql+"");
-			
-			
-			if ( sql != null){ // Se a consulta pode ser formada
+			// Se a consulta foi criada
+			if ( sql != null){ 
 
-				ExecuteQueryResponse exquery = cube.executeQuery(new ExecuteQuery(Integer.parseInt(request.getParameter("cube")),sql));
+				ExecuteQueryResponse exquery = cube.executeQuery(new ExecuteQuery(Integer.parseInt(request.getParameter("cube")), sql));
 				
-				new ResultadoParaXml(request,response,sql).parserToXML(exquery);
+				String tipoResultado = request.getParameter("tipoResultado");
 				
+				if ( "xml".equalsIgnoreCase(tipoResultado) ) {
+					
+					new ResultadoParaXml(request,response,sql).parserToXML(exquery);
+				} else if ("excel".equalsIgnoreCase(tipoResultado) ) {
+					
+					ResultadoParaExcel resultadoParaExcel = new ResultadoParaExcel( request, response, sql, response.getOutputStream() );
+					resultadoParaExcel.definirTipoDeResultado();
+					resultadoParaExcel.parserToExcel(exquery);
+				}
 			}
 		
 		} catch (Exception e) {
