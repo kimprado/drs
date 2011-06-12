@@ -1,0 +1,26 @@
+#! /bin/sh
+set -e
+
+export GLOBUS_LOCATION=/usr/local/globus-4.0.6/
+export JAVA_HOME=/usr/lib/java/
+export ANT_HOME=/usr/local/apache-ant-1.7.0/
+export CUBO_CONF=/tmp/cubo.conf
+export GLOBUS_OPTIONS="-Xms256M -Xmx512M" 
+
+. $GLOBUS_LOCATION/etc/globus-user-env.sh
+
+cd $GLOBUS_LOCATION
+case "$1" in
+    start)
+        $GLOBUS_LOCATION/sbin/globus-start-container-detached -p 8443 -nosec
+        ;;
+    stop)
+        $GLOBUS_LOCATION/sbin/globus-stop-container-detached
+        ;;
+    *)
+        echo "Usage: globus {start|stop}" >&2
+        exit 1
+       ;;
+esac
+exit 0
+
