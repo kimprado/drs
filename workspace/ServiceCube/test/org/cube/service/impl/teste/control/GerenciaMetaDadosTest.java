@@ -70,7 +70,10 @@ public class GerenciaMetaDadosTest {
 	}
 	
 	public Cubo carregaMetaDadosDeCuboDinamicamente() throws SQLException{
-		Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
+		/*Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
+				"kim", "org.postgresql.Driver", new Long(30000).longValue());*/
+		
+		Cubo cube = new Cubo("Vendas_ii_Automatico", "localhost", null, "jdbc:postgresql://localhost:5432/vendas", "kim", 
 				"kim", "org.postgresql.Driver", new Long(30000).longValue());
 		
 		cube.setURIService("http://localhost:8443/wsrf/services/cube/Cube");

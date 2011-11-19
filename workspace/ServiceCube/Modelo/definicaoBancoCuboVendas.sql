@@ -14,7 +14,6 @@ CREATE TABLE tempo
   mes integer,
   ano integer,
   data date,
-  id_vendas_dimensao integer NOT NULL,
   CONSTRAINT pk_tempo_id_tempo PRIMARY KEY (id_tempo),
   CONSTRAINT fk_vendas
 	FOREIGN KEY(id_vendas_dimensao)
@@ -27,7 +26,6 @@ CREATE TABLE produto
   descricao character varying(300), --Correto é text(memorando)
   marca character varying(100),
   categoria character varying(150),
-  id_vendas_dimensao integer NOT NULL,
   CONSTRAINT pk_produto_id_produto PRIMARY KEY (id_produto),
   CONSTRAINT fk_vendas
 	FOREIGN KEY(id_vendas_dimensao)
@@ -41,7 +39,6 @@ CREATE TABLE loja
   endereco character varying(200),
   cidade character varying(150),
   estado character varying(100),
-  id_vendas_dimensao integer NOT NULL,
   CONSTRAINT pk_loja_id_loja PRIMARY KEY (id_loja),
   CONSTRAINT fk_vendas
 	FOREIGN KEY(id_vendas_dimensao)

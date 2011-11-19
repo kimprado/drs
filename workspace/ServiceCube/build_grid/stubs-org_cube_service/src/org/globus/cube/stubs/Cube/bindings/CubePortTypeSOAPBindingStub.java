@@ -260,47 +260,12 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">removeCubeResponse");
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">executeQuery");
             cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.RemoveCubeResponse.class;
+            cls = org.globus.cube.stubs.Cube.ExecuteQuery.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">SetResourceProperties");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.SetResourceProperties_Element.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">QueryResourceProperties");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.QueryResourceProperties_Element.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UnableToModifyResourcePropertyFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.UnableToModifyResourcePropertyFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "ResourcePropertyValueChangeNotificationType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.ResourcePropertyValueChangeNotificationType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "Relationship");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.Relationship.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
 
             qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">getCubeColl");
             cachedSerQNames.add(qName);
@@ -309,205 +274,9 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "DeleteType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.DeleteType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">SetResourcePropertiesResponse");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.SetResourcePropertiesResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
             qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">GetMultipleResourcePropertiesResponse");
             cachedSerQNames.add(qName);
             cls = org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UnknownQueryExpressionDialectFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.UnknownQueryExpressionDialectFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">executeQuery");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.ExecuteQuery.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InvalidSetResourcePropertiesRequestContentFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.InvalidSetResourcePropertiesRequestContentFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "ServiceNameType");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.ServiceNameType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "AttributedURI");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.AttributedURI.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">dimensaoMetaData");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.DimensaoMetaData.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", ">BaseFaultType>Description");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.faults.BaseFaultTypeDescription.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">GetResourcePropertyResponse");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.GetResourcePropertyResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "ReplyAfterType");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.ReplyAfterType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">columnResponse");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.ColumnResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "EndpointReferenceType");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.EndpointReferenceType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">printCubeResponse");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.PrintCubeResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "ResourceUnknownFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.ResourceUnknownFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">QueryResourcePropertiesResponse");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.QueryResourcePropertiesResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">GetMultipleResourceProperties");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.GetMultipleResourceProperties_Element.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "FaultSubcodeValues");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.FaultSubcodeValues.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(enumsf);
-            cachedDeserFactories.add(enumdf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InvalidQueryExpressionFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.InvalidQueryExpressionFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeMetadataResponse");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.CubeMetadataResponse.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", ">BaseFaultType>ErrorCode");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.faults.BaseFaultTypeErrorCode.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">setLigacao");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.SetLigacao.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "AttributedQName");
-            cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.AttributedQName.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(simplesf);
-            cachedDeserFactories.add(simpledf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "SetResourcePropertyRequestFailedFaultType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.SetResourcePropertyRequestFailedFaultType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">CubeResourceProperties");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.CubeResourceProperties.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">ResourcePropertyValueChangeNotificationType>NewValue");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.ResourcePropertyValueChangeNotificationTypeNewValue.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UpdateType");
-            cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.UpdateType.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeCollResponse");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.CubeCollResponse.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -526,23 +295,93 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">setChavePrimaria");
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">QueryResourcePropertiesResponse");
             cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.SetChavePrimaria.class;
+            cls = org.oasis.wsrf.properties.QueryResourcePropertiesResponse.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">ligacaoMetaData");
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "FaultSubcodeValues");
             cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.LigacaoMetaData.class;
+            cls = org.apache.axis.message.addressing.FaultSubcodeValues.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(enumsf);
+            cachedDeserFactories.add(enumdf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UpdateType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.UpdateType.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">executeQueryResponse");
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", ">BaseFaultType>ErrorCode");
             cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.ExecuteQueryResponse.class;
+            cls = org.oasis.wsrf.faults.BaseFaultTypeErrorCode.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "AttributedQName");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.AttributedQName.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "AttributedURI");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.AttributedURI.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">fieldMetaData");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.FieldMetaData.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">CubeResourceProperties");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.CubeResourceProperties.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">setLigacao");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.SetLigacao.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeMetadataResponse");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.CubeMetadataResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "Relationship");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.Relationship.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "RelationshipTypeValues");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.RelationshipTypeValues.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(enumsf);
+            cachedDeserFactories.add(enumdf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "DeleteType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.DeleteType.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -554,9 +393,107 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InsertType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.InsertType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "ResourcePropertyValueChangeNotificationType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.ResourcePropertyValueChangeNotificationType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "ReplyAfterType");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.ReplyAfterType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InvalidSetResourcePropertiesRequestContentFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.InvalidSetResourcePropertiesRequestContentFaultType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "EndpointReferenceType");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.EndpointReferenceType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">GetResourcePropertyResponse");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.GetResourcePropertyResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">removeCubeResponse");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.RemoveCubeResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">QueryResourceProperties");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.QueryResourceProperties_Element.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "ReferencePropertiesType");
             cachedSerQNames.add(qName);
             cls = org.apache.axis.message.addressing.ReferencePropertiesType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "ResourceUnknownFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.ResourceUnknownFaultType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InvalidQueryExpressionFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.InvalidQueryExpressionFaultType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">printCubeResponse");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.PrintCubeResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">GetMultipleResourceProperties");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.GetMultipleResourceProperties_Element.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">dimensaoMetaData");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.DimensaoMetaData.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "SetResourcePropertyRequestFailedFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.SetResourcePropertyRequestFailedFaultType.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -568,16 +505,44 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">fatoMetaData");
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UnknownQueryExpressionDialectFaultType");
             cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.FatoMetaData.class;
+            cls = org.oasis.wsrf.properties.UnknownQueryExpressionDialectFaultType.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "InsertType");
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">SetResourceProperties");
             cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.properties.InsertType.class;
+            cls = org.oasis.wsrf.properties.SetResourceProperties_Element.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", "BaseFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.faults.BaseFaultType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeCollResponse");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.CubeCollResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "ServiceNameType");
+            cachedSerQNames.add(qName);
+            cls = org.apache.axis.message.addressing.ServiceNameType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">SetResourcePropertiesResponse");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.SetResourcePropertiesResponse.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -589,23 +554,58 @@ public class CubePortTypeSOAPBindingStub extends org.apache.axis.client.Stub imp
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://schemas.xmlsoap.org/ws/2004/03/addressing", "RelationshipTypeValues");
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">executeQueryResponse");
             cachedSerQNames.add(qName);
-            cls = org.apache.axis.message.addressing.RelationshipTypeValues.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(enumsf);
-            cachedDeserFactories.add(enumdf);
-
-            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">fieldMetaData");
-            cachedSerQNames.add(qName);
-            cls = org.globus.cube.stubs.Cube.FieldMetaData.class;
+            cls = org.globus.cube.stubs.Cube.ExecuteQueryResponse.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", "BaseFaultType");
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd", ">BaseFaultType>Description");
             cachedSerQNames.add(qName);
-            cls = org.oasis.wsrf.faults.BaseFaultType.class;
+            cls = org.oasis.wsrf.faults.BaseFaultTypeDescription.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(simplesf);
+            cachedDeserFactories.add(simpledf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">columnResponse");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.ColumnResponse.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">fatoMetaData");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.FatoMetaData.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", ">ResourcePropertyValueChangeNotificationType>NewValue");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.ResourcePropertyValueChangeNotificationTypeNewValue.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">ligacaoMetaData");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.LigacaoMetaData.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd", "UnableToModifyResourcePropertyFaultType");
+            cachedSerQNames.add(qName);
+            cls = org.oasis.wsrf.properties.UnableToModifyResourcePropertyFaultType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">setChavePrimaria");
+            cachedSerQNames.add(qName);
+            cls = org.globus.cube.stubs.Cube.SetChavePrimaria.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
