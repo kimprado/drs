@@ -66,7 +66,7 @@ try {
 
  		<frameset rows="60%,40%" border=0>
  			<frameset cols="30%,70%">
-				<frame src="pg/cubes.jsp" name="cubes" NORESIZE SCROLLING=auto>
+				<frame src="gerenciamento/cubes.jsp" name="cubes" NORESIZE SCROLLING=auto>
 				<frame src="pg/boasVindas.html" name="tree" NORESIZE MARGINHEIGHT=1 SCROLLING=auto>
 			</frameset>
 
