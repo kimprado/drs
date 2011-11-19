@@ -64,20 +64,18 @@ try {
 
  	<frameset cols="75%,35%">
 
- 		<frameset rows="60%,40%" border=0>
+ 		<frameset rows="100%" border=0>
  			<frameset cols="30%,70%">
 				<frame src="gerenciamento/cubes.jsp" name="cubes" NORESIZE SCROLLING=auto>
-				<frame src="pg/boasVindas.html" name="tree" NORESIZE MARGINHEIGHT=1 SCROLLING=auto>
+				<frame src="gerenciamento/boasVindas.html" name="tree" NORESIZE MARGINHEIGHT=1 SCROLLING=auto>
 			</frameset>
 
-			<frame src="pg/resumo.jsp" id="opresumo" name="opresumo" NORESIZE MARGINHEIGHT=2 MARGINWIDTH=3 SCROLLING=auto>
+			
 		</frameset>
 
 		<frame src="pg/optionsInicio.html" id="options" name="options" NORESIZE MARGINHEIGHT=0 SCROLLING=auto>
 
 	</frameset>
-
-
 
 	<frame id="ascr" name="ascr" NORESIZE MARGINHEIGHT=0 SCROLLING=no>
 
