@@ -33,6 +33,9 @@ function selecionarCubo(posicao) {
 	var cubo = cubos[posicao];
 	var metadadados = "tree.jsp?cube="+cubo.cubo+"&cubeIndexEntry="+cubo.cuboIndex+"&cubeURI="+cubo.cuboURI;
 	top.tree.location = metadadados;
+	
+	var formulario = "../cubo.do?metodo=formIncluirCubo";
+	top.formularioFrame.location = formulario;
 }
 
 var cubos = new Array();

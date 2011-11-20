@@ -71,7 +71,7 @@ function enviarOpcoes()
 				out.println( "<tr><td></td>  <td colspan=1>" );
 
 				out.println("<script>"); // início do script e do método
-				out.println("parent.document.getElementById(\"options\").src=\"pg/optionsInicio.html\"");
+				//out.println("parent.document.getElementById(\"formularioFrame\").src=\"gerenciamento/formularioInicio.html\"");
 				out.println("if (document.getElementById) {");
 				out.println( "var fato = new WebFXTree('"+fatoMD.getName()+"');" ); // insere o fato(assunto) do Cubo
 
@@ -84,7 +84,7 @@ function enviarOpcoes()
 					for(int a=0; a < dimMD.getFieldMetaData().length; a++){
 						FieldMetaData fdmd = dimMD.getFieldMetaData(a);
 						if ( !(fdmd.isPrimaryKey()) & !(fdmd.isForeignKey()) & !fdmd.getName().toUpperCase().matches("ID_.*") ){ //Se Não Fizer parte da Chave
-							out.println( "dimensao.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table="+ dimMD.getKey() +"&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','options'));" ); // adiciona o objeto fild(campos) ao fato
+							out.println( "dimensao.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table="+ dimMD.getKey() +"&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','formularioFrame'));" ); // adiciona o objeto fild(campos) ao fato
 						}
 					} // for atributo das dimensoes
 				} // for dimensao

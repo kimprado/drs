@@ -68,6 +68,19 @@
     <servlet-name>ResultadoXML</servlet-name>
     <url-pattern>/ResultadoXML</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>CuboAction</display-name>
+    <servlet-name>CuboAction</servlet-name>
+    <servlet-class>br.com.kasystemas.drsclienteweb.control.action.CuboAction</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CuboAction</servlet-name>
+    <url-pattern>/cubo.do</url-pattern>
+  </servlet-mapping>
+  
   <!-- 
   <servlet>
   	<servlet-name>Faces Servlet</servlet-name>

@@ -3,20 +3,12 @@ package br.com.kasystemas.drsclienteweb.control;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
- 
-import org.apache.axis.message.addressing.Address;
-import org.apache.axis.message.addressing.EndpointReferenceType;
-import org.globus.drs.stubs.Cube.CriarConsulta;
-import org.globus.drs.stubs.Cube.DRSPortType;
-import org.globus.drs.stubs.Cube.service.DRSServiceAddressingLocator;
  
 
 /**
@@ -41,9 +33,9 @@ public class Controlador extends HttpServlet {
 		//out.println("oi, oi. Bem-Vindo ao Grid");
 		
 		try {
-
-
-			RequestDispatcher rq = request.getRequestDispatcher("index.jsp");
+			
+			//RequestDispatcher rq = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher rq = request.getRequestDispatcher("index_gerenciamento.jsp");
 			rq.forward(request, response);
 			
 			} catch (Exception e) {

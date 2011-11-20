@@ -73,7 +73,7 @@ try {
 			
 		</frameset>
 
-		<frame src="pg/optionsInicio.html" id="options" name="options" NORESIZE MARGINHEIGHT=0 SCROLLING=auto>
+		<frame src="pg/optionsInicio.html" id="formularioFrame" name="formularioFrame" NORESIZE MARGINHEIGHT=0 SCROLLING=auto>
 
 	</frameset>
 

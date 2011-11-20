@@ -34,11 +34,11 @@ public class Cubo {
 	private Fato fato;
 	
 	private String a_driver;
-	private String conn_url;
-	private String conn_user;
-	private String conn_password;
+	private String connectionUrl;
+	private String connectionUser;
+	private String connectionPassword;
 
-	private long refresh; // Tempo de vida no serviço de índice
+	private Long refresh; // Tempo de vida no serviço de índice
 	
 	@Transient
 	private int keyCubeIndex = -1; // key recebida ao se cadastrar no CubeIndex 
@@ -58,9 +58,9 @@ public class Cubo {
 		a_nome = nome;
 		a_server = server;
 		this.fato = fato;
-		conn_url = url;
-		conn_user = user;
-		conn_password = password;
+		connectionUrl = url;
+		connectionUser = user;
+		connectionPassword = password;
 		a_driver = driver;
 		this.refresh = refresh;
 	}
@@ -132,16 +132,16 @@ public class Cubo {
 		this.refresh = refresh;
 	}
 	
-	public long getRefresh(){
+	public Long getRefresh(){
 		return this.refresh;
 	}
 	
 	public void setConnection(String url, String user, String password){
 		try {
 			
-			this.conn_url = url;
-			this.conn_user = user;
-			this.conn_password = password;
+			this.connectionUrl = url;
+			this.connectionUser = user;
+			this.connectionPassword = password;
 			
 		}catch (Exception e){ e.printStackTrace();}
 	}
@@ -150,7 +150,7 @@ public class Cubo {
 	public Connection getConnection(){
 		try {
 			Connection conn;
-			conn = DriverManager.getConnection(conn_url, conn_user, conn_password);
+			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 			return  conn;
 		}catch (Exception e){ e.printStackTrace();}
 		return null;
@@ -170,6 +170,48 @@ public class Cubo {
 	@Override
 	public String toString(){
 		return getNome();
+	}
+
+	/**
+	 * @return the conn_url
+	 */
+	public String getConnectionUrl() {
+		return connectionUrl;
+	}
+
+	/**
+	 * @param conn_url the conn_url to set
+	 */
+	public void setConnectionUrl(String conn_url) {
+		this.connectionUrl = conn_url;
+	}
+
+	/**
+	 * @return the conn_user
+	 */
+	public String getConnectionUser() {
+		return connectionUser;
+	}
+
+	/**
+	 * @param conn_user the conn_user to set
+	 */
+	public void setConnectionUser(String conn_user) {
+		this.connectionUser = conn_user;
+	}
+
+	/**
+	 * @return the conn_password
+	 */
+	public String getConnectionPassword() {
+		return connectionPassword;
+	}
+
+	/**
+	 * @param conn_password the conn_password to set
+	 */
+	public void setConnectionPassword(String conn_password) {
+		this.connectionPassword = conn_password;
 	}
 	
 	
