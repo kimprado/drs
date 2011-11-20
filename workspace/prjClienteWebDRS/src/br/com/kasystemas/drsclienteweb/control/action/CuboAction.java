@@ -72,10 +72,9 @@ public class CuboAction extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	private void formIncluirCubo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute(PARAMETRO_ACAO, "incluir");
-		
 		Cubo cubo = new Cubo();
 		
+		request.setAttribute(PARAMETRO_ACAO, "incluir");
 		request.setAttribute("cubo", cubo);
 		
 		encaminhar(FORMULARIO_CUBO);
@@ -92,8 +91,9 @@ public class CuboAction extends HttpServlet {
 		Cubo cubo = obterCuboRequisicao(request);
 		
 		request.setAttribute("cubo", cubo);
-		
-		request.setAttribute("mensagem", new MensagemRetorno("alteracao", false, "Cadas realizado com sucesso."));
+		request.setAttribute(PARAMETRO_ACAO, "visualizar");
+		request.setAttribute("camposReadonly", true);
+		request.setAttribute("mensagem", new MensagemRetorno("inclusao", false, "Cadastro realizado com sucesso."));
 		
 		encaminhar(FORMULARIO_CUBO);
 	}
@@ -107,11 +107,9 @@ public class CuboAction extends HttpServlet {
 	 */
 	private void formAlterarCubo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cubo cubo = obterCuboRequisicao(request);
-		
 		Cubo cuboConsulta = new CubeServiceDAO().consultarCubo(cubo);
 		
 		request.setAttribute("cubo", cuboConsulta);
-		
 		request.setAttribute(PARAMETRO_ACAO, "alterar");
 		
 		encaminhar(FORMULARIO_CUBO);
@@ -128,8 +126,8 @@ public class CuboAction extends HttpServlet {
 		Cubo cubo = obterCuboRequisicao(request);
 		
 		request.setAttribute("cubo", cubo);
-		
 		request.setAttribute(PARAMETRO_ACAO, "visualizar");
+		request.setAttribute("camposReadonly", true);
 		request.setAttribute("mensagem", new MensagemRetorno("alteracao", false, "Cadastro realizado com sucesso."));
 		
 		encaminhar(FORMULARIO_CUBO);
@@ -144,8 +142,11 @@ public class CuboAction extends HttpServlet {
 	 */
 	private void formVisualizarCubo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cubo cubo = obterCuboRequisicao(request);
+		Cubo cuboConsulta = new CubeServiceDAO().consultarCubo(cubo);
 		
+		request.setAttribute("cubo", cuboConsulta);
 		request.setAttribute(PARAMETRO_ACAO, "visualizar");
+		request.setAttribute("camposReadonly", true);
 		
 		encaminhar(FORMULARIO_CUBO);
 	}
@@ -159,7 +160,7 @@ public class CuboAction extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	private void excluirCubo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cubo obterCuboRequisicao = obterCuboRequisicao(request);
+		Cubo cubo = obterCuboRequisicao(request);
 		
 		encaminhar(FORMULARIO_CUBO);
 	}

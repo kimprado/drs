@@ -40,10 +40,11 @@ public class CubeServiceDAO {
 		
 		cubo.setId( cubeMetaData.getId() );
 		cubo.setNome( cubeMetaData.getName() );
-		cubo.setConnectionUrl( cubeMetaData.getUri() );
+		cubo.setConnectionUrl( cubeMetaData.getConnectionUrl() );
 		cubo.setConnectionUser( cubeMetaData.getUser() );
 		cubo.setConnectionPassword( cubeMetaData.getPassword() );
 		cubo.setDriver( cubeMetaData.getDriver() );
+		cubo.setURIService( cubeMetaData.getUri() );
 		cubo.setRefresh( cubeMetaData.getMillisecond() );
 		
 		return cubo;

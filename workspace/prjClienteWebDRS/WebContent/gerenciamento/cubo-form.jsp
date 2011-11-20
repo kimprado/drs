@@ -28,24 +28,34 @@
 	
 	<c:if test="${acao eq 'incluir'}" >
 		<c:set var="metodo" value="incluirCubo"/>
+		<h4>&nbsp;Cubo > Incluir</h4>
 	</c:if>
 	
 	<c:if test="${acao eq 'alterar'}" >
 		<c:set var="metodo" value="alterarCubo"/>
+		<h4>&nbsp;Cubo > Alterar</h4>
 	</c:if>
 	
-	<br>
+	<c:if test="${acao eq 'visualizar'}" >
+		<h4>&nbsp;Cubo > Visualizar</h4>
+	</c:if>
+	
+	<c:if test="${camposReadonly eq true}" >
+		<c:set var="readonly" value="readonly=\"readonly\""/>
+	</c:if>
+	
 	<form action="cubo.do" method="post">
 		<input type="hidden" name="cubo.id" value="${cubo.id}">
 		<input type="hidden" name="metodo" value="${metodo}">
-	
+		<input type="hidden" name="acao" value="${metodo}">
+		
 		<table>
 			<tr>
 				<td>
 					Nome
 				</td>
 				<td>
-					<input type="text" id="cubo.nome" name="cubo.nome" value="${cubo.nome}" />
+					<input type="text" id="cubo.nome" name="cubo.nome" value="${cubo.nome}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -54,7 +64,7 @@
 					URL
 				</td>
 				<td>
-					<input type="text" id="cubo.connectionUrl" name="cubo.connectionUrl" value="${cubo.connectionUrl}" />
+					<input type="text" id="cubo.connectionUrl" name="cubo.connectionUrl" value="${cubo.connectionUrl}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -63,7 +73,7 @@
 					Usuário
 				</td>
 				<td>
-					<input type="text" id="cubo.connectionUser" name="cubo.connectionUser" value="${cubo.connectionUser}" />
+					<input type="text" id="cubo.connectionUser" name="cubo.connectionUser" value="${cubo.connectionUser}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -72,7 +82,7 @@
 					Senha
 				</td>
 				<td>
-					<input type="text" id="cubo.connectionPassword" name="cubo.connectionPassword" value="${cubo.connectionPassword}" />
+					<input type="text" id="cubo.connectionPassword" name="cubo.connectionPassword" value="${cubo.connectionPassword}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -81,7 +91,7 @@
 					Driver
 				</td>
 				<td>
-					<input type="text" id="cubo.driver" name="cubo.driver" value="${cubo.driver}" />
+					<input type="text" id="cubo.driver" name="cubo.driver" value="${cubo.driver}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -90,7 +100,7 @@
 					Refresh
 				</td>
 				<td>
-					<input type="text" id="cubo.refresh" name="cubo.refresh" value="${cubo.refresh}" />
+					<input type="text" id="cubo.refresh" name="cubo.refresh" value="${cubo.refresh}" ${readonly}/>
 				</td>
 			</tr>
 			
@@ -98,7 +108,7 @@
 				<td colspan="2" align="center">			
 					<c:if test="${ acao eq 'incluir' }">
 						<input type="submit" value="Gravar">
-						<input type="button" value="Cancelar" onclick="visualizarCubo()">
+						<input type="reset" value="Limpar">
 					</c:if>
 					
 					<c:if test="${ acao eq 'alterar' }">

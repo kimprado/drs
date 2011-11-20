@@ -1,11 +1,17 @@
 function novoCubo(){
-	alert('novoCubo Cubo');
+	var form = document.forms[0];
+	form.action = "cubo.do?metodo=formIncluirCubo";
+	form.submit();
 }
 
 function alterarCubo(){
-	alert('alterarCubo Cubo');
+	var form = document.forms[0];
+	form.action = "cubo.do?metodo=formAlterarCubo";
+	form.submit();
 }
 
 function visualizarCubo(){
-	alert('visualizar Cubo');
+	var form = document.forms[0];
+	form.action = "cubo.do?metodo=formVisualizarCubo";
+	form.submit();
 }
