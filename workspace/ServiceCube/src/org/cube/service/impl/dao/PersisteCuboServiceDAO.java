@@ -21,6 +21,7 @@ public class PersisteCuboServiceDAO {
 	}
 	
 	public void persisteCubo(Cubo cubo) {
+		System.out.println("\n\nCubo Par Persistir : " + cubo);
 		persiste(cubo);
 		
 		Fato fato = cubo.getFato();

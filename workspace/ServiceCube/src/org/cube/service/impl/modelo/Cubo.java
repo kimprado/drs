@@ -88,7 +88,6 @@ public class Cubo {
 		return a_UriService;		
 	}	
 	
-	
 	public void setKeyindex(int key){
 		keyCubeIndex = key;
 	}

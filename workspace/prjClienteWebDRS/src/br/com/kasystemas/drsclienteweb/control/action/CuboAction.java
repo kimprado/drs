@@ -90,11 +90,24 @@ public class CuboAction extends HttpServlet {
 	private void incluirCubo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cubo cubo = obterCuboRequisicao(request);
 		
-		request.setAttribute("cubo", cubo);
-		request.setAttribute(PARAMETRO_ACAO, "visualizar");
-		request.setAttribute("camposReadonly", true);
-		request.setAttribute("mensagem", new MensagemRetorno("inclusao", false, "Cadastro realizado com sucesso."));
-		
+		try {
+			boolean incluirCubo = new CubeServiceDAO().incluirCubo(cubo);
+			
+			if ( incluirCubo ) {
+				request.setAttribute("cubo", cubo);
+				request.setAttribute(PARAMETRO_ACAO, "visualizar");
+				request.setAttribute("camposReadonly", true);
+				request.setAttribute("mensagem", new MensagemRetorno("inclusao", false, "Cadastro realizado com sucesso."));
+			} else {
+				request.setAttribute("cubo", cubo);
+				request.setAttribute(PARAMETRO_ACAO, "incluir");
+				request.setAttribute("mensagem", new MensagemRetorno("inclusao", true, "Erro ao incluir cubo."));
+			}
+		} catch (Exception e) {
+			request.setAttribute("cubo", cubo);
+			request.setAttribute(PARAMETRO_ACAO, "incluir");
+			request.setAttribute("mensagem", new MensagemRetorno("inclusao", true, e.getMessage()));
+		}
 		encaminhar(FORMULARIO_CUBO);
 	}
 	

@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 
 import org.cube.service.impl.control.CubeServiceControl;
 import org.cube.service.impl.dao.DAO;
+import org.cube.service.impl.dao.PersisteCuboServiceDAO;
 import org.cube.service.impl.infra.AbreConexao;
 import org.cube.service.impl.infra.FechaConexao;
 import org.cube.service.impl.modelo.Atributo;
@@ -21,6 +22,7 @@ import org.cube.service.impl.modelo.Fato;
 import org.cube.service.impl.modelo.Ligacao;
 import org.globus.cube.stubs.Cube.AddCube;
 import org.globus.cube.stubs.Cube.CubeCollResponse;
+import org.globus.cube.stubs.Cube.CubeMetaData;
 import org.globus.cube.stubs.Cube.CubeMetadataResponse;
 import org.globus.cube.stubs.Cube.DimensaoMetaData;
 import org.globus.cube.stubs.Cube.ExecuteQuery;
@@ -56,8 +58,6 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	/* Constructor. Initializes RPs */
 	public CubeService() throws RemoteException {
-		System.out.println("tabrabo bravo");
-		
 		serviceIndexURI = getServiceURI("cubeindexservice"); //cubeIndex
 		System.out.println("\n\nIndex: "+getServiceURI("cubeindexservice"));
 		serviceCubeURI = getServiceURI("cubeservice");
@@ -156,24 +156,77 @@ public class CubeService implements Resource, ResourceProperties{
 		return cubeMetadataResponse;
 	}
 	
-	public boolean addCube(AddCube addcube){
-		Cubo cb = new Cubo();
-		cb.setConnection(addcube.getUri(), addcube.getUser(), addcube.getPassword());
+	public boolean addCube(AddCube addcube1) {
+		CubeMetaData CubeMetaData = addcube1.getCube();
+		
+		Cubo cubo = new Cubo();
+		cubo.setConnection(CubeMetaData.getConnectionUrl(), CubeMetaData.getUser(), CubeMetaData.getPassword());
 		
 		try {
-			CubeServiceControl.setCubeMetaData(cb);
+			CubeServiceControl.setCubeMetaData(cubo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		cb.setNome(addcube.getName());
+		cubo.setNome(CubeMetaData.getName());
+		
+		idCount++;
+		getCubos().put(new Integer(idCount), cubo);
+		
+		cubo.setURIService(serviceCubeURI); //CubeService
+		
+		cubo.setTimer(serviceIndexURI, CubeMetaData.getMillisecond(), idCount);
+		
+		cubo.setDriver(CubeMetaData.getDriver());
+		cubo.setRefresh(CubeMetaData.getMillisecond());
+		cubo.setServer(serviceIndexURI);
+		try {
+			EntityManager em = AbreConexao.abreConexao();
+			
+			//Persiste cubo e toda árvore de metadados
+			PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
+			persisteCuboServiceDAO.persisteCubo(cubo);
+			
+			FechaConexao.fechaConexao(em);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public Cubo cuboFromMetadados(CubeMetadataResponse metaDados) {
+		Cubo cubo = new Cubo();
+		CubeMetaData cubeMetaData = metaDados.getCubeMetaData();
+		cubo.setId( cubeMetaData.getId() );
+		cubo.setNome( cubeMetaData.getName() );
+		cubo.setConnectionUrl( cubeMetaData.getConnectionUrl() );
+		cubo.setConnectionUser( cubeMetaData.getUser() );
+		cubo.setConnectionPassword( cubeMetaData.getPassword() );
+		cubo.setDriver( cubeMetaData.getDriver() );
+		cubo.setURIService( cubeMetaData.getUri() );
+		cubo.setRefresh( cubeMetaData.getMillisecond() );
+		return cubo;
+	}
+	
+	public boolean addCubeMetadata(AddCube addcube){
+		Cubo cubo = new Cubo();
+		cubo.setConnection(addcube.getUri(), addcube.getUser(), addcube.getPassword());
+		
+		try {
+			CubeServiceControl.setCubeMetaData(cubo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		cubo.setNome(addcube.getName());
 		
 		//idCount+=10;
 		idCount++;
-		getCubos().put(new Integer(idCount), cb);
+		getCubos().put(new Integer(idCount), cubo);
 		
-		cb.setURIService(serviceCubeURI); //CubeService
+		cubo.setURIService(serviceCubeURI); //CubeService
 		
-		cb.setTimer(serviceIndexURI, addcube.getMillisecond(), idCount);
+		cubo.setTimer(serviceIndexURI, addcube.getMillisecond(), idCount);
 		
 		return true;
 	}
@@ -292,6 +345,7 @@ public class CubeService implements Resource, ResourceProperties{
 			getCubos().put(Integer.valueOf(idCount), cubo);
 			
 			cubo.setURIService(serviceCubeURI);
+			System.out.println(serviceIndexURI + " - " + cubo.getRefresh() + " - " + idCount);
 			cubo.setTimer(serviceIndexURI, cubo.getRefresh(), idCount);
 		}
 		

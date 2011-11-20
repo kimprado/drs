@@ -157,6 +157,7 @@
 			<xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
 			<xsd:element name="millisecond" type="xsd:long" minOccurs="1" maxOccurs="1"/>
 			<xsd:element name="fato" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="cube" ref="tns:cubeMetaData" minOccurs="1" maxOccurs="1"/>
 		</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

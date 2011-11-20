@@ -543,7 +543,7 @@ private void queryLittle(CubePortType cube){
 	private void adicionarVendasT(CubePortType cube){
 		try {
 		//* ADICIONAR
-		if ( cube.addCube(new AddCube("t",5000,"Vendas","globus","jdbc:postgresql://eingrid002.unigranrio.br:5432/ogsadb","globus")) ){
+		if ( cube.addCube(new AddCube(null, "t",5000,"Vendas","globus","jdbc:postgresql://eingrid002.unigranrio.br:5432/ogsadb","globus")) ){
 			System.out.println("O cubo foi adicionado");
 		}else System.out.println("Não foi cadastrado");//*/
 		

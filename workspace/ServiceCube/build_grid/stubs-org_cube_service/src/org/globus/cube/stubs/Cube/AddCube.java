@@ -14,11 +14,13 @@ public class AddCube  implements java.io.Serializable {
     private java.lang.String password;
     private long millisecond;
     private java.lang.String fato;
+    private org.globus.cube.stubs.Cube.CubeMetaData cube;
 
     public AddCube() {
     }
 
     public AddCube(
+           org.globus.cube.stubs.Cube.CubeMetaData cube,
            java.lang.String fato,
            long millisecond,
            java.lang.String name,
@@ -31,6 +33,7 @@ public class AddCube  implements java.io.Serializable {
            this.password = password;
            this.millisecond = millisecond;
            this.fato = fato;
+           this.cube = cube;
     }
 
 
@@ -153,6 +156,26 @@ public class AddCube  implements java.io.Serializable {
         this.fato = fato;
     }
 
+
+    /**
+     * Gets the cube value for this AddCube.
+     * 
+     * @return cube
+     */
+    public org.globus.cube.stubs.Cube.CubeMetaData getCube() {
+        return cube;
+    }
+
+
+    /**
+     * Sets the cube value for this AddCube.
+     * 
+     * @param cube
+     */
+    public void setCube(org.globus.cube.stubs.Cube.CubeMetaData cube) {
+        this.cube = cube;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof AddCube)) return false;
@@ -180,7 +203,10 @@ public class AddCube  implements java.io.Serializable {
             this.millisecond == other.getMillisecond() &&
             ((this.fato==null && other.getFato()==null) || 
              (this.fato!=null &&
-              this.fato.equals(other.getFato())));
+              this.fato.equals(other.getFato()))) &&
+            ((this.cube==null && other.getCube()==null) || 
+             (this.cube!=null &&
+              this.cube.equals(other.getCube())));
         __equalsCalc = null;
         return _equals;
     }
@@ -207,6 +233,9 @@ public class AddCube  implements java.io.Serializable {
         _hashCode += new Long(getMillisecond()).hashCode();
         if (getFato() != null) {
             _hashCode += getFato().hashCode();
+        }
+        if (getCube() != null) {
+            _hashCode += getCube().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -247,6 +276,11 @@ public class AddCube  implements java.io.Serializable {
         elemField.setFieldName("fato");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fato"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("cube");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", "cube"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeMetaData"));
         typeDesc.addFieldDesc(elemField);
     }
 
