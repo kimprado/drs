@@ -3,13 +3,13 @@ package br.com.kasystemas.drsclienteweb.control.mb;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.RequestScoped;
 
 import br.com.kasystemas.drsclienteweb.dao.CubeServiceDAO;
 
-@ManagedBean
-@RequestScoped
+//@ManagedBean
+//@RequestScoped
 //@ViewScoped
 public class CuboMetaDataBean {
 	
@@ -39,7 +39,7 @@ public class CuboMetaDataBean {
 		//setMetaDadosCubo("Não tinha NADA!!! isso não serve p/ nada: '" + getMetaDadosCubo() + "'");
 		
 		try {
-			String metadadosSolicitados = new CubeServiceDAO().getPotType().printCube(6).getCube();
+			String metadadosSolicitados = new CubeServiceDAO().getPortType().printCube(6).getCube();
 			setMetaDadosCubo(metadadosSolicitados);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

@@ -21,6 +21,7 @@ import org.cube.service.impl.modelo.Dimensao;
 import org.cube.service.impl.modelo.Fato;
 import org.cube.service.impl.modelo.Ligacao;
 import org.globus.cube.stubs.Cube.ColumnResponse;
+import org.globus.cube.stubs.Cube.CubeMetaData;
 import org.globus.cube.stubs.Cube.CubeMetadataResponse;
 import org.globus.cube.stubs.Cube.DimensaoMetaData;
 import org.globus.cube.stubs.Cube.ExecuteQueryResponse;
@@ -221,6 +222,19 @@ public class CubeServiceControl {
 	}
 
 	public static CubeMetadataResponse getCubeMetadata(Cubo cb) {
+		
+		//Dados do Cubo
+		CubeMetaData cubeMetaData = new CubeMetaData();
+		cubeMetaData.setId( cb.getId() );
+		cubeMetaData.setName( cb.getNome() );
+		cubeMetaData.setUri( cb.getURIService() );
+		cubeMetaData.setUser( cb.getConnectionUser() );
+		cubeMetaData.setPassword( cb.getConnectionPassword() );
+		cubeMetaData.setConnectionUrl( cb.getConnectionUrl() );
+		cubeMetaData.setDriver( cb.getDriver() );
+		cubeMetaData.setMillisecond( cb.getRefresh() );
+		
+		
 		// System.out.println("\nEstou em getCubeMetadata");
 		Fato fato = cb.getFato();
 		// System.out.println("FATO: "+fato);
@@ -342,10 +356,14 @@ public class CubeServiceControl {
 
 		ftmd.setDimensaoMetaData(dims);
 
-		CubeMetadataResponse cubeMetaData = new CubeMetadataResponse();
-		cubeMetaData.setName(cb.getNome());
-		cubeMetaData.setFatoMetaData(ftmd);
-		return cubeMetaData;
+		CubeMetadataResponse cubeMetaDataResponse = new CubeMetadataResponse();
+		cubeMetaDataResponse.setName(cb.getNome());
+		cubeMetaDataResponse.setFatoMetaData(ftmd);
+		
+		cubeMetaData.setFato( ftmd );
+		cubeMetaDataResponse.setCubeMetaData(cubeMetaData);
+		
+		return cubeMetaDataResponse;
 
 	}
 

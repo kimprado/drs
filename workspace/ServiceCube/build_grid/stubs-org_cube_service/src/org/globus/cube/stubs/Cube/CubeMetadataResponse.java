@@ -10,15 +10,18 @@ package org.globus.cube.stubs.Cube;
 public class CubeMetadataResponse  implements java.io.Serializable {
     private java.lang.String name;
     private org.globus.cube.stubs.Cube.FatoMetaData fatoMetaData;
+    private org.globus.cube.stubs.Cube.CubeMetaData cubeMetaData;
 
     public CubeMetadataResponse() {
     }
 
     public CubeMetadataResponse(
+           org.globus.cube.stubs.Cube.CubeMetaData cubeMetaData,
            org.globus.cube.stubs.Cube.FatoMetaData fatoMetaData,
            java.lang.String name) {
            this.name = name;
            this.fatoMetaData = fatoMetaData;
+           this.cubeMetaData = cubeMetaData;
     }
 
 
@@ -61,6 +64,26 @@ public class CubeMetadataResponse  implements java.io.Serializable {
         this.fatoMetaData = fatoMetaData;
     }
 
+
+    /**
+     * Gets the cubeMetaData value for this CubeMetadataResponse.
+     * 
+     * @return cubeMetaData
+     */
+    public org.globus.cube.stubs.Cube.CubeMetaData getCubeMetaData() {
+        return cubeMetaData;
+    }
+
+
+    /**
+     * Sets the cubeMetaData value for this CubeMetadataResponse.
+     * 
+     * @param cubeMetaData
+     */
+    public void setCubeMetaData(org.globus.cube.stubs.Cube.CubeMetaData cubeMetaData) {
+        this.cubeMetaData = cubeMetaData;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof CubeMetadataResponse)) return false;
@@ -78,7 +101,10 @@ public class CubeMetadataResponse  implements java.io.Serializable {
               this.name.equals(other.getName()))) &&
             ((this.fatoMetaData==null && other.getFatoMetaData()==null) || 
              (this.fatoMetaData!=null &&
-              this.fatoMetaData.equals(other.getFatoMetaData())));
+              this.fatoMetaData.equals(other.getFatoMetaData()))) &&
+            ((this.cubeMetaData==null && other.getCubeMetaData()==null) || 
+             (this.cubeMetaData!=null &&
+              this.cubeMetaData.equals(other.getCubeMetaData())));
         __equalsCalc = null;
         return _equals;
     }
@@ -95,6 +121,9 @@ public class CubeMetadataResponse  implements java.io.Serializable {
         }
         if (getFatoMetaData() != null) {
             _hashCode += getFatoMetaData().hashCode();
+        }
+        if (getCubeMetaData() != null) {
+            _hashCode += getCubeMetaData().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -115,6 +144,11 @@ public class CubeMetadataResponse  implements java.io.Serializable {
         elemField.setFieldName("fatoMetaData");
         elemField.setXmlName(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", "fatoMetaData"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">fatoMetaData"));
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("cubeMetaData");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", "cubeMetaData"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.globus.org/namespaces/examples/core/Cube", ">cubeMetaData"));
         typeDesc.addFieldDesc(elemField);
     }
 

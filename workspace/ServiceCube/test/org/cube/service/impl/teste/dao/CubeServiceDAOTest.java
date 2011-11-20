@@ -5,7 +5,7 @@ import org.apache.axis.message.addressing.EndpointReferenceType;
 import org.globus.cube.stubs.Cube.CubePortType;
 import org.globus.cube.stubs.Cube.service.CubeServiceAddressingLocator;
 
-public class CubeServiceDAO {
+public class CubeServiceDAOTest {
 	
 	public CubePortType getPotType(/*s*/) {
 		
@@ -15,7 +15,7 @@ public class CubeServiceDAO {
 			
 			// Create endpoint reference to service
 			EndpointReferenceType endpoint = new EndpointReferenceType();
-			endpoint.setAddress(new Address(WebServiceDAO.getServiceURI(WebServiceDAO.CUBESERVICEURI)));
+			endpoint.setAddress(new Address(WebServiceDAOTest.getServiceURI(WebServiceDAOTest.CUBESERVICEURI)));
 			
 			// Get PortType
 			CubePortType cube = locator.getCubePortTypePort(endpoint);

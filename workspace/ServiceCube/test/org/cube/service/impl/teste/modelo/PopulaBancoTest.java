@@ -41,7 +41,7 @@ public class PopulaBancoTest {
 		
 		Cubo cubo = dao.busca(1);
 		
-		cubo = dao.busca(1);
+		//cubo = dao.busca(2);
 		
 		//System.out.println("cubo localizado: " + cubo.getId() + " " + cubo.getNome() + " " + cubo.getServer() );
 		System.out.println(cubo.getNome() + " - " + cubo.getFato().getNome());

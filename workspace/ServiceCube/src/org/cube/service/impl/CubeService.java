@@ -56,6 +56,8 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	/* Constructor. Initializes RPs */
 	public CubeService() throws RemoteException {
+		System.out.println("tabrabo bravo");
+		
 		serviceIndexURI = getServiceURI("cubeindexservice"); //cubeIndex
 		System.out.println("\n\nIndex: "+getServiceURI("cubeindexservice"));
 		serviceCubeURI = getServiceURI("cubeservice");
@@ -66,7 +68,12 @@ public class CubeService implements Resource, ResourceProperties{
 		System.out.println("bancometadadosconexao: "+getServiceURI("bancometadadosconexao"));
 		
 		/* Create RP set */
-		this.propSet = new SimpleResourcePropertySet(CubeQNames.RESOURCE_PROPERTIES);
+		try {
+			this.propSet = new SimpleResourcePropertySet(CubeQNames.RESOURCE_PROPERTIES);
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		
 		
 		/* Initialize the RP's */
 		try {

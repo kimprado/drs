@@ -2,7 +2,7 @@ package org.cube.service.impl.teste.interfaceServico;
 
 import java.rmi.RemoteException;
 
-import org.cube.service.impl.teste.dao.CubeServiceDAO;
+import org.cube.service.impl.teste.dao.CubeServiceDAOTest;
 import org.junit.Test;
 
 
@@ -13,7 +13,7 @@ public class InterfaceServicoTest {
 		
 		String metadadosSolicitados = null;
 		
-		metadadosSolicitados = new CubeServiceDAO().getPotType().printCube(6).getCube();
+		metadadosSolicitados = new CubeServiceDAOTest().getPotType().printCube(6).getCube();
 		
 		System.out.println(metadadosSolicitados);
 	}

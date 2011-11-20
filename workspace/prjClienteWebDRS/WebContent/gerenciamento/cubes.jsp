@@ -34,7 +34,7 @@ function selecionarCubo(posicao) {
 	var metadadados = "tree.jsp?cube="+cubo.cubo+"&cubeIndexEntry="+cubo.cuboIndex+"&cubeURI="+cubo.cuboURI;
 	top.tree.location = metadadados;
 	
-	var formulario = "../cubo.do?metodo=formIncluirCubo";
+	var formulario = "../cubo.do?metodo=formAlterarCubo&cubo.id="+cubo.cubo;
 	top.formularioFrame.location = formulario;
 }
 

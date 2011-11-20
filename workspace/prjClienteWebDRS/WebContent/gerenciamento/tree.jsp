@@ -84,7 +84,7 @@ function enviarOpcoes()
 					for(int a=0; a < dimMD.getFieldMetaData().length; a++){
 						FieldMetaData fdmd = dimMD.getFieldMetaData(a);
 						if ( !(fdmd.isPrimaryKey()) & !(fdmd.isForeignKey()) & !fdmd.getName().toUpperCase().matches("ID_.*") ){ //Se Não Fizer parte da Chave
-							out.println( "dimensao.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table="+ dimMD.getKey() +"&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','formularioFrame'));" ); // adiciona o objeto fild(campos) ao fato
+							out.println( "dimensao.add(new WebFXTreeItem('"+ fdmd.getName() +"',null,'formularioFrame'));" ); // adiciona o objeto fild(campos) ao fato
 						}
 					} // for atributo das dimensoes
 				} // for dimensao
@@ -93,7 +93,7 @@ function enviarOpcoes()
 				for(int j=0; j <cubeMD.getFatoMetaData().getFieldMetaData().length; j++){
 					FieldMetaData fdmd = fatoMD.getFieldMetaData(j);
 					if (!fdmd.isForeignKey() & !fdmd.isPrimaryKey() && !fdmd.getName().toUpperCase().matches("ID_.*") ){ //Se Não Fizer parte da Chave Estrangeira
-						out.println( "fato.add(new WebFXTreeItem('"+ fdmd.getName() +"','options.jsp?cube="+request.getParameter( "cube" )+"&table=-1&field="+ fdmd.getKey() +"&fieldName="+ fdmd.getName() +"&cubeIndexEntry="+ cubeIndexEntry +"&cubeURI="+ serviceURICube +"','options'));" ); // adiciona o objeto fild(campos) ao fato
+						out.println( "fato.add(new WebFXTreeItem('"+ fdmd.getName() +"',null,'formularioFrame'));" ); // adiciona o objeto fild(campos) ao fato
 					}
 				}
 

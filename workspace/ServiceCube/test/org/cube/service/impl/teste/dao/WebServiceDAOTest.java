@@ -3,7 +3,7 @@ package org.cube.service.impl.teste.dao;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class WebServiceDAO {
+public class WebServiceDAOTest {
 	
 	public static String CUBESERVICEURI = "cubeservice";
 	
