@@ -4,7 +4,8 @@ public class MensagemRetorno {
 	
 	private String tipo;
 	private boolean erro;
-	private String Mensagem;
+	private String mensagem;
+	private String funcao;
 	
 	public MensagemRetorno(){
 		
@@ -13,9 +14,16 @@ public class MensagemRetorno {
 	public MensagemRetorno(String tipo, boolean erro, String mensagem) {
 		this.tipo = tipo;
 		this.erro = erro;
-		Mensagem = mensagem;
+		this.mensagem = mensagem;
 	}
 	
+	public MensagemRetorno(String tipo, boolean erro, String mensagem, String funcao) {
+		this.tipo = tipo;
+		this.erro = erro;
+		this.mensagem = mensagem;
+		this.funcao = funcao;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -33,10 +41,18 @@ public class MensagemRetorno {
 	}
 	
 	public String getMensagem() {
-		return Mensagem;
+		return mensagem;
 	}
 	
 	public void setMensagem(String mensagem) {
-		Mensagem = mensagem;
+		this.mensagem = mensagem;
+	}
+	
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+	
+	public String getFuncao() {
+		return funcao;
 	}
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.util.StringUtil;
 import org.cube.service.impl.modelo.Cubo;
 
 import br.com.kasystemas.drsclienteweb.control.action.MensagemRetorno.MensagemRetorno;
@@ -95,18 +94,18 @@ public class CuboAction extends HttpServlet {
 			
 			if ( incluirCubo ) {
 				request.setAttribute("cubo", cubo);
-				request.setAttribute(PARAMETRO_ACAO, "visualizar");
+				request.setAttribute(PARAMETRO_ACAO, "cubo");
 				request.setAttribute("camposReadonly", true);
-				request.setAttribute("mensagem", new MensagemRetorno("inclusao", false, "Cadastro realizado com sucesso."));
+				request.setAttribute("mensagemRetorno", new MensagemRetorno("inclusao", false, "Cadastro realizado com sucesso.", "recarregarCubos()"));
 			} else {
 				request.setAttribute("cubo", cubo);
 				request.setAttribute(PARAMETRO_ACAO, "incluir");
-				request.setAttribute("mensagem", new MensagemRetorno("inclusao", true, "Erro ao incluir cubo."));
+				request.setAttribute("mensagemRetorno", new MensagemRetorno("inclusao", true, "Erro ao incluir cubo."));
 			}
 		} catch (Exception e) {
 			request.setAttribute("cubo", cubo);
 			request.setAttribute(PARAMETRO_ACAO, "incluir");
-			request.setAttribute("mensagem", new MensagemRetorno("inclusao", true, e.getMessage()));
+			request.setAttribute("mensagemRetorno", new MensagemRetorno("inclusao", true, e.getMessage()));
 		}
 		encaminhar(FORMULARIO_CUBO);
 	}
@@ -141,7 +140,7 @@ public class CuboAction extends HttpServlet {
 		request.setAttribute("cubo", cubo);
 		request.setAttribute(PARAMETRO_ACAO, "visualizar");
 		request.setAttribute("camposReadonly", true);
-		request.setAttribute("mensagem", new MensagemRetorno("alteracao", false, "Cadastro realizado com sucesso."));
+		request.setAttribute("mensagemRetorno", new MensagemRetorno("alteracao", false, "Cadastro realizado com sucesso.", "recarregarCubos()"));
 		
 		encaminhar(FORMULARIO_CUBO);
 	}

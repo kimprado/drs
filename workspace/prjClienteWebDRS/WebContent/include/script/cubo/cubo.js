@@ -15,3 +15,8 @@ function visualizarCubo(){
 	form.action = "cubo.do?metodo=formVisualizarCubo";
 	form.submit();
 }
+
+function recarregarCubos() {
+	top.cubes.location = "";
+	top.cubes.location = top.cubes.location;
+}

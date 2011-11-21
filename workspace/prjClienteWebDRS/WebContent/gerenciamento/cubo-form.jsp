@@ -14,12 +14,16 @@
 	
 	<script type="text/javascript">
 		var mensagem = {
-			tipo : "${mensagem.tipo}",
-			erro : "${mensagem.erro}",
-			mensagem : "${mensagem.mensagem}"
+			tipo : "${mensagemRetorno.tipo}",
+			erro : "${mensagemRetorno.erro}",
+			mensagem : "${mensagemRetorno.mensagem}",
+			funcao : "${mensagemRetorno.funcao}"
 		};
-		
 		mensagemRetorno( mensagem );
+		
+		if ( mensagem.funcao && mensagem.funcao != "" ) {
+			eval( "" + mensagem.funcao + "" ) ;
+		}
 	</script>
 	
 	

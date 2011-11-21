@@ -75,13 +75,11 @@ function adicionarCubo(pnome, pcubo, pcuboIndex, pcuboURI) {
 				out.println("<script>\n if (document.getElementById) {"); // início do script e do método
 				out.println("var tree = new WebFXTree('Assuntos',null,null);"); // declara a "raíz" da árvore ou o "nodo raiz"
 				
-				out.println("tree.location = 'caraca isso é muita doidera';"); // declara a "raíz" da árvore ou o "nodo raiz"
 				
 				CubeServiceAddressingLocator locatorCube = new CubeServiceAddressingLocator();
 
 				for (int i=0; i < cubeList.getCubeEntry().length; i++){  //responsável por fazer a ransição entre as entradas
 					CubeEntry cb = cubeList.getCubeEntry(i); // as entradas da lista não possuem o EPR ou uri. Para obter a uri é preciso ir direto ao cubeIndex e "chamar" o método getCubeEntry.
-					//out.println( "var cube = new WebFXTreeItem('"+cb.getName()+"','tree.jsp?cube="+cb.getIndex()+"&cubeIndexEntry="+cb.getEntry()+"&cubeURI="+cb.getUri()+"','tree');" );
 					out.println( "var cube = new WebFXTreeItem('"+cb.getName()+"',\"javascript:selecionarCubo('"+ i +"')\",null);" );
 					out.println( "adicionarCubo('"+cb.getName()+"','"+cb.getIndex()+"','"+cb.getEntry()+"','"+cb.getUri()+"');" );
 					out.println( "cube.icon = 'images/cube002.png';");
