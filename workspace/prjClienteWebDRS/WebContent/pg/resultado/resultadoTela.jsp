@@ -127,9 +127,7 @@ public String getServicURI(String procurar){
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			out.println("erro");
-			out.println(e.getMessage());
-			out.println(e.getCause());
+			out.println("Consulta não pode ser processada.");
 		}
 %>
 
