@@ -326,6 +326,7 @@ schema.local:   Directory where our schema files are located.
 	<!-- Compile the implementation classes (service, resource, etc.) -->
 	<target name="compile" depends="compileStubs">
 		<javac srcdir="${src.dir}" includes="${package.dir}/impl/**" destdir="${build.dest}" debug="${java.debug}" deprecation="${deprecation}">
+			<include name="**/*.java" />
 			<classpath>
 				<pathelement location="${stubs.dest}" />
 				<fileset dir="${globus.location}/lib">
@@ -344,6 +345,7 @@ schema.local:   Directory where our schema files are located.
 		<jar jarfile="${build.lib.dir}/${jar.name}" basedir="${build.dest}">
 			<include name="**/${package.dir}/impl/**" />
 			<include name="**/${package.dir}/config/**" />
+			<include name="**/br/com/kasystemas/**" />
 		</jar>
 	</target>
 
