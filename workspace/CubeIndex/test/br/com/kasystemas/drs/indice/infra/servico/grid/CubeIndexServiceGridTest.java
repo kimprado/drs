@@ -26,7 +26,7 @@ import br.com.kasystemas.drs.indice.infra.servico.ServicoUtil;
  * @author kim
  *
  */
-public class CubeIndexServiceTest {
+public class CubeIndexServiceGridTest {
 	
 	String serviceURI = null;
 	String cubeserviceURI = null;
