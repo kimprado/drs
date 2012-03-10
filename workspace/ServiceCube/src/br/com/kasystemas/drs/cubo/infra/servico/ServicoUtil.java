@@ -1,4 +1,4 @@
-package br.com.kasystemas.drs.indice.infra.servico;
+package br.com.kasystemas.drs.cubo.infra.servico;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +20,7 @@ public class ServicoUtil {
 	public static final String CUBE_INDEX_SERVICE = "cubeindexservice";
 	public static final String CUBE_SERVICE = "cubeservice";
 	public static final String DRS_SERVICE = "drsservice";
-	
+
 	public String getServiceURI(String procurar) {
 		try {
 			FileReader reader = new FileReader(System.getenv("CUBO_CONF"));
