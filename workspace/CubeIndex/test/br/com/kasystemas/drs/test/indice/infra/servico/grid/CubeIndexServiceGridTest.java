@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.kasystemas.drs.indice.infra.servico.grid;
+package br.com.kasystemas.drs.test.indice.infra.servico.grid;
 
 import static org.junit.Assert.fail;
 
@@ -72,9 +72,21 @@ public class CubeIndexServiceGridTest {
 	/**
 	 * Test method for {@link org.cubeindex.service.impl.CubeIndexService#getCubeEntry(int)}.
 	 */
-	//@Test
+	@Test
 	public final void testGetCubeEntry() {
-		fail("Not yet implemented"); // TODO
+		try {
+			CubeIndexPortType cubeIndex = new ServicoUtil().obterEndpointCubeIndexService();
+			
+			CubeEntry cubeEntry = cubeIndex.getCubeEntry(2).getCubeEntry();
+			System.out.println(cubeEntry.getName()+" ("+cubeEntry.getUri()+") - "+cubeEntry.getIndex() +"  time: "+cubeEntry.getTime().getTime());
+			
+		} catch (MalformedURIException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -123,13 +135,10 @@ public class CubeIndexServiceGridTest {
 			Assert.assertFalse(refreshCube);
 			
 		} catch (MalformedURIException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -147,13 +156,10 @@ public class CubeIndexServiceGridTest {
 			Assert.assertTrue(refreshCube);
 			
 		} catch (MalformedURIException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
