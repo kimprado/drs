@@ -3,7 +3,7 @@ package org.cubeindex.service.impl;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.globus.index.stubs.Cube.CubeEntry;
 import org.globus.index.stubs.Cube.CubeEntryResponse;
@@ -19,8 +19,7 @@ import org.globus.wsrf.impl.SimpleResourcePropertySet;
 
 public class CubeIndexService implements Resource, ResourceProperties{
 
-	
-	private HashMap<Integer, CubeIndexEntry> cubeIndex = new HashMap<Integer, CubeIndexEntry>();
+	private ConcurrentHashMap<Integer, CubeIndexEntry> cubeIndex = new ConcurrentHashMap<Integer, CubeIndexEntry>();
 	private int idCount = 0;
 	
 	
