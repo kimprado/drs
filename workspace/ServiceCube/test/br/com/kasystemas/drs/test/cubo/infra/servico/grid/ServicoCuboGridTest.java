@@ -5,6 +5,7 @@ package br.com.kasystemas.drs.test.cubo.infra.servico.grid;
 
 import static org.junit.Assert.fail;
 
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 
 import javax.xml.rpc.ServiceException;
@@ -16,7 +17,6 @@ import org.globus.cube.stubs.Cube.CubeMetaData;
 import org.globus.cube.stubs.Cube.CubePortType;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,8 +30,9 @@ import br.com.kasystemas.drs.cubo.infra.servico.ServicoUtil;
 public class ServicoCuboGridTest {
 	
 	private static final String NOME_CUBO_MOCK = "Vendas_ii_Teste_Mock";
-	
+	private BigInteger idCuboInclusao;
 	private static Cubo cb = null;
+
 
 	/**
 	 * @throws java.lang.Exception
@@ -118,9 +119,12 @@ public class ServicoCuboGridTest {
 			addCube.setCube(cubeMetaData);
 		
 			CubePortType cube = new ServicoUtil().obterEndpointCubeService();
-			boolean inclusaoRealizada = cube.addCube(addCube);
 			
-			Assert.assertTrue(inclusaoRealizada);
+			idCuboInclusao = cube.addCube(addCube);
+			if (idCuboInclusao != null &&  idCuboInclusao.longValue() < 1 ) {
+				fail("Cubo não foi adicionado.");
+			}
+			
 			
 		} catch (MalformedURIException e) {
 			e.printStackTrace();

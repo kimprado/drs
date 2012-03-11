@@ -1,5 +1,6 @@
 package br.com.kasystemas.drsclienteweb.dao;
 
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 
 import org.apache.axis.message.addressing.Address;
@@ -65,9 +66,12 @@ public class CubeServiceDAO {
 		
 		addCube.setCube(cubeMetaData);
 		
-		boolean inclusaoRealizada = getPortType().addCube( addCube );
+		BigInteger idCubo = getPortType().addCube(addCube);
+		if (idCubo != null && idCubo.longValue() > 0 ) {
+			return true;
+		}
 		
-		return inclusaoRealizada;
+		return false;
 	}
 
 	/**

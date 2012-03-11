@@ -162,7 +162,7 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="addCubeResponse" type="xsd:boolean"/>
+	<xsd:element name="addCubeResponse" type="xsd:integer"/>
 
 
 	<xsd:element name="removeCube" type="xsd:int"/>

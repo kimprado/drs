@@ -1,5 +1,6 @@
 package org.cube.client;
 
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,7 +43,7 @@ public class Client {
 	public static void consultaMysql(){
 		try {
 			System.out.println(new Date());
-			Class.forName("com.mysql.jdbc.Driver");   // Inicialização do driver jdbc
+			Class.forName("com.mysql.jdbc.Driver");   // Inicializaï¿½ï¿½o do driver jdbc
 			Connection conn;
 			conn = DriverManager.getConnection("jdbc:mysql://casa:3306/territorio", "post","post");
 			Statement stCube = conn.createStatement(3,1);
@@ -64,7 +65,7 @@ public class Client {
 	
 	public void setCubeCollectionMetaData(){
 		try {
-			Class.forName("org.postgresql.Driver");   // Inicialização do driver jdbc
+			Class.forName("org.postgresql.Driver");   // Inicializaï¿½ï¿½o do driver jdbc
 			Connection conn;
 			conn = DriverManager.getConnection("jdbc:postgresql://eingrid005.unigranrio.br:5432/cubo", "globus","globus");
 			Statement stCube = conn.createStatement(3,1);
@@ -109,7 +110,7 @@ public class Client {
 					int dimensaoAtual =  rsDimensao.getInt("iddimensao");
 					dimensao.setId(dimensaoAtual);
 					cube.getFato().addDimensao(dimensao/*, dimensaoAtual*/);
-					System.out.println("\n\nNOVA DIMENSÃO "+rsDimensao.getInt("iddimensao"));
+					System.out.println("\n\nNOVA DIMENSï¿½O "+rsDimensao.getInt("iddimensao"));
 					System.out.println("Atributo "+rsDimensao.getInt("idatributo"));
 					
 					while (dimensaoAtual == rsDimensao.getInt("iddimensao") ){
@@ -135,7 +136,7 @@ public class Client {
 								dimensaoAtual = rsDimensao.getInt("iddimensao");
 								dimensao.setId(dimensaoAtual);
 								cube.getFato().addDimensao(dimensao/*, dimensaoAtual*/);
-								System.out.println("\n\nNOVA DIMENSÃO "+rsDimensao.getInt("iddimensao"));
+								System.out.println("\n\nNOVA DIMENSï¿½O "+rsDimensao.getInt("iddimensao"));
 								System.out.println("Atributo "+rsDimensao.getInt("idatributo"));
 								//break;
 							}
@@ -143,7 +144,7 @@ public class Client {
 					}
 					
 					
-					System.out.println("QTD de Dimesões "+cube.getFato().getQuantidadeDimensao());
+					System.out.println("QTD de Dimesï¿½es "+cube.getFato().getQuantidadeDimensao());
 				}
 				
 				
@@ -194,13 +195,13 @@ public class Client {
 			System.out.println("sucesso is: "+ rmCube.isSuccess());
 			if (rmCube.isSuccess()){
 			System.out.println("O cubo  \""+rmCube.getName().toUpperCase()+"\"  foi removido");}
-			else { System.out.println("O cubo não pode ser removido");}
+			else { System.out.println("O cubo nï¿½o pode ser removido");}
 			//*/
 			
 			
 			// Perform some operations and print out the resource properties
-			// faz uma chamada ao método 'fato'. recebe um objeto FatoResponse
-			// e recupera o conteúdo do atributo 'fatonome' que está definido
+			// faz uma chamada ao mï¿½todo 'fato'. recebe um objeto FatoResponse
+			// e recupera o conteï¿½do do atributo 'fatonome' que estï¿½ definido
 			// no wsdl.
 			//System.out.println("cubo 1: "+cube.fato(0).getFatonome());
 			//System.out.println("cubo 2: "+cube.fato(1).getFatonome());
@@ -212,7 +213,7 @@ public class Client {
 			System.out.println("\nVou executar \"cubeMetaData\"");
 			CubeMetadataResponse cubeMD = cube.getCubeMetaData(10);
 			
-			System.out.println("o nome deste cubo específico é: "+cubeMD.getName());
+			System.out.println("o nome deste cubo especï¿½fico ï¿½: "+cubeMD.getName());
 			FatoMetaData fatoMD = cubeMD.getFatoMetaData();
 			System.out.println("\nFATO: " + fatoMD.getName());
 			System.out.println("  Atributos: ");
@@ -227,7 +228,7 @@ public class Client {
 			
 			for(int j=0; j < fatoMD.getDimensaoMetaData().length; j++){
 				dimMD = fatoMD.getDimensaoMetaData(j);
-				System.out.println("\n Dimensão: "+dimMD.getName());
+				System.out.println("\n Dimensï¿½o: "+dimMD.getName());
 				System.out.println("  Atributos: ");
 				for(int i=0; i <dimMD.getFieldMetaData().length; i++){
 					System.out.println(dimMD.getFieldMetaData(i).getName() +" - "+dimMD.getFieldMetaData(i).isPrimaryKey());
@@ -238,7 +239,7 @@ public class Client {
 			/* ADICIONAR
 			if ( cube.addCube(new AddCube("venda",59000,"Vendas","globus","jdbc:postgresql://eingrid002.unigranrio.br:5432/venda","globus")) ){
 				System.out.println("O cubo foi adicionado");
-			}else System.out.println("Não foi cadastrado");//*/
+			}else System.out.println("Nï¿½o foi cadastrado");//*/
 			
 	
 			//setCubeCollectionMetaData();
@@ -252,7 +253,7 @@ public class Client {
 			System.out.println("vou a adicionar");
 			if ( cube.addCube(new AddCube("littleblackbook",59000,"Estoque","ogsadai","jdbc:postgresql://eingrid001.unigranrio.br:5432/ogsadai","ogsadai")) ){
 				System.out.println("O cubo foi adicionado");
-			}else System.out.println("Não foi adicionado");
+			}else System.out.println("Nï¿½o foi adicionado");
 			//*/
 			
 			
@@ -316,11 +317,11 @@ public class Client {
 			CubeCollResponse collresp = cube.getCubeColl(new GetCubeColl());
 			
 			if ( collresp.getCubeName() == null ){
-				System.out.println("O service cube não possui algum Cubo");}
+				System.out.println("O service cube nï¿½o possui algum Cubo");}
 			else {
 			
 				
-			System.out.println("\n Cubos disponíveis:");
+			System.out.println("\n Cubos disponï¿½veis:");
 			for (int i=0; i < collresp.getCubeIndex().length; i++){
 				System.out.println(collresp.getCubeName(i)+" ("+collresp.getCubeServer(i)+") - "+collresp.getCubeIndex(i));
 			}*/
@@ -356,7 +357,7 @@ public class Client {
 		
 		
 		if (exquery.getColumnResponse() == null){
-			System.out.println("\n A CONSULTA NÃO OBTEVE RESULTADOS");
+			System.out.println("\n A CONSULTA Nï¿½O OBTEVE RESULTADOS");
 		}
 		else {
 			
@@ -399,11 +400,11 @@ private void queryLittle(CubePortType cube){
 			CubeCollResponse collresp = cube.getCubeColl(new GetCubeColl());
 			
 			if ( collresp.getCubeName() == null ){
-				System.out.println("O service cube não possui algum Cubo");}
+				System.out.println("O service cube nï¿½o possui algum Cubo");}
 			else {
 			
 				
-			System.out.println("\n Cubos disponíveis:");
+			System.out.println("\n Cubos disponï¿½veis:");
 			for (int i=0; i < collresp.getCubeIndex().length; i++){
 				System.out.println(collresp.getCubeName(i)+" ("+collresp.getCubeServer(i)+") - "+collresp.getCubeIndex(i));
 			}//*/
@@ -430,7 +431,7 @@ private void queryLittle(CubePortType cube){
 		
 		
 		if (exquery.getColumnResponse() == null){
-			System.out.println("\n A CONSULTA NÃO OBTEVE RESULTADOS");
+			System.out.println("\n A CONSULTA Nï¿½O OBTEVE RESULTADOS");
 		}
 		else {
 			
@@ -477,12 +478,12 @@ private void queryLittle(CubePortType cube){
 		calend.set(2008, 2, 18,15,40,50);  // Criar uma data
 		//Date depois = calend.getTime();    // atribuir uma data a um tipo Date
 		Date agora = new Date();
-		//System.out.println(agora.compareTo(depois)); // Faz comparação também com segundos e prova velmente com milisegundos
+		//System.out.println(agora.compareTo(depois)); // Faz comparaï¿½ï¿½o tambï¿½m com segundos e prova velmente com milisegundos
 		
 		calend.setTime(agora);  // Setar uma data completa a um calendar
 		
 		for (int i=12; i < 15; i++)
-		System.out.println(calend.get(i)); //recupera todas as informações como ano,dia e milis
+		System.out.println(calend.get(i)); //recupera todas as informaï¿½ï¿½es como ano,dia e milis
 		
 		System.out.println(calend.getTime());
 		calend.add(Calendar.MILLISECOND, 3600000); // adiciona um valor a uma parte da data. Neste caso (1 hora = 3600000 ms) 
@@ -518,7 +519,7 @@ private void queryLittle(CubePortType cube){
 		LigacaoMetaData lig[] = new LigacaoMetaData[1];
 		lig[0]= new LigacaoMetaData(new FieldMetaData(null,false,0,"id",false,null,null),new FieldMetaData(null,false,0,"id",false,null,null));
 		dimensaomd.setLigacaoMetaData(lig);
-		System.out.println("Ligação"+dimensaomd.getLigacaoMetaData());
+		System.out.println("Ligaï¿½ï¿½o"+dimensaomd.getLigacaoMetaData());
 		*/
 		
 		//*
@@ -543,9 +544,10 @@ private void queryLittle(CubePortType cube){
 	private void adicionarVendasT(CubePortType cube){
 		try {
 		//* ADICIONAR
-		if ( cube.addCube(new AddCube(null, "t",5000,"Vendas","globus","jdbc:postgresql://eingrid002.unigranrio.br:5432/ogsadb","globus")) ){
+		BigInteger idCubo = cube.addCube(new AddCube(null, "t",5000,"Vendas","globus","jdbc:postgresql://eingrid002.unigranrio.br:5432/ogsadb","globus"));
+		if ( idCubo != null && idCubo.intValue() > 0  ){
 			System.out.println("O cubo foi adicionado");
-		}else System.out.println("Não foi cadastrado");//*/
+		}else System.out.println("Nï¿½o foi cadastrado");//*/
 		
 		//* METADADOS
 		DimensaoMetaData[] dimensaoMDa = new DimensaoMetaData[2];
@@ -584,12 +586,12 @@ private void queryLittle(CubePortType cube){
 		int cubeID = 10; // Mudar De acordo Com o CUBO inserido
 		///
 		
-		// CHAVE PRIMÁRIA 
+		// CHAVE PRIMï¿½RIA 
 		if (cube.setChavePrimaria(new SetChavePrimaria(cubeID,fatoMD))){
 			CubeMetadataResponse cubeMD = cube.getCubeMetaData(cubeID);
 			//System.out.println("OK");
-			//System.out.println("Definida a chave primáriado do fato");
-			System.out.println("Definida a chave primáriado do fato '"+cubeMD.getFatoMetaData().getName()+"' do cubo '"+cubeMD.getName()+"'");
+			//System.out.println("Definida a chave primï¿½riado do fato");
+			System.out.println("Definida a chave primï¿½riado do fato '"+cubeMD.getFatoMetaData().getName()+"' do cubo '"+cubeMD.getName()+"'");
 		}///
 		
 		// RELACIONAMENTOS
@@ -597,8 +599,8 @@ private void queryLittle(CubePortType cube){
 			//System.out.println("setei os metadados");
 			CubeMetadataResponse cubeMD = cube.getCubeMetaData(cubeID);
 			//System.out.println("OK");
-			//System.out.println("Definida as ligações das dimensões");
-			System.out.println("Definida as ligações das dimensões'"+cubeMD.getFatoMetaData().getName()+"' do cubo '"+cubeMD.getName()+"'");
+			//System.out.println("Definida as ligaï¿½ï¿½es das dimensï¿½es");
+			System.out.println("Definida as ligaï¿½ï¿½es das dimensï¿½es'"+cubeMD.getFatoMetaData().getName()+"' do cubo '"+cubeMD.getName()+"'");
 		}//*/
 		
 	} catch (Exception e) {

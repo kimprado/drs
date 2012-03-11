@@ -156,7 +156,7 @@ public class CubeService implements Resource, ResourceProperties{
 		return cubeMetadataResponse;
 	}
 	
-	public boolean addCube(AddCube addcube1) {
+	public Integer addCube(AddCube addcube1) {
 		CubeMetaData CubeMetaData = addcube1.getCube();
 		
 		Cubo cubo = new Cubo();
@@ -182,17 +182,16 @@ public class CubeService implements Resource, ResourceProperties{
 		try {
 			EntityManager em = AbreConexao.abreConexao();
 			
-			//Persiste cubo e toda árvore de metadados
+			//Persiste cubo e toda Ã¡rvore de metadados
 			PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
 			persisteCuboServiceDAO.persisteCubo(cubo);
 			
 			FechaConexao.fechaConexao(em);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}
-		
-		return true;
+		return idCount;
 	}
 	
 	public Cubo cuboFromMetadados(CubeMetadataResponse metaDados) {
@@ -271,18 +270,18 @@ public class CubeService implements Resource, ResourceProperties{
 		Fato fato = getCube(new Integer(setLigacao.getCube())).getFato();
 		FatoMetaData ftMD = setLigacao.getFatoMetaData();
 		
-		System.out.println("\nDimensões: "+ftMD.getDimensaoMetaData().length);
+		System.out.println("\nDimensï¿½es: "+ftMD.getDimensaoMetaData().length);
 		for(int i=0; i < ftMD.getDimensaoMetaData().length; i++){
 			
 			DimensaoMetaData dmMD = ftMD.getDimensaoMetaData(i);
-			System.out.println("\n Dimensão: "+dmMD.getKey() );
+			System.out.println("\n Dimensï¿½o: "+dmMD.getKey() );
 			Dimensao dimensao = fato.getdimensao(dmMD.getKey());
 			LigacaoMetaData[] ligacaoMD = dmMD.getLigacaoMetaData();
-			System.out.println("Liagações : "+ligacaoMD.length +" da dimensaão: "+dimensao);
+			System.out.println("Liagaï¿½ï¿½es : "+ligacaoMD.length +" da dimensaï¿½o: "+dimensao);
 			for(int j=0; j < ligacaoMD.length; j++){
-				Atributo atEstrangeiro = fato.getAtributo(ligacaoMD[j].getEstrangeiro().getKey()); // Recuperar para incluir na ligação o atributo que possui a key igual ao solicitado pelo Obj MetaDados
-				System.out.println("Atributo "+ ligacaoMD[j].getPrimario().getKey() +" primário da Dimensão: "+ dimensao.getAtributo(ligacaoMD[j].getPrimario().getKey()));
-				Atributo atPrimario = dimensao.getAtributo(ligacaoMD[j].getPrimario().getKey()); // Recuperar para incluir na ligação o atributo que possui a key igual ao solicitado pelo Obj MetaDados
+				Atributo atEstrangeiro = fato.getAtributo(ligacaoMD[j].getEstrangeiro().getKey()); // Recuperar para incluir na ligaï¿½ï¿½o o atributo que possui a key igual ao solicitado pelo Obj MetaDados
+				System.out.println("Atributo "+ ligacaoMD[j].getPrimario().getKey() +" primï¿½rio da Dimensï¿½o: "+ dimensao.getAtributo(ligacaoMD[j].getPrimario().getKey()));
+				Atributo atPrimario = dimensao.getAtributo(ligacaoMD[j].getPrimario().getKey()); // Recuperar para incluir na ligaï¿½ï¿½o o atributo que possui a key igual ao solicitado pelo Obj MetaDados
 				Ligacao ligacao = new Ligacao(atEstrangeiro,atPrimario);
 				fato.addLigacao(dmMD.getKey(), ligacao);
 			}
