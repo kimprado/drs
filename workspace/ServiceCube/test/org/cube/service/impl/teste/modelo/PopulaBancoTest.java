@@ -52,7 +52,7 @@ public class PopulaBancoTest {
 	
 	@Test
 	public void buscaCubosTest() throws Exception {
-		//Com cache de segundo nível estas três chamadas vão precisar de apenas um consulta ao banco, 
+		//Com cache de segundo nï¿½vel estas trï¿½s chamadas vï¿½o precisar de apenas um consulta ao banco, 
 		//	mesmo com o fechameto dos EntityManager(em) 
 		buscaCuboTest();
 		buscaCuboTest();
@@ -127,7 +127,7 @@ public class PopulaBancoTest {
 		
 		Atributo atributo = new Atributo();
 		//atributo.setId(47);
-		atributo.setNome("Preço");
+		atributo.setNome("Preï¿½o");
 		atributo.setDecimal("2");
 		atributo.setTipo("double");
 		atributo.setTamanho("30");
@@ -201,7 +201,7 @@ public class PopulaBancoTest {
 		System.out.println("fato localizado: " + fato.getId() + " " + fato.getNome());
 		//System.out.println("cubo do fato: " + fato.getCubo());
 		
-		//Mesmo sem dao.altera() o hibernate faz o updade automático.
+		//Mesmo sem dao.altera() o hibernate faz o updade automï¿½tico.
 		FechaConexao.fechaConexao(em);
 	}
 	
@@ -218,6 +218,24 @@ public class PopulaBancoTest {
 		System.out.println("Cubo auto detectado e persistido:\n" + cubo.getNome());
 		
 		FechaConexao.fechaConexao(em);
+	}
+	
+	@Test
+	public final void deletaCubo() throws Exception {
+		try {
+			EntityManager em = AbreConexao.abreConexao();
+			
+			DAO<Cubo> dao = new DAO<Cubo>(em, Cubo.class);
+			
+			Cubo cubo = dao.busca(5);
+			
+			dao.remove(cubo);
+		
+			FechaConexao.fechaConexao(em);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 }
