@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,13 +31,13 @@ public class Tabela {
 	
 	private String nome;
 	
-	@OneToMany(mappedBy="tabela", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="tabela", fetch=FetchType.LAZY, orphanRemoval=true, cascade={CascadeType.REMOVE})
 	private List<Atributo> atributos = new LinkedList<Atributo>();
 	
 	@Transient
 	private int idCount;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, orphanRemoval=true, cascade={CascadeType.REMOVE})
 	private ChavePrimaria chavePrimaria;
 	
 	public Tabela(){
@@ -86,7 +87,7 @@ public class Tabela {
 	}
 	
 	public int getIdMaxAtributo(){
-		//TODO Esse método deve deixar de ser usado
+		//TODO Esse mï¿½todo deve deixar de ser usado
 		return 5000;//idCount;
 	}
 	

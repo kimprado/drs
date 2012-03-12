@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Timer;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,12 +26,12 @@ public class Cubo {
 	@SequenceGenerator(allocationSize=1, initialValue=1, name="cubo_sequence", sequenceName="cubo_sequence")
 	private Integer id;
 	
-	private String a_UriService; // uri do serviço Cube
+	private String a_UriService; // uri do serviï¿½o Cube
 	
 	private String a_nome;
 	private String a_server;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, orphanRemoval=true, cascade={CascadeType.REMOVE})
 	private Fato fato;
 	
 	private String a_driver;
@@ -38,7 +39,7 @@ public class Cubo {
 	private String connectionUser;
 	private String connectionPassword;
 
-	private Long refresh; // Tempo de vida no serviço de índice
+	private Long refresh; // Tempo de vida no serviï¿½o de ï¿½ndice
 	
 	@Transient
 	private int keyCubeIndex = -1; // key recebida ao se cadastrar no CubeIndex 
@@ -92,7 +93,7 @@ public class Cubo {
 		keyCubeIndex = key;
 	}
 	public int getKeyindex(){
-		return keyCubeIndex; // mantém o index recebido do CubeIndex, é dinâmico e não armazenado
+		return keyCubeIndex; // mantï¿½m o index recebido do CubeIndex, ï¿½ dinï¿½mico e nï¿½o armazenado
 	}
 	
 	public void setNome(String nome){

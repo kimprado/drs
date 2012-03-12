@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class ChaveEstrangeira {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Fato fato;
 	
-	@OneToMany(mappedBy="chaveEstrangeira", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="chaveEstrangeira", fetch=FetchType.LAZY, orphanRemoval=true, cascade={CascadeType.REMOVE})
 	private List<Ligacao> ligacoes = new LinkedList<Ligacao>();
 	
 	@OneToOne(fetch=FetchType.LAZY)

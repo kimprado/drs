@@ -222,19 +222,20 @@ public class PopulaBancoTest {
 	
 	@Test
 	public final void deletaCubo() throws Exception {
+		EntityManager em = AbreConexao.abreConexao();
 		try {
-			EntityManager em = AbreConexao.abreConexao();
 			
 			DAO<Cubo> dao = new DAO<Cubo>(em, Cubo.class);
 			
-			Cubo cubo = dao.busca(5);
+			Cubo cubo = dao.busca(6);
 			
 			dao.remove(cubo);
 		
-			FechaConexao.fechaConexao(em);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
+		} finally {
+			FechaConexao.fechaConexao(em);
 		}
 	}
 	

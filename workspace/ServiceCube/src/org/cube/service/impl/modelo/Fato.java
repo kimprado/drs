@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -15,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 public class Fato extends Tabela {
 	
-	@OneToMany(mappedBy="fato", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="fato", fetch=FetchType.LAZY, orphanRemoval=true, cascade={CascadeType.REMOVE})
 	private List<ChaveEstrangeira> chaveEstrangeira = new LinkedList<ChaveEstrangeira>();
 	
 	@OneToOne(mappedBy="fato", fetch=FetchType.LAZY)
@@ -60,7 +61,7 @@ public class Fato extends Tabela {
 	}
 	
 	public int getIdMaxDimensao(){
-		//TODO Esse método deve deixar de ser usado
+		//TODO Esse mï¿½todo deve deixar de ser usado
 		return 5000;//idCount;
 	}
 	
