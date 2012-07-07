@@ -48,4 +48,9 @@ public class CubeIndexEntry {
 	public void setTime(Calendar time){
 		a_time = time;
 	}
+	
+	@Override
+	public String toString() {
+		return a_name;
+	}
 }

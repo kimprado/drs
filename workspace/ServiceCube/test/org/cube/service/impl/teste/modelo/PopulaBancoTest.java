@@ -44,7 +44,7 @@ public class PopulaBancoTest {
 		//cubo = dao.busca(2);
 		
 		//System.out.println("cubo localizado: " + cubo.getId() + " " + cubo.getNome() + " " + cubo.getServer() );
-		System.out.println(cubo.getNome() + " - " + cubo.getFato().getNome());
+		System.out.println(cubo.getNome());
 		
 		FechaConexao.fechaConexao(abreConexao);
 		
@@ -113,7 +113,7 @@ public class PopulaBancoTest {
 		EntityManager abreConexao = AbreConexao.abreConexao();
 		DAO<Dimensao> dao = new DAO<Dimensao>(abreConexao, Dimensao.class);
 		
-		Dimensao dimensao = dao.busca(1);
+		Dimensao dimensao = dao.busca(2);
 		
 		System.out.println("dimensao localizada: " + dimensao.getId() + " " + dimensao.getNome());
 		
@@ -144,7 +144,7 @@ public class PopulaBancoTest {
 		EntityManager abreConexao = AbreConexao.abreConexao();
 		DAO<Atributo> dao = new DAO<Atributo>(abreConexao, Atributo.class);
 		
-		Atributo atributo = dao.busca(3);
+		Atributo atributo = dao.busca(1);
 		
 		System.out.println("atributo localizado: " + atributo.getId() + " " + atributo.getName() + " " + atributo.getDecimal() + " " + atributo.getTamanho() + " " +  atributo.getTipo());
 		//System.err.println("tabela do atributo: " + atributo.getTabela().GetQuantidadeAtributo());
@@ -157,13 +157,13 @@ public class PopulaBancoTest {
 		EntityManager em = AbreConexao.abreConexao();
 		DAO<Fato> dao = new DAO<Fato>(em, Fato.class);
 		
-		Fato fato = dao.busca(2);
+		Fato fato = dao.busca(1);
 		
 		System.out.println("fato localizado: " + fato.getId() + " " + fato.getNome());
 		System.out.println("cubo do fato: " + fato.getCubo());
 		
 		Cubo cubo = new Cubo();
-		cubo.setId(1);
+		cubo.setId(2);
 		em.merge(cubo);
 		cubo = em.find(Cubo.class, 1);
 		em.detach(cubo);
@@ -184,11 +184,25 @@ public class PopulaBancoTest {
 	}
 	
 	@Test
+	public void carregaMetaDadosEPersisteCubo() throws Exception{
+		EntityManager em = AbreConexao.abreConexao();
+
+		Cubo cubo = new GerenciaMetaDadosTest().carregaMetaDadosDeCuboDinamicamente();
+		
+		PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
+		persisteCuboServiceDAO.persisteCubo(cubo);
+		
+		System.out.println("Cubo auto detectado e persistido:\n" + cubo.getNome());
+		
+		FechaConexao.fechaConexao(em);
+	}
+	
+	@Test
 	public void editarAtributoAdicionarFatoTest() throws Exception {
 		EntityManager em = AbreConexao.abreConexao();
 		DAO<Fato> dao = new DAO<Fato>(em, Fato.class);
 		
-		Fato fato = dao.busca(2);
+		Fato fato = dao.busca(1);
 		
 		System.out.println("fato localizado: " + fato.getId() + " " + fato.getNome());
 		//System.out.println("cubo do fato: " + fato.getCubo());
@@ -205,29 +219,14 @@ public class PopulaBancoTest {
 		FechaConexao.fechaConexao(em);
 	}
 	
-	
 	@Test
-	public void carregaMetaDadosEPersisteCubo() throws Exception{
-		EntityManager em = AbreConexao.abreConexao();
-
-		Cubo cubo = new GerenciaMetaDadosTest().carregaMetaDadosDeCuboDinamicamente();
-		
-		PersisteCuboServiceDAO persisteCuboServiceDAO = new PersisteCuboServiceDAO(em);
-		persisteCuboServiceDAO.persisteCubo(cubo);
-		
-		System.out.println("Cubo auto detectado e persistido:\n" + cubo.getNome());
-		
-		FechaConexao.fechaConexao(em);
-	}
-	
-	@Test
-	public final void deletaCubo() throws Exception {
+	public final void removeCubo() throws Exception {
 		EntityManager em = AbreConexao.abreConexao();
 		try {
 			
 			DAO<Cubo> dao = new DAO<Cubo>(em, Cubo.class);
 			
-			Cubo cubo = dao.busca(6);
+			Cubo cubo = dao.busca(3);
 			
 			dao.remove(cubo);
 		

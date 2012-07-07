@@ -127,15 +127,17 @@ public class CubeService implements Resource, ResourceProperties{
 	}
 	
 	public PrintCubeResponse printCube(int index) throws RemoteException {
+		PrintCubeResponse printCubeResponse = null;
 		if (index==(-1)){
 			String print = "\nTodos os Cubos:";
 			for(int i = 0; i < getCubos().size(); i++){
 				print = print + ("\n"+(getCube(i)).imprimir(System.out)+"\n");
 			}
-			return new PrintCubeResponse(print);
+			printCubeResponse = new PrintCubeResponse(print);
+		} else if (getCubos().containsKey(new Integer(index))){
+			printCubeResponse = new PrintCubeResponse((getCube(index)).imprimir(System.out));//(fato.Getnome());
 		}
-		else
-		return new PrintCubeResponse((getCube(index)).imprimir(System.out));//(fato.Getnome());
+		return printCubeResponse;
 	}
 	
 	public ExecuteQueryResponse executeQuery(ExecuteQuery exq){
@@ -232,13 +234,31 @@ public class CubeService implements Resource, ResourceProperties{
 	
 	
 	public RemoveCubeResponse removeCube(int cube){
+		System.out.println("\n\nRemovendo Cubo: " + cube);
+		RemoveCubeResponse removeCubeResponse = null;
 		if (getCubos().containsKey(new Integer(cube))){	
-			Cubo cb = getCubos().remove(new Integer(cube));
-			CubeServiceControl.removeCubeIndexService(cb,getServiceURI(serviceIndexURI) );
-			return new RemoveCubeResponse(cb.getNome(),true);
+			
+			Cubo cb = getCubos().get(Integer.valueOf(cube));
+			try {
+				EntityManager em = AbreConexao.abreConexao();
+				DAO<Cubo> dao = new DAO<Cubo>(em, Cubo.class);
+				Cubo cubo = dao.busca(cb.getId());
+				dao.remove(cubo);
+				FechaConexao.fechaConexao(em);
+				
+				getCubos().remove(Integer.valueOf(cube));
+				CubeServiceControl.removeCubeIndexService(cb,getServiceURI(serviceIndexURI) );
+				
+				removeCubeResponse = new RemoveCubeResponse(cb.getNome(),true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				removeCubeResponse = new RemoveCubeResponse(null, false);
+			}
 		} else {
-			return new RemoveCubeResponse(null,false);
+			removeCubeResponse = new RemoveCubeResponse("não Removido",false);
 		}
+		System.out.println("Cubo (" + cube + ") removido: " + removeCubeResponse.isSuccess() );
+		return removeCubeResponse;
 	}
 	
 	@Deprecated

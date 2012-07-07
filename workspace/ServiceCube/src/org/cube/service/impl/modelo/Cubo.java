@@ -41,7 +41,8 @@ public class Cubo {
 
 	private Long refresh; // Tempo de vida no servi�o de �ndice
 	
-	@Transient
+	//TODO - Verificar se keyCubeIndex deve ser persistido 
+	//@Transient
 	private int keyCubeIndex = -1; // key recebida ao se cadastrar no CubeIndex 
 	
 	@Transient
@@ -119,6 +120,7 @@ public class Cubo {
 		return fato;
 	}
 	
+	//TODO refatorar esta funcionalidade para uma classe gerenciadora de refresh baseada no id do cubo.
 	public void setTimer(String serviceURI, long millisecond, int idcube){
 		a_timer = new Timer();
 		a_timer.schedule(new TaskRefresh(serviceURI, idcube, this), 0, millisecond);

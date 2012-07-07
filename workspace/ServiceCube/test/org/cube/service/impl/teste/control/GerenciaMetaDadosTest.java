@@ -51,24 +51,6 @@ public class GerenciaMetaDadosTest {
 		return null;
 	}
 	
-	@Test
-	public void imprimeMetaDadosDeEsquema() throws SQLException{
-		this.configuraAtributos();
-		
-		idCount = CubeServiceControl.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
-		CubeServiceControl.printMetaData(a_cubeColl.get(idCount).getConnection());
-	}
-	
-	@Test
-	public void imprimeCubo() throws SQLException{
-		this.configuraAtributos();
-		
-		idCount = CubeServiceControl.setCubeCollectionMetaData( a_cubeColl, serviceIndexURI,serviceCubeURI, bancoMetadadosDriver, bancoMetadadosConexao);
-		Cubo cubo = a_cubeColl.get(idCount);
-		System.out.println(cubo.imprimir(System.out));
-		//cubo;
-	}
-	
 	public Cubo carregaMetaDadosDeCuboDinamicamente() throws SQLException{
 		/*Cubo cube = new Cubo("Vendas_ii_Automatico", "eingrid005.unigranrio.br", null, "jdbc:postgresql://eingrid005.unigranrio.br:5432/vendas", "kim", 
 				"kim", "org.postgresql.Driver", new Long(30000).longValue());*/

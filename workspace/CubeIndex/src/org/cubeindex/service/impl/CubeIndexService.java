@@ -127,6 +127,8 @@ public class CubeIndexService implements Resource, ResourceProperties{
 	
 	
 	public boolean removeEntry(int entry){
+		CubeIndexEntry cubeIndexEntry2 = cubeIndex.get(Integer.valueOf(entry));
+		System.out.println("removeEntry: " + entry + " - " + cubeIndexEntry2);
 		
 		if (cubeIndex.containsKey(new Integer( entry )) ){
 			cubeIndex.remove(new Integer(entry));
@@ -139,6 +141,8 @@ public class CubeIndexService implements Resource, ResourceProperties{
 	
 	
 	public boolean refreshCube(int entry){
+		CubeIndexEntry cubeIndexEntry2 = cubeIndex.get(Integer.valueOf(entry));
+		System.out.println("refreshCube: " + entry + " - " + cubeIndexEntry2);
 		
 		if (cubeIndex.containsKey(new Integer(entry))){
 			Calendar calend = Calendar.getInstance(); 

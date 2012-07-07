@@ -42,7 +42,7 @@ public class CubeServiceControl {
 		int idCount = 0;
 		Connection conn = null;
 		try {
-			Class.forName(bancoMetadadosDriver); // Inicialização do driver
+			Class.forName(bancoMetadadosDriver); // Inicializaï¿½ï¿½o do driver
 			// jdbc
 			
 			conn = DriverManager.getConnection(bancoMetadadosConexao, "globus",
@@ -238,7 +238,7 @@ public class CubeServiceControl {
 		// System.out.println("\nEstou em getCubeMetadata");
 		Fato fato = cb.getFato();
 		// System.out.println("FATO: "+fato);
-		FatoMetaData ftmd = new FatoMetaData(); // a terminação 'md' se refere a
+		FatoMetaData ftmd = new FatoMetaData(); // a terminaï¿½ï¿½o 'md' se refere a
 		// meta data
 
 		ftmd.setName(fato.getNome());
@@ -287,7 +287,7 @@ public class CubeServiceControl {
 				dimensaomd.setName(dimensao.getNome());
 				dimensaomd.setKey(i);
 
-				int idLigacao = 0; // obter qtd de ligações
+				int idLigacao = 0; // obter qtd de ligaï¿½ï¿½es
 
 				LigacaoMetaData ligAUX[] = new LigacaoMetaData[dimensao
 						.GetQuantidadeAtributo()];
@@ -325,7 +325,7 @@ public class CubeServiceControl {
 
 						}
 						
-						// Definir Chave Primária
+						// Definir Chave Primï¿½ria
 						if (dimensao.getAtributo(j).getChavePrimaria() != null) {
 							fdmd.setPrimaryKey(true);
 						} else {
@@ -373,7 +373,7 @@ public class CubeServiceControl {
 		try {
 			// Statement st = conn.createStatement(3,1);
 			
-			//System.out.println("\n\n\nCriar Conexão\n\n");
+			//System.out.println("\n\n\nCriar Conexï¿½o\n\n");
 			//Statement st = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			Statement st = conn.createStatement();
 			
@@ -392,7 +392,7 @@ public class CubeServiceControl {
 			}
 			
 			
-			// listasResultados Irá armazenar as coleções que representam colunas do resultado
+			// listasResultados Irï¿½ armazenar as coleï¿½ï¿½es que representam colunas do resultado
 			Object[] listasResultados = new Object[colSel];
 			for (int i = 0; i < colSel; i++) {
 				listasResultados[i] = new LinkedList<String>(); // Inicia os Objetos
@@ -400,7 +400,7 @@ public class CubeServiceControl {
 
 			while (rs.next()) { // Varre o resultado da consulta recuperando os campos
 				for (int i = 0; i < colSel; i++) {
-					if (rs.getObject(i+1) != null){ // Testa se um Campo não é Nullo
+					if (rs.getObject(i+1) != null){ // Testa se um Campo nï¿½o ï¿½ Nullo
 						((LinkedList<String>) listasResultados[i]).add(rs.getObject(i+1).toString());
 					}else{
 						((LinkedList<String>) listasResultados[i]).add(null);
@@ -411,27 +411,27 @@ public class CubeServiceControl {
 			
 		    
 			
-			// A QTD de Objetos de uma Coleção é a mesma de linhas recuperadas na Consulta
+			// A QTD de Objetos de uma Coleï¿½ï¿½o ï¿½ a mesma de linhas recuperadas na Consulta
 			linSel = ((LinkedList<String>)listasResultados[0]).size();
 			
-			 // Recupera os campos das coleções e monta o resultado
+			 // Recupera os campos das coleï¿½ï¿½es e monta o resultado
 			ColumnResponse[] colresColl = null;
 			if (linSel > 0){
-				 //Cada posição de 'colresColl' aponta para um Objeto que possui um Array que representa todos os valores de determinada coluna
+				 //Cada posiï¿½ï¿½o de 'colresColl' aponta para um Objeto que possui um Array que representa todos os valores de determinada coluna
 				colresColl = new ColumnResponse[colSel];
 				for(int i = 0; i < colSel; i++){
-					// Com ToArray do LinkedList são recuperados os objetos que representam uma coluna 
+					// Com ToArray do LinkedList sï¿½o recuperados os objetos que representam uma coluna 
 					colresColl[i] = new ColumnResponse(((LinkedList<String>)listasResultados[i]).toArray(new String[linSel]) , columnName[i]);
 				}
 				rs.close();
 				st.close();
-				conn.close(); //Fecha a conexão
+				conn.close(); //Fecha a conexï¿½o
 				return new ExecuteQueryResponse(colresColl, columnName); //Retorna o resultado
 			}
 			
 			rs.close();
 			st.close();
-			conn.close(); //Fecha a conexão
+			conn.close(); //Fecha a conexï¿½o
 
 			return new ExecuteQueryResponse(colresColl, columnName);
 
@@ -547,7 +547,7 @@ public class CubeServiceControl {
 
 			while (rsDim.next()) {
 				Dimensao dm = new Dimensao(rsDim.getString("table_name"));
-				// System.out.println("Nova dimensão: "+ dm.Getnome());
+				// System.out.println("Nova dimensï¿½o: "+ dm.Getnome());
 				if (cube.getFato().getNome().equals(dm.getNome()) == false) {
 					cube.getFato().addDimensao(dm);
 					ResultSet rsFild = dbmd.getColumns(null, null, rsDim

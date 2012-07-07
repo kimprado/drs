@@ -15,6 +15,7 @@ import org.cube.service.impl.modelo.Cubo;
 import org.globus.cube.stubs.Cube.AddCube;
 import org.globus.cube.stubs.Cube.CubeMetaData;
 import org.globus.cube.stubs.Cube.CubePortType;
+import org.globus.cube.stubs.Cube.RemoveCubeResponse;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,8 +31,11 @@ import br.com.kasystemas.drs.cubo.infra.servico.ServicoUtil;
 public class ServicoCuboGridTest {
 	
 	private static final String NOME_CUBO_MOCK = "Vendas_ii_Teste_Mock";
-	private BigInteger idCuboInclusao;
-	private static Cubo cb = null;
+	private static final String NOME_CUBO_REMOCAO_MOCK = "Vendas_ii_Teste_Remocao_Mock";
+	private static BigInteger idCuboInclusao;
+	private static BigInteger idCuboRemocao;// = BigInteger.valueOf(3l);
+	private static Cubo cuboInclusao = null;
+	private static Cubo cuboRemocao = null;
 
 
 	/**
@@ -39,10 +43,15 @@ public class ServicoCuboGridTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		cb = new Cubo(NOME_CUBO_MOCK, "localhost", null, "jdbc:postgresql://localhost:5432/vendas", "kim",
+		cuboInclusao = new Cubo(NOME_CUBO_MOCK, "localhost", null, "jdbc:postgresql://localhost:5432/vendas", "kim",
 				"kim", "org.postgresql.Driver", 30000l );
+		cuboInclusao.setURIService("http://localhost:8443/wsrf/services/cube/Cube");
 		
-		cb.setURIService("http://localhost:8443/wsrf/services/cube/Cube");
+		cuboRemocao = new Cubo(NOME_CUBO_REMOCAO_MOCK, "localhost", null, "jdbc:postgresql://localhost:5432/vendas", "kim",
+				"kim", "org.postgresql.Driver", 30000l );
+		cuboRemocao.setURIService("http://localhost:8443/wsrf/services/cube/Cube");
+		
+		preparaCuboRemocaoMock();
 	}
 
 	/**
@@ -69,7 +78,7 @@ public class ServicoCuboGridTest {
 	/**
 	 * Test method for {@link org.cube.service.impl.CubeService#getCubeColl(org.globus.cube.stubs.Cube.GetCubeColl)}.
 	 */
-	@Test
+	//@Test
 	public final void testGetCubeColl() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -77,7 +86,7 @@ public class ServicoCuboGridTest {
 	/**
 	 * Test method for {@link org.cube.service.impl.CubeService#printCube(int)}.
 	 */
-	@Test
+	//@Test
 	public final void testPrintCube() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -85,7 +94,7 @@ public class ServicoCuboGridTest {
 	/**
 	 * Test method for {@link org.cube.service.impl.CubeService#executeQuery(org.globus.cube.stubs.Cube.ExecuteQuery)}.
 	 */
-	@Test
+	//@Test
 	public final void testExecuteQuery() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -93,7 +102,7 @@ public class ServicoCuboGridTest {
 	/**
 	 * Test method for {@link org.cube.service.impl.CubeService#getCubeMetaData(int)}.
 	 */
-	@Test
+	//@Test
 	public final void testGetCubeMetaData() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -107,14 +116,14 @@ public class ServicoCuboGridTest {
 			AddCube addCube = new AddCube(null,"",1l,"","","","");
 			
 			CubeMetaData cubeMetaData = new CubeMetaData();
-			cubeMetaData.setId( cb.getId()== null ? 0 :cb.getId() );
-			cubeMetaData.setName( cb.getNome() );
-			cubeMetaData.setUri( cb.getURIService() );
-			cubeMetaData.setUser( cb.getConnectionUser() );
-			cubeMetaData.setPassword( cb.getConnectionPassword() );
-			cubeMetaData.setConnectionUrl( cb.getConnectionUrl() );
-			cubeMetaData.setDriver( cb.getDriver() );
-			cubeMetaData.setMillisecond( cb.getRefresh() );
+			cubeMetaData.setId( cuboInclusao.getId()== null ? 0 :cuboInclusao.getId() );
+			cubeMetaData.setName( cuboInclusao.getNome() );
+			cubeMetaData.setUri( cuboInclusao.getURIService() );
+			cubeMetaData.setUser( cuboInclusao.getConnectionUser() );
+			cubeMetaData.setPassword( cuboInclusao.getConnectionPassword() );
+			cubeMetaData.setConnectionUrl( cuboInclusao.getConnectionUrl() );
+			cubeMetaData.setDriver( cuboInclusao.getDriver() );
+			cubeMetaData.setMillisecond( cuboInclusao.getRefresh() );
 			
 			addCube.setCube(cubeMetaData);
 		
@@ -140,7 +149,51 @@ public class ServicoCuboGridTest {
 	 */
 	@Test
 	public final void testRemoveCube() {
-		fail("Not yet implemented"); // TODO
+		try {
+			CubePortType cube = new ServicoUtil().obterEndpointCubeService();
+			RemoveCubeResponse removeCube = cube.removeCube(idCuboRemocao.intValue());
+			
+			if (!removeCube.isSuccess()) {
+				fail("Cubo não pôde ser removido.");
+			}
+			
+			System.out.println("Cubo removido: " + removeCube.getName());
+		} catch (MalformedURIException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void preparaCuboRemocaoMock() {
+		try {
+			AddCube addCube = new AddCube(null,"",1l,"","","","");
+			
+			CubeMetaData cubeMetaData = new CubeMetaData();
+			cubeMetaData.setId( cuboRemocao.getId()== null ? 0 :cuboRemocao.getId() );
+			cubeMetaData.setName( cuboRemocao.getNome() );
+			cubeMetaData.setUri( cuboRemocao.getURIService() );
+			cubeMetaData.setUser( cuboRemocao.getConnectionUser() );
+			cubeMetaData.setPassword( cuboRemocao.getConnectionPassword() );
+			cubeMetaData.setConnectionUrl( cuboRemocao.getConnectionUrl() );
+			cubeMetaData.setDriver( cuboRemocao.getDriver() );
+			cubeMetaData.setMillisecond( cuboRemocao.getRefresh() );
+			
+			addCube.setCube(cubeMetaData);
+		
+			CubePortType cube = new ServicoUtil().obterEndpointCubeService();
+			
+			idCuboRemocao = cube.addCube(addCube);
+			
+		} catch (MalformedURIException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
