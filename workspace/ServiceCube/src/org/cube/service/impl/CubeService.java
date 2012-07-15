@@ -244,18 +244,19 @@ public class CubeService implements Resource, ResourceProperties{
 				DAO<Cubo> dao = new DAO<Cubo>(em, Cubo.class);
 				Cubo cubo = dao.busca(cb.getId());
 				dao.remove(cubo);
-				FechaConexao.fechaConexao(em);
 				
 				getCubos().remove(Integer.valueOf(cube));
-				CubeServiceControl.removeCubeIndexService(cb,getServiceURI(serviceIndexURI) );
+				CubeServiceControl.removeCubeIndexService(cb, serviceIndexURI);
 				
-				removeCubeResponse = new RemoveCubeResponse(cb.getNome(),true);
+				FechaConexao.fechaConexao(em);
+				
+				removeCubeResponse = new RemoveCubeResponse(cb.getNome(), true);
 			} catch (Exception e) {
 				e.printStackTrace();
 				removeCubeResponse = new RemoveCubeResponse(null, false);
 			}
 		} else {
-			removeCubeResponse = new RemoveCubeResponse("não Removido",false);
+			removeCubeResponse = new RemoveCubeResponse("não Removido", false);
 		}
 		System.out.println("Cubo (" + cube + ") removido: " + removeCubeResponse.isSuccess() );
 		return removeCubeResponse;
