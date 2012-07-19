@@ -43,6 +43,9 @@ import org.globus.wsrf.impl.SimpleResourcePropertySet;
 
 public class CubeService implements Resource, ResourceProperties{
 	
+	//TODO - Refatorar CubeService.java para novas classes CuboBean, para gerenciar metadados do cubo, e DisponibilidadeCuboBean, que será
+	//um singleton com obejtivo de informar ao serviço de índices sobre a diponibilidade ou não de um cubo.
+	//CubeService agirá como conversor das mensagens trocadas entre clientes do serviço e nova camada de negócio(CuboBean.java e DisponibilidadeCuboBean.java).
 	private HashMap< Integer, Cubo>  cubos = new HashMap< Integer, Cubo>();
 	private int idCount;
 	private String serviceIndexURI;
